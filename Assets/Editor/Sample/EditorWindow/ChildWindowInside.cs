@@ -1,0 +1,110 @@
+
+using UnityEditor;
+using UnityEngine;
+using System;
+using System.Collections.Generic;
+
+public class ChildWindowInside:EditorWindow
+{
+    [MenuItem("EditorWindow/ChildWindowInside")]
+    static void Init(){
+        GetWindow<ChildWindowInside>();
+    }
+
+    private Window CreateChildWindow<T>() where T:Window{
+        T window = Activator.CreateInstance<T>();
+        window.Id = CreatID();
+        windows.Add(window);
+        return window;
+    }
+
+    private  List<Window> windows = new List<Window>();
+    private  int curId=0;
+    private  int CreatID(){
+        return curId++;
+    }
+
+    void OnGUI(){
+
+        
+        if(GUILayout.Button("加一个窗口")){
+            Window win = CreateChildWindow<Window>();
+            win.Title = "ceshi"+win.Id;
+            win.Enable = true;
+            win.Draggable = true;
+            win.Rect = new Rect(0,0,200,200);
+        }
+
+        if(GUILayout.Button("Clear")){
+            windows.Clear();
+        }
+
+        DrawWindows();
+
+    }
+
+    void DrawWindows(){
+        BeginWindows();
+        foreach(Window win in windows){
+            if(win.Enable)
+                win.OnGUI();
+        }
+
+        EndWindows();
+    }
+
+
+    public class Window{
+        /// <summary>
+        /// Title text
+        /// </summary>
+        /// <returns></returns>
+        public string Title { get; set; }
+        /// <summary>
+        /// Icon in title
+        /// </summary>
+        /// <returns></returns>
+        public Texture Icon { get; set; }
+        /// <summary>
+        /// Rect of window
+        /// </summary>
+        /// <returns></returns>
+        public Rect Rect { get; set; }
+        /// <summary>
+        /// Control ID
+        /// </summary>
+        /// <returns></returns>
+        public int Id { get; set; }
+
+        public bool Enable { get; set; }
+
+        public bool Draggable { get; set; }
+
+        public Rect DragArea { get; set; }
+
+        public void OnGUI(){
+            Rect = GUI.Window(Id,Rect,Draw,Title);
+        }
+
+        private void Draw(int id){
+            
+            DrawCustomContent(id);
+            
+            if(Draggable){
+                if(DragArea.size != Vector2.zero)
+                    GUI.DragWindow(DragArea);
+                else
+                    GUI.DragWindow();
+            }
+
+        }
+
+        /// <summary>
+        /// How to draw the content of window
+        /// </summary>
+        protected virtual void DrawCustomContent(int id){
+            GUILayout.Label("Custom content");
+        }
+    }
+}
+
