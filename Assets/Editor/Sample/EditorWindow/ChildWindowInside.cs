@@ -1,7 +1,6 @@
 
 using UnityEditor;
 using UnityEngine;
-using System;
 using System.Collections.Generic;
 
 public class ChildWindowInside:EditorWindow
@@ -11,28 +10,23 @@ public class ChildWindowInside:EditorWindow
         GetWindow<ChildWindowInside>();
     }
 
-    private Window CreateChildWindow<T>() where T:Window{
-        T window = Activator.CreateInstance<T>();
-        window.Id = CreatID();
-        windows.Add(window);
-        return window;
-    }
-
     private  List<Window> windows = new List<Window>();
-    private  int curId=0;
-    private  int CreatID(){
-        return curId++;
+
+    private void AddWindow(Window window){
+        window.Id = window.GetHashCode();
+        windows.Add(window);
     }
 
     void OnGUI(){
 
         
         if(GUILayout.Button("加一个窗口")){
-            Window win = CreateChildWindow<Window>();
+            Window win =new Window();
             win.Title = "ceshi"+win.Id;
             win.Enable = true;
             win.Draggable = true;
             win.Rect = new Rect(0,0,200,200);
+            AddWindow(win);
         }
 
         if(GUILayout.Button("Clear")){
@@ -40,6 +34,7 @@ public class ChildWindowInside:EditorWindow
         }
 
         DrawWindows();
+
 
     }
 
