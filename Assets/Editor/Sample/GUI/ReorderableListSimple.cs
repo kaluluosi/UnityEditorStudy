@@ -9,7 +9,6 @@ public class ReorderableListSimple:EditorWindow
     [MenuItem("GUI/ReorderableListSimple")]
     static void Init(){
         GetWindow<ReorderableListSimple>();
-        
     }
 
     ReorderableList reorderableList;
