@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace EditorFramework
 {
@@ -12,11 +13,11 @@ namespace EditorFramework
     public abstract class EditorWindowEx : EditorWindow,IControlContainer,IWindowContainer
     {
         private List<Window> windows;
-        private ControlCollection controls;
+        private ContainerControl containerControl;
 
         public EditorWindowEx(){
             windows = new List<Window>();
-            controls = new ControlCollection(null);
+            containerControl = new ContainerControl();
         }
 
         public List<Window> Windows
@@ -29,8 +30,14 @@ namespace EditorFramework
 
         public ControlCollection Controls{
             get{
-                return controls;
+                return containerControl.Controls;
             }
+        }
+
+        void OnGUI()
+        {
+            containerControl.Draw();
+            DrawWindows();
         }
 
 
@@ -48,15 +55,6 @@ namespace EditorFramework
             EndWindows();
         }
 
-        /// <summary>
-        /// 绘制控件
-        /// </summary>
-        protected void DrawControls(){
-            foreach(Control ctrl in controls){
-                if(ctrl.Enable)
-                    ctrl.Draw();
-            }
-        }
 
         /// <summary>
         /// 层叠窗口

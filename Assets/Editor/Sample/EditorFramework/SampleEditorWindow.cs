@@ -3,7 +3,7 @@ using System;
 using EditorFramework;
 using UnityEditor;
 using UnityEngine;
-
+using EditorFramework.Controls;
 
 public class SampleEditorWIndow : EditorWindowEx
 {
@@ -12,50 +12,92 @@ public class SampleEditorWIndow : EditorWindowEx
         GetWindow<SampleEditorWIndow>();
     }
 
-    ToolBar toolbar = new ToolBar();
-    SubWindow window = new SubWindow();
+    ToolBar toolbar;
+    ToolBar statubar;
+    ToolBar noneDockToolbar;
+
+    Button btnLeft;
+    Button btnFill;
+    Button btnRight;
+    Button btnNone;
 
     public SampleEditorWIndow() {
 
-    }
-
-    void OnEnable(){
+        toolbar = new ToolBar();
+        Button addWinBtn = new Button("Add Window");
+        addWinBtn.Width = 100;
+        addWinBtn.ToolTip = "hello moto";
+        addWinBtn.Style = EditorStyles.toolbarButton;
+        addWinBtn.Click += AddWinBtn_Click;
+        toolbar.Controls.Add(addWinBtn);
         Controls.Add(toolbar);
-        Windows.Add(window);
+
+        statubar = new ToolBar();
+        Button statuLabel = new Button("This is a Label");
+        statuLabel.Style = EditorStyles.label;
+        statubar.Dock = Dock.Bottom;
+        Controls.Add(statubar);
+
+        noneDockToolbar = new ToolBar();
+        noneDockToolbar.Rect = new Rect(200, 200, 300, 40);
+        noneDockToolbar.Dock = Dock.None;
+        noneDockToolbar.Controls.Add(new Button("Dock None Toolbar") { Style = EditorStyles.toolbarButton });
+        Controls.Add(noneDockToolbar);
+
+        btnLeft = new Button("Dock Left Button");
+        btnLeft.Dock = Dock.Left;
+        btnLeft.Click += BtnLeft_Click;
+
+        btnFill = new Button("Dock Fill Button");
+        btnFill.Dock = Dock.Fill;
+
+        btnRight = new Button("Dock Right Button");
+        btnRight.Dock = Dock.Right;
+
+        btnNone = new Button("Dock None Button");
+        btnNone.Rect = new Rect(300, 300, 200, 40);
+        btnNone.Dock = Dock.None;
+
+        Controls.Add(btnLeft);
+        Controls.Add(btnFill);
+        Controls.Add(btnRight);
+        Controls.Add(btnNone);
+
     }
 
-    void OnGUI(){
-        DrawControls();
-        DrawWindows();
-    }
-
-    public class ToolBar : Control
+    private void BtnLeft_Click(object sender, ClickEventArgs e)
     {
-        public ToolBar(){
-            Enable = true;
-        }
-
-        public override void Draw()
-        {
-            GUILayout.BeginHorizontal(EditorStyles.toolbar);
-            GUILayout.Label("Label");
-            GUILayout.Button("Button",EditorStyles.toolbarButton);
-            GUILayout.EndHorizontal();
-        }
+        if (e.Source.ID == GUIUtility.hotControl)
+            Debug.Log("ÍÛ ÄãµÄÊó±êÐüÍ£ÔÚ:" + e.Source.Text);
+        Debug.Log(GUIUtility.hotControl);
     }
+
+    private void AddWinBtn_Click(object sender,ClickEventArgs e)
+    {
+        this.Windows.Add(new SubWindow());
+    }
+
+
+
 
     public class SubWindow : Window
     {
+        private Button btnLeft = new Button("test Button", "text tool") { Style = EditorStyles.toolbarButton,Dock = Dock.Left} ;
+
+        private ToolBar statubar = new ToolBar() { Text="sub window statu bar",Dock = Dock.Bottom};
+
         public SubWindow(){
             Title = "Hello Window";
             Rect = new Rect(0,0,300,300);
-            AutoSize = false;
+            AutoSize = true;
             Draggable=true;
+
+            statubar.Controls.Add(btnLeft);
+
+
+            Controls.Add(statubar);
         }
-        protected override void DrawContent()
-        {
-            GUILayout.Label("Hello World!");
-        }
+
     }
 
 }

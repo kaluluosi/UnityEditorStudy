@@ -4,6 +4,10 @@ using System;
 using System.Collections.ObjectModel;
 
 namespace EditorFramework{
+
+    /// <summary>
+    /// ¿Ø¼þ¼¯ºÏ
+    /// </summary>
     public class ControlCollection:Collection<Control>
     {   
         private Control owner;
@@ -25,6 +29,13 @@ namespace EditorFramework{
             base.RemoveItem(index);
         }
 
+        public void DrawAll()
+        {
+            foreach(Control ctrl in this)
+            {
+                ctrl.Draw();
+            }
+        }
     }
 
 

@@ -19,8 +19,9 @@ public class ChildWindowInside:EditorWindow
 
     void OnGUI(){
 
+        EditorGUILayout.BeginHorizontal(EditorStyles.toolbar);
         
-        if(GUILayout.Button("加一个窗口")){
+        if(GUILayout.Button("加一个窗口",EditorStyles.toolbarButton,GUILayout.Width(100))){
             Window win =new Window();
             win.Title = "ceshi"+win.Id;
             win.Enable = true;
@@ -29,9 +30,13 @@ public class ChildWindowInside:EditorWindow
             AddWindow(win);
         }
 
-        if(GUILayout.Button("Clear")){
+        if(GUILayout.Button("Clear", EditorStyles.toolbarButton, GUILayout.Width(100))){
             windows.Clear();
         }
+
+        GUILayout.FlexibleSpace();
+
+        EditorGUILayout.EndHorizontal();
 
         DrawWindows();
 
@@ -78,7 +83,9 @@ public class ChildWindowInside:EditorWindow
         public Rect DragArea { get; set; }
 
         public void OnGUI(){
+
             Rect = GUI.Window(Id,Rect,Draw,Title);
+            
         }
 
         private void Draw(int id){

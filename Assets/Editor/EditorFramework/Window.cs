@@ -5,17 +5,19 @@ using UnityEngine;
 
 namespace EditorFramework
 {
-    
-    public abstract class Window :Control
+
+    public abstract class Window : ContainerControl
     {
 
 
-        public Window(string title) {
+        public Window(string title)
+        {
             Title = title;
         }
 
-        public Window(){
-                Title = "未命名";
+        public Window():this("未命名")
+        {
+           
         }
 
         /// <summary>
@@ -29,7 +31,6 @@ namespace EditorFramework
 
         public bool AutoSize { get; set; }
 
-
         public sealed override void Draw()
         {
             if (AutoSize)
@@ -42,29 +43,22 @@ namespace EditorFramework
         {
 
             //基本窗体内容绘制
-            DrawContent();
+            base.Draw();
 
-            //绘制控件
-            foreach(Control ctrl in Controls) {
-                ctrl.Draw();
-            }
-
+            //Controls.DrawAll();
             //拖拽判断
             if (Draggable)
             {
-                if (DragArea.size != Vector2.zero){
+                if (DragArea.size != Vector2.zero)
+                {
                     GUI.DragWindow(DragArea);
                 }
-                else{
+                else
+                {
                     GUI.DragWindow();
                 }
             }
         }
-
-        /// <summary>
-        /// 窗体内容绘制
-        /// </summary>
-        protected abstract void DrawContent();
 
 
     }
