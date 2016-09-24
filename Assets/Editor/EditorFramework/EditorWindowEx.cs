@@ -2,14 +2,22 @@
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-
+using System;
 
 namespace EditorFramework
 {
-    public abstract class EditorWindowEx : EditorWindow
+    /// <summary>
+    /// 支持MDI的窗口 
+    /// </summary>
+    public abstract class EditorWindowEx : EditorWindow,IControlContainer,IWindowContainer
     {
-        private List<Window> windows = new List<Window>();
-        private List<Control> controls = new List<Control>();
+        private List<Window> windows;
+        private ControlCollection controls;
+
+        public EditorWindowEx(){
+            windows = new List<Window>();
+            controls = new ControlCollection(null);
+        }
 
         public List<Window> Windows
         {
@@ -19,12 +27,13 @@ namespace EditorFramework
             }
         }
 
-        public List<Control> Controls{
+        public ControlCollection Controls{
             get{
                 return controls;
             }
         }
-        
+
+
         /// <summary>
         /// 绘制窗口
         /// </summary>

@@ -39,12 +39,12 @@ public class ChildWindowInside:EditorWindow
     }
 
     void DrawWindows(){
+
         BeginWindows();
         foreach(Window win in windows){
             if(win.Enable)
                 win.OnGUI();
         }
-
         EndWindows();
     }
 

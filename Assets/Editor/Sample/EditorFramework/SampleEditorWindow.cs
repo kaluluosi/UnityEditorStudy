@@ -14,6 +14,11 @@ public class SampleEditorWIndow : EditorWindowEx
 
     ToolBar toolbar = new ToolBar();
     SubWindow window = new SubWindow();
+
+    public SampleEditorWIndow() {
+
+    }
+
     void OnEnable(){
         Controls.Add(toolbar);
         Windows.Add(window);
