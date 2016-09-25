@@ -42,9 +42,7 @@ namespace EditorFramework
 
         public int ID {
             get {
-                if (id == -1)
-                    id = GUIUtility.GetControlID(FocusType.Native);
-                return id;
+                return GetHashCode();
             }
         }
 

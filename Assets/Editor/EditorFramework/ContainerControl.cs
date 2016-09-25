@@ -56,7 +56,7 @@ namespace EditorFramework
 
         public override void Draw()
         {
-
+            //Container
             GUILayout.BeginVertical();
 
             //Top
@@ -65,22 +65,23 @@ namespace EditorFramework
                 ctrl.Draw();
             GUILayout.EndVertical();
 
-            GUILayout.FlexibleSpace();
-
 
             //Mid
             GUILayout.BeginHorizontal();
+
             //Left
             GUILayout.BeginVertical();
             foreach (Control ctrl in GetLefts())
                 ctrl.Draw();
             GUILayout.EndVertical();
+            //End Left
 
             //Fill
             GUILayout.BeginVertical();
             foreach (Control ctrl in GetFills())
                 ctrl.Draw();
             GUILayout.EndVertical();
+            //End Fill
 
             GUILayout.FlexibleSpace();
 
@@ -89,18 +90,23 @@ namespace EditorFramework
             foreach (Control ctrl in GetRights())
                 ctrl.Draw();
             GUILayout.EndVertical();
+            //End Right
 
             GUILayout.EndHorizontal();
+            //End Mid
 
             GUILayout.FlexibleSpace();
+            
             //Bottom
             GUILayout.BeginVertical();
             foreach (Control ctrl in GetBottoms())
                 ctrl.Draw();
             GUILayout.EndVertical();
+            //End Bottom
+
 
             GUILayout.EndVertical();
-
+            //End Container
 
             foreach (Control ctrl in GetNones())
                 ctrl.Draw();

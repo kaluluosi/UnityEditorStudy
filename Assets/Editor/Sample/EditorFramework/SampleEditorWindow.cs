@@ -57,11 +57,11 @@ public class SampleEditorWIndow : EditorWindowEx
         btnNone = new Button("Dock None Button");
         btnNone.Rect = new Rect(300, 300, 200, 40);
         btnNone.Dock = Dock.None;
+        Controls.Add(btnNone);
 
         Controls.Add(btnLeft);
         Controls.Add(btnFill);
         Controls.Add(btnRight);
-        Controls.Add(btnNone);
 
     }
 
