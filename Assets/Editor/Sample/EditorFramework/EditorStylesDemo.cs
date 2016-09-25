@@ -19,13 +19,14 @@ namespace Assets.Editor.Sample.EditorFramework
 
         public EditorStylesDemo()
         {
-            var properties = typeof(EditorStyles).GetProperties();
+            //EditorStyles里面不仅仅只有GUIStyle 还有别的类型的属性，因此要过滤一下
+            var properties = typeof(EditorStyles).GetProperties().Where(p=> p.PropertyType== typeof(GUIStyle));
 
             foreach (var prop in properties)
             {
                 string name = prop.Name;
                 GUIStyle style = prop.GetValue(null, null) as GUIStyle;
-                Controls.Add(new Button(name,"This is "+name) { Style = style, Width = 200 });
+                Controls.Add(new Button(name, "This is " + name) { Style = style, Width = 200 });
             }
 
         }

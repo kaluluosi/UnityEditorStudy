@@ -79,3 +79,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/Assets/Editor/Sample/EditorFramework/GUIStylesDemo.cs
