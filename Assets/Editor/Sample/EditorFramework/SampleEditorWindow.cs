@@ -60,8 +60,9 @@ public class SampleEditorWIndow : EditorWindowEx
         Controls.Add(btnNone);
 
         Controls.Add(btnLeft);
-        Controls.Add(btnFill);
+        //Controls.Add(btnFill);
         Controls.Add(btnRight);
+
 
     }
 
@@ -74,10 +75,8 @@ public class SampleEditorWIndow : EditorWindowEx
 
     private void AddWinBtn_Click(object sender,ClickEventArgs e)
     {
-        this.Windows.Add(new SubWindow());
+        this.Windows.Add(new SubWindow() { Position=new Vector2(position.width/2,position.height/2) });
     }
-
-
 
 
     public class SubWindow : Window
@@ -93,7 +92,6 @@ public class SampleEditorWIndow : EditorWindowEx
             Draggable=true;
 
             statubar.Controls.Add(btnLeft);
-
 
             Controls.Add(statubar);
         }

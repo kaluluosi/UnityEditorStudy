@@ -6,6 +6,7 @@ using UnityEngine;
 namespace EditorFramework
 {
 
+
     public abstract class Window : ContainerControl
     {
 
@@ -29,7 +30,7 @@ namespace EditorFramework
 
         public Rect DragArea { get; set; }
 
-        public bool AutoSize { get; set; }
+        public EditorWindow Parent { get; set; }
 
         public sealed override void Draw()
         {

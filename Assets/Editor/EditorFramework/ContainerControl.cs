@@ -67,8 +67,7 @@ namespace EditorFramework
 
 
             //Mid
-            GUILayout.BeginHorizontal();
-
+            GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
             //Left
             GUILayout.BeginVertical();
             foreach (Control ctrl in GetLefts())
@@ -85,6 +84,7 @@ namespace EditorFramework
 
             GUILayout.FlexibleSpace();
 
+
             //Right
             GUILayout.BeginVertical();
             foreach (Control ctrl in GetRights())
@@ -92,10 +92,11 @@ namespace EditorFramework
             GUILayout.EndVertical();
             //End Right
 
+
             GUILayout.EndHorizontal();
             //End Mid
 
-            GUILayout.FlexibleSpace();
+            //GUILayout.FlexibleSpace();
             
             //Bottom
             GUILayout.BeginVertical();

@@ -1,4 +1,3 @@
-
 using System;
 using UnityEditor;
 using UnityEngine;
@@ -21,23 +20,14 @@ public class EditorWindowSimple:EditorWindow
 
     void OnGUI(){
 
-        Rect areaRect = new Rect(100, 100, 800, 600);
-
-        GUILayout.BeginArea(new Rect(100, 100, 800, 600),"box","box");
-
         BeginWindows();
-
-        if (windowRect0.position.x < 0)
-            windowRect0.x = 0;
-        if (windowRect0.position.y < 0)
-            windowRect0.y = 0;
-
-
-        windowRect0 = GUILayout.Window(0,windowRect0,doWindow,img);
-
+        windowRect0 = GUI.Window(0, windowRect0, doWindow, img);
         EndWindows();
 
-        GUILayout.EndArea();
+        GUILayout.BeginVertical(new GUIStyle("window"),GUILayout.Width(300),GUILayout.Height(200));
+        EditorGUILayout.IntField("age", 100);
+        GUILayout.EndVertical();
+
     }
 
     private void doWindow(int id)

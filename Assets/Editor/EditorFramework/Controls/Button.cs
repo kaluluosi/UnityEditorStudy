@@ -32,14 +32,16 @@ namespace EditorFramework.Controls
 
         public override void Draw()
         {
+            Content = new GUIContent(Text, ToolTip);
+
             if (IgnoreLayout)
             {
-                if (GUI.Button(Rect, new GUIContent(Text, ToolTip), Style))
+                if (GUI.Button(Rect,Content, Style))
                     OnClick();
             }
             else
             {
-                if (GUILayout.Button(new GUIContent(Text, ToolTip), options: GetGUILayoutOptions(), style: Style))
+                if (GUILayout.Button(Content, options: GetGUILayoutOptions(), style: Style))
                     OnClick();
             }
 

@@ -16,15 +16,17 @@ namespace EditorFramework.Controls
 
         public override void Draw()
         {
+            Content = new GUIContent(Text, ToolTip);
+
             if (IgnoreLayout)
             {
-                GUILayout.BeginArea(Rect,new GUIContent(), Style);
+                GUILayout.BeginArea(Rect,Content, Style);
                 Controls.DrawAll();
                 GUILayout.FlexibleSpace();
                 GUILayout.EndArea();
             }else
             {
-                GUILayout.BeginHorizontal(Style);
+                GUILayout.BeginHorizontal(Content,Style);
                 Controls.DrawAll();
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();

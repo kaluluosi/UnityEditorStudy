@@ -24,7 +24,6 @@ namespace EditorFramework
     {
         private bool enable = true;
         private ControlCollection controls;
-        private int id = -1;
 
         private Dictionary<GUILayoutOptionType, float> guiLayoutOptions;
 
@@ -39,6 +38,8 @@ namespace EditorFramework
         public string Text { get; set; }
 
         public string ToolTip { get; set; }
+
+        public GUIContent Content { get; set; }
 
         public int ID {
             get {
@@ -84,7 +85,7 @@ namespace EditorFramework
             }
             set
             {
-                Rect.Set(value.x, value.y, Rect.width, Rect.height);
+                Rect = new Rect(value.x, value.y, Rect.width, Rect.height);
             }
         }
 
@@ -98,6 +99,11 @@ namespace EditorFramework
             {
                 Rect.Set(Rect.x, Rect.y, value.x, value.y);
             }
+        }
+
+        public bool AutoSize
+        {
+            get;set;
         }
 
         /// <summary>
