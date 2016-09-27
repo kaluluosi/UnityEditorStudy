@@ -20,7 +20,7 @@ namespace EditorFramework
     /// <summary>
     /// 容器控件
     /// </summary>
-    public class ContainerControl:Control
+    public class ContainerControl : Control
     {
 
         private Control[] GetTops()
@@ -56,62 +56,82 @@ namespace EditorFramework
 
         public override void Draw()
         {
+            if (EditorFrameworkUtility.IsDesignMode)
+                Style = "box";
+            else
+                Style = new GUIStyle();
+
             //Container
-            GUILayout.BeginVertical();
+            GUILayout.BeginVertical(Style);
 
             //Top
-            GUILayout.BeginVertical();
+            GUILayout.BeginVertical(Style,GUILayout.ExpandWidth(true));
             foreach (Control ctrl in GetTops())
                 ctrl.Draw();
             GUILayout.EndVertical();
-
+            DrawControlArea();
 
             //Mid
-            GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+            GUILayout.BeginHorizontal(Style,GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
             //Left
-            GUILayout.BeginVertical();
+            GUILayout.BeginVertical(Style,GUILayout.ExpandHeight(true));
             foreach (Control ctrl in GetLefts())
                 ctrl.Draw();
             GUILayout.EndVertical();
             //End Left
+            DrawControlArea();
 
             //Fill
-            GUILayout.BeginVertical();
+            GUILayout.BeginVertical(Style, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
             foreach (Control ctrl in GetFills())
                 ctrl.Draw();
             GUILayout.EndVertical();
             //End Fill
+            DrawControlArea();
 
-            GUILayout.FlexibleSpace();
-
+            //GUILayout.FlexibleSpace();
 
             //Right
-            GUILayout.BeginVertical();
+            GUILayout.BeginVertical(Style,GUILayout.ExpandHeight(true));
             foreach (Control ctrl in GetRights())
                 ctrl.Draw();
             GUILayout.EndVertical();
             //End Right
+            DrawControlArea();
 
 
             GUILayout.EndHorizontal();
             //End Mid
+            DrawControlArea();
+
 
             //GUILayout.FlexibleSpace();
-            
+
             //Bottom
-            GUILayout.BeginVertical();
+            GUILayout.BeginVertical(Style,GUILayout.ExpandWidth(true));
             foreach (Control ctrl in GetBottoms())
                 ctrl.Draw();
             GUILayout.EndVertical();
             //End Bottom
+            DrawControlArea();
 
 
             GUILayout.EndVertical();
             //End Container
+            DrawControlArea();
+
 
             foreach (Control ctrl in GetNones())
                 ctrl.Draw();
+        }
 
+        private void DrawControlArea()
+        {
+            if (EditorFrameworkUtility.IsDesignMode)
+            {
+                Rect rect = GUILayoutUtility.GetLastRect();
+                Drawing.DrawRectangle(rect, Color.red);
+            }
         }
     }
 }

@@ -21,6 +21,8 @@ public class SampleEditorWIndow : EditorWindowEx
     Button btnRight;
     Button btnNone;
 
+    ContainerControl cc_container;
+
     public SampleEditorWIndow() {
 
         toolbar = new ToolBar();
@@ -50,6 +52,8 @@ public class SampleEditorWIndow : EditorWindowEx
 
         btnFill = new Button("Dock Fill Button");
         btnFill.Dock = Dock.Fill;
+        btnFill.ExpandHeight = true;
+        btnFill.ExpandWidth = true;
 
         btnRight = new Button("Dock Right Button");
         btnRight.Dock = Dock.Right;
@@ -59,10 +63,15 @@ public class SampleEditorWIndow : EditorWindowEx
         btnNone.Dock = Dock.None;
         Controls.Add(btnNone);
 
-        Controls.Add(btnLeft);
-        //Controls.Add(btnFill);
-        Controls.Add(btnRight);
+        cc_container = new ContainerControl();
+        cc_container.Dock = Dock.Fill;
+        cc_container.ExpandHeight = true;
+        cc_container.ExpandWidth = true;
 
+//         Controls.Add(cc_container);
+        Controls.Add(btnLeft);
+//         Controls.Add(btnFill);
+        Controls.Add(btnRight);
 
     }
 

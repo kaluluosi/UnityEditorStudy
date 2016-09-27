@@ -32,6 +32,7 @@ namespace EditorFramework.Controls
 
         public override void Draw()
         {
+
             Content = new GUIContent(Text, ToolTip);
 
             if (IgnoreLayout)
@@ -43,8 +44,12 @@ namespace EditorFramework.Controls
             {
                 if (GUILayout.Button(Content, options: GetGUILayoutOptions(), style: Style))
                     OnClick();
+                Rect = GUILayoutUtility.GetLastRect();
             }
 
+
+            if (EditorFrameworkUtility.IsDesignMode)
+                Drawing.DrawRectangle(Rect,Color.red);
         }
 
         private void OnClick()

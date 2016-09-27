@@ -14,7 +14,7 @@ namespace EditorFramework
         MinWidth,
         MinHeight,
         MaxWidth,
-        MaxHeight
+        MaxHeight,
     }
 
     /// <summary>
@@ -293,6 +293,9 @@ namespace EditorFramework
             }
         }
 
+        public bool ExpandWidth { get; set; }
+        public bool ExpandHeight { get; set; }
+
         #endregion
 
         protected GUILayoutOption[] GetGUILayoutOptions()
@@ -324,8 +327,12 @@ namespace EditorFramework
                 }
             }
 
+            options.Add(GUILayout.ExpandWidth(ExpandWidth));
+            options.Add(GUILayout.ExpandHeight(ExpandHeight));
+
             return options.ToArray();
         }
+
 
         /// <summary>
         /// 绘制控件

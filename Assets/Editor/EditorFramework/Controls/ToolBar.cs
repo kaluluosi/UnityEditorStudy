@@ -30,7 +30,11 @@ namespace EditorFramework.Controls
                 Controls.DrawAll();
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
+                Rect = GUILayoutUtility.GetLastRect();
             }
+
+            if (EditorFrameworkUtility.IsDesignMode)
+                Drawing.DrawRectangle(Rect, Color.red);
 
         }
     }
