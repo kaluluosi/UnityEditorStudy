@@ -30,6 +30,7 @@ namespace EditorFramework.Controls
                 Controls.DrawAll();
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
+                //同步更新Rect
                 Rect = GUILayoutUtility.GetLastRect();
             }
 

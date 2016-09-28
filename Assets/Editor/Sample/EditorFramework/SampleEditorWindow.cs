@@ -26,7 +26,6 @@ public class SampleEditorWIndow : EditorWindowEx
 
     public SampleEditorWIndow() {
 
-
         toolbar = new ToolBar();
         Button addWinBtn = new Button("Add Window");
         addWinBtn.Width = 100;
@@ -54,8 +53,8 @@ public class SampleEditorWIndow : EditorWindowEx
 
         btnFill = new Button("Dock Fill Button");
         btnFill.Dock = Dock.Fill;
-//         btnFill.ExpandHeight = true;
-//         btnFill.ExpandWidth = true;
+        btnFill.ExpandHeight = true;
+        btnFill.ExpandWidth = true;
 
         btnRight = new Button("Dock Right Button");
 //         btnRight.Width = 200;
@@ -77,11 +76,12 @@ public class SampleEditorWIndow : EditorWindowEx
         minitoolbar.MinWidth = 200f;
         minitoolbar.Dock = Dock.Left;
 
-        //Controls.Add(cc_container);
-//         Controls.Add(noneDockToolbar);
-//         Controls.Add(btnNone);
+        Controls.Add(cc_container);
+        Controls.Add(noneDockToolbar);
+        Controls.Add(btnNone);
+        Controls.Add(btnLeft);
         Controls.Add(minitoolbar);
-        //Controls.Add(btnFill);
+        Controls.Add(btnFill);
         Controls.Add(btnRight);
 
     }
@@ -115,7 +115,6 @@ public class SampleEditorWIndow : EditorWindowEx
             Draggable=true;
 
             statubar.Controls.Add(btnLeft);
-
             Controls.Add(statubar);
         }
 

@@ -44,6 +44,7 @@ namespace EditorFramework.Controls
             {
                 if (GUILayout.Button(Content, options: GetGUILayoutOptions(), style: Style))
                     OnClick();
+                //同步更新Rect
                 Rect = GUILayoutUtility.GetLastRect();
             }
 

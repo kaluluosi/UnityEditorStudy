@@ -47,6 +47,8 @@ namespace EditorFramework
             }
         }
 
+        public object Tag { get; set; }
+
         /// <summary>
         /// 子控件集合
         /// </summary>

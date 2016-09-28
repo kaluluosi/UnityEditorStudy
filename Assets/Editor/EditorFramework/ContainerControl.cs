@@ -21,7 +21,7 @@ namespace EditorFramework
     /// <summary>
     /// 容器控件
     /// </summary>
-    public class ContainerControl : Control
+    public class ContainerControl : ScrollableControl
     {
 
         private static GUIStyle DockBox {
@@ -31,7 +31,6 @@ namespace EditorFramework
                 boxStyle.margin = new RectOffset();
                 boxStyle.padding = new RectOffset();
                 boxStyle.normal.background = null;
-
                 return boxStyle;
             }
         }
@@ -67,8 +66,8 @@ namespace EditorFramework
 
 
         public override void Draw() {
-            //             if (EditorFrameworkUtility.IsDesignMode)
-            //                 Style = "box";
+
+            BeginScrollView();
 
             //Container
             GUILayout.BeginVertical();
@@ -98,7 +97,7 @@ namespace EditorFramework
             //End Fill
             DrawControlArea();
 
-            //             GUILayout.FlexibleSpace();
+            //GUILayout.FlexibleSpace();
 
             //Right
             GUILayout.BeginVertical(DockBox, GUILayout.ExpandHeight(true));
@@ -132,6 +131,8 @@ namespace EditorFramework
 
             foreach(Control ctrl in GetNones())
                 ctrl.Draw();
+
+            EndScrollView();
         }
 
         private void DrawControlArea() {
