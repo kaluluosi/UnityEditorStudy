@@ -15,18 +15,32 @@ public class EditorWindowSimple:EditorWindow
 
     void OnEnable(){
         img = (Texture)EditorGUIUtility.Load(@"Assets/Resources/ButtonBrakeOverSprite.png");
-        Debug.Log(img);
     }
 
     void OnGUI(){
 
-        BeginWindows();
-        windowRect0 = GUI.Window(0, windowRect0, doWindow, img);
-        EndWindows();
+        GUILayout.BeginHorizontal();
 
-        GUILayout.BeginVertical(new GUIStyle("window"),GUILayout.Width(300),GUILayout.Height(200));
-        EditorGUILayout.IntField("age", 100);
-        GUILayout.EndVertical();
+        GUIStyle boxStyle = new GUIStyle("box");
+        boxStyle.border = new RectOffset();
+        boxStyle.margin = new RectOffset();
+        boxStyle.padding = new RectOffset();
+        boxStyle.normal.background = null;
+
+        //boxStyle = new GUIStyle();
+        //boxStyle.stretchWidth = true;
+
+        EditorGUILayout.BeginVertical(boxStyle);
+        GUILayout.BeginHorizontal("toolbar");
+        GUILayout.Button("hehe","toolbarbutton",GUILayout.Width(100));
+        GUILayout.EndHorizontal();
+        EditorGUILayout.EndVertical();
+
+        EditorGUILayout.BeginVertical(GUILayout.ExpandWidth(true));
+        GUILayout.Button("hehe");
+        EditorGUILayout.EndVertical();
+
+        GUILayout.EndHorizontal();
 
     }
 

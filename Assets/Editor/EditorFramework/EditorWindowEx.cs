@@ -13,7 +13,7 @@ namespace EditorFramework
     public abstract class EditorWindowEx : EditorWindow,IControlContainer,IWindowContainer
     {
         private List<Window> windows;
-        private ContainerControl containerControl;
+        protected ContainerControl containerControl;
 
         public EditorWindowEx(){
             windows = new List<Window>();

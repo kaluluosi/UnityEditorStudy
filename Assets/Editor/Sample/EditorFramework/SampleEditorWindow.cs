@@ -14,6 +14,7 @@ public class SampleEditorWIndow : EditorWindowEx
 
     ToolBar toolbar;
     ToolBar statubar;
+    ToolBar minitoolbar;
     ToolBar noneDockToolbar;
 
     Button btnLeft;
@@ -24,6 +25,7 @@ public class SampleEditorWIndow : EditorWindowEx
     ContainerControl cc_container;
 
     public SampleEditorWIndow() {
+
 
         toolbar = new ToolBar();
         Button addWinBtn = new Button("Add Window");
@@ -44,42 +46,54 @@ public class SampleEditorWIndow : EditorWindowEx
         noneDockToolbar.Rect = new Rect(200, 200, 300, 40);
         noneDockToolbar.Dock = Dock.None;
         noneDockToolbar.Controls.Add(new Button("Dock None Toolbar") { Style = EditorStyles.toolbarButton });
-        Controls.Add(noneDockToolbar);
 
         btnLeft = new Button("Dock Left Button");
         btnLeft.Dock = Dock.Left;
+//         btnLeft.Width = 200;
         btnLeft.Click += BtnLeft_Click;
 
         btnFill = new Button("Dock Fill Button");
         btnFill.Dock = Dock.Fill;
-        btnFill.ExpandHeight = true;
-        btnFill.ExpandWidth = true;
+//         btnFill.ExpandHeight = true;
+//         btnFill.ExpandWidth = true;
 
         btnRight = new Button("Dock Right Button");
+//         btnRight.Width = 200;
         btnRight.Dock = Dock.Right;
+        btnRight.Click += btnRight_Click;
 
         btnNone = new Button("Dock None Button");
         btnNone.Rect = new Rect(300, 300, 200, 40);
         btnNone.Dock = Dock.None;
-        Controls.Add(btnNone);
 
         cc_container = new ContainerControl();
         cc_container.Dock = Dock.Fill;
         cc_container.ExpandHeight = true;
         cc_container.ExpandWidth = true;
 
-//         Controls.Add(cc_container);
-        Controls.Add(btnLeft);
-//         Controls.Add(btnFill);
+        minitoolbar = new ToolBar();
+        minitoolbar.Controls.Add(new Button("shit") {Style = EditorStyles.toolbarButton });
+        minitoolbar.Controls.Add(new Button("haha") {Style = EditorStyles.toolbarButton });
+        minitoolbar.MinWidth = 200f;
+        minitoolbar.Dock = Dock.Left;
+
+        //Controls.Add(cc_container);
+//         Controls.Add(noneDockToolbar);
+//         Controls.Add(btnNone);
+        Controls.Add(minitoolbar);
+        //Controls.Add(btnFill);
         Controls.Add(btnRight);
 
     }
 
+    void btnRight_Click(object sender, ClickEventArgs e) {
+        containerControl.Style = new GUIStyle();
+    }
+
     private void BtnLeft_Click(object sender, ClickEventArgs e)
     {
-        if (e.Source.ID == GUIUtility.hotControl)
-            Debug.Log("ÍÛ ÄãµÄÊó±êÐüÍ£ÔÚ:" + e.Source.Text);
-        Debug.Log(GUIUtility.hotControl);
+
+        containerControl.Style = "box";
     }
 
     private void AddWinBtn_Click(object sender,ClickEventArgs e)

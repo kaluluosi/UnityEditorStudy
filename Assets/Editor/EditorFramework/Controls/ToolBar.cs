@@ -26,7 +26,7 @@ namespace EditorFramework.Controls
                 GUILayout.EndArea();
             }else
             {
-                GUILayout.BeginHorizontal(Content,Style);
+                GUILayout.BeginHorizontal(Content,Style,GetGUILayoutOptions());
                 Controls.DrawAll();
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
