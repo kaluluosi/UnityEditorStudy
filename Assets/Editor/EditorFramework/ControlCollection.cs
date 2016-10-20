@@ -3,7 +3,7 @@
 using System;
 using System.Collections.ObjectModel;
 
-namespace EditorFramework{
+namespace EditorFramework {
 
     /// <summary>
     /// ¿Ø¼þ¼¯ºÏ

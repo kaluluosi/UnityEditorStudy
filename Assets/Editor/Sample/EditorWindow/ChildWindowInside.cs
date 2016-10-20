@@ -40,7 +40,7 @@ public class ChildWindowInside:EditorWindow
 
         DrawWindows();
 
-
+        Debug.Log(Event.current.mousePosition);
     }
 
     void DrawWindows(){

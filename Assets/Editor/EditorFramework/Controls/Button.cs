@@ -13,8 +13,18 @@ namespace EditorFramework.Controls
         }
     }
 
+    public class MouseHoverEventArgs : EventArgs {
+        public Button Source { get; private set; }
+        public MouseHoverEventArgs(Button source) {
+            Source = source;
+        }
+    }
+
     public class Button : Control
     {
+        public event EventHandler<ClickEventArgs> Click;
+        public event EventHandler<MouseHoverEventArgs> MouseHover;
+
         public static Vector2 DefaultSize = new Vector2(100, 30);
 
         public Button(string text)
@@ -27,8 +37,6 @@ namespace EditorFramework.Controls
         {
             ToolTip = tooltip;
         }
-
-        public event EventHandler<ClickEventArgs> Click;
 
         public override void Draw()
         {
@@ -50,13 +58,23 @@ namespace EditorFramework.Controls
 
 
             if (EditorFrameworkUtility.IsDesignMode)
-                Drawing.DrawRectangle(Rect,Color.red);
+                Drawing.DrawRectangle(Rect, Color.red);
+
+            if (Rect.Contains(Event.current.mousePosition))
+                OnMouseHover(); 
+
+
         }
 
         private void OnClick()
         {
             if (Click != null)
                 Click(this, new ClickEventArgs(this));
+        }
+
+        private void OnMouseHover() {
+            if (MouseHover != null)
+                MouseHover(this, new MouseHoverEventArgs(this));
         }
     }
 }

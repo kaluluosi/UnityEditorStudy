@@ -11,7 +11,7 @@ namespace Assets.Editor.Sample.EditorFramework
 {
    public  class EditorStylesDemo:EditorWindowEx
     {
-        [MenuItem("EditorFramework/EditorStyles")]
+        [MenuItem("GUI/EditorStyles")]
         static void Init()
         {
             GetWindow<EditorStylesDemo>();
