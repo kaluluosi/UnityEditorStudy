@@ -1,4 +1,5 @@
 
+using EditorFramework.Container;
 using System;
 using UnityEditor;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace EditorFramework
 {
 
 
-    public abstract class Window : ContainerControl
+    public abstract class Window : Panel
     {
 
 

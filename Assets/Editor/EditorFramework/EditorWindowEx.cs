@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using EditorFramework.Container;
 
 namespace EditorFramework
 {
@@ -13,11 +14,11 @@ namespace EditorFramework
     public abstract class EditorWindowEx : EditorWindow,IControlContainer,IWindowContainer
     {
         private List<Window> windows;
-        protected ContainerControl containerControl;
+        protected Panel containerControl;
 
         public EditorWindowEx(){
             windows = new List<Window>();
-            containerControl = new ContainerControl();
+            containerControl = new Panel();
         }
 
         public List<Window> Windows

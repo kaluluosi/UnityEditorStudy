@@ -40,27 +40,27 @@ namespace EditorFramework
             Style = new GUIStyle();
         }
 
-        private Control[] GetTops() {
+        protected Control[] GetTops() {
             return (from c in Controls where c.Dock == Dock.Top select c).ToArray();
         }
 
-        private Control[] GetBottoms() {
+        protected Control[] GetBottoms() {
             return (from c in Controls where c.Dock == Dock.Bottom select c).ToArray();
         }
 
-        private Control[] GetRights() {
+        protected Control[] GetRights() {
             return (from c in Controls where c.Dock == Dock.Right select c).ToArray();
         }
 
-        private Control[] GetLefts() {
+        protected Control[] GetLefts() {
             return (from c in Controls where c.Dock == Dock.Left select c).ToArray();
         }
 
-        private Control[] GetFills() {
+        protected Control[] GetFills() {
             return (from c in Controls where c.Dock == Dock.Fill select c).ToArray();
         }
 
-        private Control[] GetNones() {
+        protected Control[] GetNones() {
             return (from c in Controls where c.Dock == Dock.None select c).ToArray();
         }
 

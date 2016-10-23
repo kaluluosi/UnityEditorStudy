@@ -4,6 +4,7 @@ using EditorFramework;
 using UnityEditor;
 using UnityEngine;
 using EditorFramework.Controls;
+using EditorFramework.Container;
 
 public class SampleEditorWIndow : EditorWindowEx
 {
@@ -22,7 +23,7 @@ public class SampleEditorWIndow : EditorWindowEx
     Button btnRight;
     Button btnNone;
 
-    ContainerControl cc_container;
+    Panel cc_container;
 
     public SampleEditorWIndow() {
 
@@ -65,7 +66,7 @@ public class SampleEditorWIndow : EditorWindowEx
         btnNone.Rect = new Rect(300, 300, 200, 40);
         btnNone.Dock = Dock.None;
 
-        cc_container = new ContainerControl();
+        cc_container = new Panel();
         cc_container.Dock = Dock.Fill;
         cc_container.ExpandHeight = true;
         cc_container.ExpandWidth = true;
