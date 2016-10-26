@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using EditorFramework;
 
 public class SplitViewWindow : EditorWindow
 {
@@ -21,6 +22,8 @@ public class SplitViewWindow : EditorWindow
         cursorChangeRect = new Rect(0, currentScrollViewHeight, this.position.width, 5f);
     }
 
+    Rect rect = new Rect(100, 100, 100, 100);
+
     void OnGUI()
     {
         GUILayout.BeginVertical();
@@ -35,6 +38,14 @@ public class SplitViewWindow : EditorWindow
 
         GUILayout.EndVertical();
         Repaint();
+
+        Drawing.DrawRectangle(rect,Color.red);
+
+        if (Event.current.type == EventType.mouseDown && rect.Contains(Event.current.mousePosition)) {
+            Debug.Log("rect mouseDown");
+        }
+
+
     }
 
     private void ResizeScrollView()
@@ -45,6 +56,7 @@ public class SplitViewWindow : EditorWindow
         if (Event.current.type == EventType.mouseDown && cursorChangeRect.Contains(Event.current.mousePosition))
         {
             resize = true;
+            Debug.Log("mouseDown");
         }
         if (resize)
         {

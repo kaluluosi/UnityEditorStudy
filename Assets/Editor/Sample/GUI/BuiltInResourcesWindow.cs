@@ -2,8 +2,6 @@
 using UnityEditor;
 
 using System;
-using UnityEditor;
-using UnityEngine;
 using System.Collections.Generic;
 
 public class BuiltInResourcesWindow : EditorWindow
@@ -112,8 +110,10 @@ public class BuiltInResourcesWindow : EditorWindow
 
                     draw.Draw = () =>
                     {
-                        if (GUILayout.Button(thisStyle.name, GUILayout.Width(width)))
-                            CopyText("(GUIStyle)\"" + thisStyle.name + "\"");
+                        if (GUILayout.Button(thisStyle.name, GUILayout.Width(width))) {
+                            CopyText(thisStyle.name);
+                            ShowNotification(new GUIContent(thisStyle.name + " 已经复制到粘贴板"));
+                        }
 
                         GUILayout.BeginHorizontal();
                         GUILayout.Toggle(false, inactiveText, thisStyle, GUILayout.Width(width / 2));
@@ -170,8 +170,10 @@ public class BuiltInResourcesWindow : EditorWindow
 
                     draw.Draw = () =>
                     {
-                        if (GUILayout.Button(texture.name, GUILayout.Width(width)))
-                            CopyText("EditorGUIUtility.FindTexture( \"" + texture.name + "\" )");
+                        if (GUILayout.Button(texture.name, GUILayout.Width(width))) {
+                            CopyText(texture.name);
+                            ShowNotification(new GUIContent(texture.name + " 已经复制到粘贴板",EditorGUIUtility.Load(texture.name) as Texture));
+                        }
 
                         Rect textureRect = GUILayoutUtility.GetRect(texture.width, texture.width, texture.height, texture.height, GUILayout.ExpandHeight(false), GUILayout.ExpandWidth(false));
                         EditorGUI.DrawTextureTransparent(textureRect, texture);

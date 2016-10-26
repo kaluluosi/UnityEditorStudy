@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EditorFramework.Control" Collapsed="true">
+    <Position X="7" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEACAFgAggoAoEAAACHgAACAAACAABBAwCAAAEBA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\Control.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EditorFramework.Controls.ClickEventArgs" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\Controls\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditorFramework.Controls.MouseHoverEventArgs" Collapsed="true">
+    <Position X="14" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\Controls\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditorFramework.Controls.Button" Collapsed="true">
+    <Position X="8.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAACAAAACAAACAAAAAgAAgA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\Controls\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditorFramework.Controls.ToolBar" Collapsed="true">
+    <Position X="5.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\Controls\ToolBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditorFramework.ContainerControl" Collapsed="true">
+    <Position X="3" Y="4" Width="1.5" />
+    <InheritanceLine Type="EditorFramework.ScrollableControl" ManuallyRouted="true">
+      <Path>
+        <Point X="6" Y="1.677" />
+        <Point X="6" Y="2.32" />
+        <Point X="3.75" Y="2.32" />
+        <Point X="3.75" Y="4" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAASAAoEAAAAEAAAAAAAAAQAAAAAAAAAEAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\ContainerControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditorFramework.ControlCollection" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAgAAAAAAAAAAAAAEAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\ControlCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditorFramework.Drawing" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\Drawing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditorFramework.EditorFrameworkUtility" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAgAAAAAAgAAAAAAAAAwAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\EditorFrameworkUtility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditorFramework.EditorWindowEx" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAQAAAAABAAAAAAAAAAAAAAAABCgQAAQAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\EditorWindowEx.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EditorFramework.ScrollableControl" Collapsed="true">
+    <Position X="5.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAQAAgAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\ScrollableControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditorFramework.Window" Collapsed="true">
+    <Position X="3" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAkAAAAABQAAAAAAAAAAgAAAAAAAEAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\Window.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="EditorFramework.IControlContainer" Collapsed="true">
+    <Position X="10.5" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\IControlContainer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EditorFramework.IWindowContainer" Collapsed="true">
+    <Position X="12.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\IWindowContainer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="EditorFramework.GUILayoutOptionType" Collapsed="true">
+    <Position X="13" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAFAAAAAAAAAAAAEAAAAAAAAAAAAAQAAAAEBA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\Control.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EditorFramework.Dock" Collapsed="true">
+    <Position X="14.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAICAAACACAAAEAAAA=</HashCode>
+      <FileName>Assets\Editor\EditorFramework\ContainerControl.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

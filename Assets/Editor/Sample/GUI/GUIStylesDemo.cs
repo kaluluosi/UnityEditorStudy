@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using EditorFramework;
-using System.Linq;
-using EditorFramework.Controls;
 
 public class GUIStylesDemo : EditorWindow {
     private Vector2 scrollPos;
@@ -18,12 +15,14 @@ public class GUIStylesDemo : EditorWindow {
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
         foreach(GUIStyle style in GUI.skin) {
+            EditorGUILayout.BeginHorizontal("box");
             if(GUILayout.Button(style.name, style)) {
                 ShowNotification(new GUIContent(style.name + "已复制到剪贴板"));
                 GUIUtility.systemCopyBuffer = style.name;
             }
+            EditorGUILayout.EndHorizontal();
         }
-
+        GUILayout.Space(50);
         EditorGUILayout.EndScrollView();
     }
 
