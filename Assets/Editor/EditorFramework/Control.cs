@@ -141,6 +141,8 @@ namespace EditorFramework {
 
         public virtual void RenderLayout() {
             Position = GUILayoutUtility.GetLastRect();
+            CheckMouseEvent();
+            OnRender(new DrawCanvas(Position));
         }
 
 

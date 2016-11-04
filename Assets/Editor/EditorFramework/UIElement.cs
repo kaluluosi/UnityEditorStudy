@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace EditorFramework {
     public abstract class UIElement : Visual, IInputElement {
-        public event EventHandler<ClickEventArgs> ClickEvent;
-        public event EventHandler<MouseLeftDownEvenArgs> MouseLeftDownEvent;
-        public event EventHandler<MouseRightDownEventArgs> MouseRightDownEvent;
+        public event EventHandler<MouseEventArgs> MouseLeftDownEvent;
+        public event EventHandler<MouseEventArgs> MouseRightDownEvent;
+        public event EventHandler<MouseEventArgs> MouseMiddleDownEvent;
 
         protected bool IsMousePositionInside
         {
@@ -19,17 +19,37 @@ namespace EditorFramework {
 
         protected virtual void OnMouseLeftDown() {
             if (MouseLeftDownEvent != null)
-                MouseLeftDownEvent(this,new MouseLeftDownEvenArgs() { Position=Event.current.mousePosition});
+                MouseLeftDownEvent(this,new MouseEventArgs());
         }
         protected virtual void OnMouseRightDown() {
             if (MouseRightDownEvent != null)
-                MouseRightDownEvent(this, new MouseRightDownEventArgs() { Position = Event.current.mousePosition });
+                MouseRightDownEvent(this, new MouseEventArgs());
         }
 
-        protected virtual void OnClick() {
-            if (ClickEvent != null)
-                ClickEvent(this, new ClickEventArgs() { Position = Event.current.mousePosition });
+        protected virtual void OnMouseMiddleDown() {
+            if (MouseMiddleDownEvent != null)
+                MouseMiddleDownEvent(this, new MouseEventArgs());
         }
 
+        public override void Render() {
+            base.Render();
+            CheckMouseEvent();
+        }
+
+        protected void CheckMouseEvent() {
+            if (IsMousePositionInside && Event.current.type == EventType.MouseDown) {
+                switch (Event.current.button) {
+                    case 0:
+                        OnMouseLeftDown();
+                        break;
+                    case 1:
+                        OnMouseRightDown();
+                        break;
+                    case 2:
+                        OnMouseMiddleDown();
+                        break;
+                }
+            }
+        }
     }
 }

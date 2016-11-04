@@ -6,8 +6,15 @@ namespace EditorFramework.Input {
     /// 让对象支持鼠标键盘输入事件的接口
     /// </summary>
     public interface IInputElement {
-        event EventHandler<ClickEventArgs> ClickEvent;
-        event EventHandler<MouseLeftDownEvenArgs> MouseLeftDownEvent;
-        event EventHandler<MouseRightDownEventArgs> MouseRightDownEvent;
+        #region Mouse Events
+        event EventHandler<MouseEventArgs> MouseLeftDownEvent;
+        event EventHandler<MouseEventArgs> MouseRightDownEvent;
+        event EventHandler<MouseEventArgs> MouseMiddleDownEvent;
+        #endregion
+
+
+        #region Keyboard Events
+
+        #endregion
     }
 }

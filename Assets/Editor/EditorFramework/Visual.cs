@@ -3,11 +3,12 @@ using UnityEngine;
 
 namespace EditorFramework
 {
-    public abstract class Visual
+    public abstract class Visual:GUIContent
     {
         //To do
         //publick VisualCollection _children;
 
+        public string Name { get; set; }
         public virtual Rect Position { get; set; }
         public virtual Rect Size {
             get {
@@ -21,16 +22,39 @@ namespace EditorFramework
 
         public Visual VisualParent { get; set; }
 
+        private string imagePath;
+        public string ImagePath
+        {
+            get
+            {
+                return ImagePath;
+            }
+            set
+            {
+                imagePath = value;
+                Texture img = LoadImage(value);
+                image = img;
+            }
+        }
+
+
         public Visual()
         {
             Scale = Vector2.one;
         }
 
-        public virtual void Render()
-        {
+
+        /// <summary>
+        /// 绘制控件,会调用OnRender方法。重写此方法的时候必须要 base.Render()。
+        /// </summary>
+        public virtual void Render(){
             OnRender(new DrawCanvas(Position,Scale));
         }
 
+        /// <summary>
+        /// 绘制控件的时候会调用此方法，用户可以在这个方法里用drawContext绘图。
+        /// </summary>
+        /// <param name="drawContext">绘图上下文</param>
         public virtual void OnRender(DrawCanvas drawContext) {
 
         }
@@ -47,7 +71,6 @@ namespace EditorFramework
 
             return null;
         }
-
 
     }
 }

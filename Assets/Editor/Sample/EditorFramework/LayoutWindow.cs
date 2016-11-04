@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using EditorFramework;
+using EditorFramework.Controls;
+using System.Collections.Generic;
 
 public class LayoutWindow : EditorWindow {
     [MenuItem("EditorFramework/LayoutWindow")]
@@ -8,24 +10,53 @@ public class LayoutWindow : EditorWindow {
         GetWindow<LayoutWindow>();
     }
 
-    Button btnText = new Button() { Text = "文本", Image = "", ToolTip = "这是文本按钮" };
-    Button btnImg = new Button() { Image = "SceneAsset Icon", ToolTip = "这是图形按钮", Position = new Rect(0, 30, 100, 20) };
-    Button btnImgText = new Button() { Text = "图形+文本", Image = "SceneAsset Icon", ToolTip = "这是图形+文本按钮", Position = new Rect(0, 60, 100, 20) };
-    Button btnBoxStyle = new Button() { Style = "box", Text = "Box风格", Image = "SceneAsset Icon", ToolTip = "这是Style设置成Box后的按钮", Position = new Rect(0, 90, 100, 20) };
+    Button btntext = new Button() { text = "文本", ImagePath = "", tooltip = "这是文本按钮" };
+    Button btnImg = new Button() { ImagePath = "SceneAsset Icon", tooltip = "这是图形按钮", Position = new Rect(0, 30, 100, 20) };
+    Button btnImgtext = new Button() { text = "图形+文本", ImagePath = "SceneAsset Icon", tooltip = "这是图形+文本按钮", Position = new Rect(0, 60, 100, 20) };
+    Button btnBoxStyle = new Button() { Style = "box", text = "Box风格", ImagePath = "SceneAsset Icon", tooltip = "这是Style设置成Box后的按钮", Position = new Rect(0, 90, 100, 20) };
+    Button btntextWidth = new Button() { text = "LayoutSetting.Width",tooltip="被LayoutSetting.Width影响的按钮", Width = 300 };
+    Button btnRepeat = new Button() { text = "连点按钮", Repeatable = true };
 
-    Button btnTextWidth = new Button() { Text = "LayoutSetting.Width",ToolTip="被LayoutSetting.Width影响的按钮", Width = 300 };
+    TextBox txtbox = new TextBox() { MultiLine = true };
+
+    HorizontalSlider hslider = new HorizontalSlider() { Value = 0, MinValue = 0, MaxValue = 100 };
+    HorizontalSlider hslider2 = new HorizontalSlider() { Value = 0, MinValue = 0, MaxValue = 100, SliderStyle = "horizontalscrollbar", ThumbStyle = "horizontalscrollbarthumb" };
+
+    VerticalSlider vslider = new VerticalSlider() { Value = 0, MinValue = 0, MaxValue = 100 };
+
+    Tabbar tabbar = new Tabbar() {
+        Items = new List<GUIContent>() {
+            new TabItem("按钮1"),
+            new TabItem("按钮2"),
+            new TabItem("按钮3"),
+            new Button() { text="真·按钮" }
+        }
+    };
+
+    void Awake() {
+
+        btnRepeat.ClickEvent += (sender, args) => {
+            Debug.Log("连点");
+        };
+    }
 
     void OnGUI() {
-        btnText.RenderLayout();
+        btntext.RenderLayout();
         btnImg.RenderLayout();
-        btnImgText.RenderLayout();
+        btnImgtext.RenderLayout();
         btnBoxStyle.RenderLayout();
-        btnTextWidth.RenderLayout();
+        btntextWidth.RenderLayout();
 
-//         if (GUILayout.Button("测试")) {
-//             Rect rect = new Rect(0, 0, 100, 100);
-//             Vector2 v = new Vector2(10, 10);
-//             Debug.Log(rect.Contains(v));
-//         }
+        txtbox.RenderLayout();
+
+        hslider.RenderLayout();
+
+        hslider2.RenderLayout();
+
+        vslider.RenderLayout();
+
+        btnRepeat.RenderLayout();
+
+        tabbar.RenderLayout();
     }
 }

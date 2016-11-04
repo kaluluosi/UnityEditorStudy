@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace EditorFramework {
+namespace EditorFramework.Controls {
     public class Image:Control{
 
 
@@ -20,10 +20,13 @@ namespace EditorFramework {
 
         public override void Render() {
             GUI.DrawTexture(Position, LoadImage(Path), Mode, AlphaBlend);
+
+            base.Render();
         }
 
         public override void RenderLayout() {
             GUILayout.Box(new GUIContent(LoadImage(Path)), GUIStyle.none);
+
             base.RenderLayout();
         }
 
