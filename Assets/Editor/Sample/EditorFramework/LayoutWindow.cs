@@ -4,7 +4,7 @@ using EditorFramework;
 using EditorFramework.Controls;
 using System.Collections.Generic;
 
-public class LayoutWindow : EditorWindow {
+public class LayoutWindow : EditorWindowEx {
     [MenuItem("EditorFramework/LayoutWindow")]
     static void DoIt() {
         GetWindow<LayoutWindow>();
@@ -33,10 +33,28 @@ public class LayoutWindow : EditorWindow {
         }
     };
 
+    SelectionGrid selectionGrid = new SelectionGrid() {
+        Items = new List<GUIContent>() {
+            new TabItem("按钮1"),
+            new TabItem("按钮2"),
+            new TabItem("按钮3"),
+            new Button() { text="真·按钮" }
+        },
+        Col = 2
+    };
+
     void Awake() {
 
         btnRepeat.ClickEvent += (sender, args) => {
             Debug.Log("连点");
+        };
+
+        tabbar.SelectedChangedEvent += (sender, args) => {
+            ShowNotification("Tabbar Changed Selection:" + tabbar.SelectedItem.text);
+        };
+
+        selectionGrid.SelectedChangedEvent += (sender, args) => {
+            ShowNotification("SelectionGrid Changed seledted:" + args.OldSelected + " to " + args.NewSelected);
         };
     }
 
@@ -58,5 +76,7 @@ public class LayoutWindow : EditorWindow {
         btnRepeat.RenderLayout();
 
         tabbar.RenderLayout();
+
+        selectionGrid.RenderLayout();
     }
 }

@@ -3,30 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EditorFramework;
-using EditorFramework.Controls;
 using UnityEngine;
 
 namespace EditorFramework.Controls {
-    public class Tabbar:ItemsControl {
+    public class SelectionGrid:ItemsControl {
+        public int Col { get;  set; }
 
-
-        public Tabbar() {
-            Items = new List<GUIContent>();
+        public SelectionGrid() {
+            Col = 1;
         }
 
         public override void Render() {
 
-            Selected = GUI.Toolbar(Position, Selected, Items.ToArray(),Style);
+            Selected = GUI.SelectionGrid(Position, Selected, Items.ToArray(), Col, Style);
 
             base.Render();
         }
 
+
         public override void RenderLayout() {
 
-            Selected = GUILayout.Toolbar(Selected, Items.ToArray(), Style,LayoutOptions);
+            Selected = GUILayout.SelectionGrid(Selected, Items.ToArray(), Col, LayoutOptions);
 
             base.RenderLayout();
         }
-
     }
 }
