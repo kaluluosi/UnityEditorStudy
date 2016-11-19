@@ -33,6 +33,8 @@ public class ControlsWindow : EditorWindow {
 
     VerticalSlider vslider = new VerticalSlider() { Value = 0, MinValue = 0, MaxValue = 100,Position=new Rect(0,400,20,100) };
 
+    HorizontalScrollBar hScrollBar = new HorizontalScrollBar() { MinValue=0,MaxValue=100,Position=new Rect(30,420,100,10) };
+    VerticalScrollBar vScrollBar = new VerticalScrollBar() { MinValue = 0, MaxValue = 100, Position = new Rect(30, 450, 10, 100) };
 
     void Awake() {
         btnImg.ClickEvent += (sender, args) => {
@@ -77,5 +79,7 @@ public class ControlsWindow : EditorWindow {
         slider.Render();
         vslider.Render();
 
+        hScrollBar.Render();
+        vScrollBar.Render();
     }
 }

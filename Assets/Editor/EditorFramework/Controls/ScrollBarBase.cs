@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnityEngine;
 
 namespace EditorFramework.Controls {
-    public abstract class SliderBase:Control {
+    public abstract class ScrollBarBase:Control {
+
+        public ScrollBarBase() {
+            BarSize = 5f;
+        }
 
         public float Value { get; set; }
         public float MinValue { get; set; }
         public float MaxValue { get; set; }
-        public GUIStyle SliderStyle { get; set; }
-        public GUIStyle ThumbStyle { get; set; }
 
-
+        public float BarSize { get; set; }
     }
 }

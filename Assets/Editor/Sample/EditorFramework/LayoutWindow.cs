@@ -78,5 +78,6 @@ public class LayoutWindow : EditorWindowEx {
         tabbar.RenderLayout();
 
         selectionGrid.RenderLayout();
+
     }
 }
