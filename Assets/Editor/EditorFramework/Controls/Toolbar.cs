@@ -10,6 +10,8 @@ namespace EditorFramework.Controls
         public Toolbar()
         {
             Style = "toolbar";
+            ExpandWidth = true;
+            AutoWidth = false;
         }
 
 
@@ -17,7 +19,7 @@ namespace EditorFramework.Controls
         {
 
             GUI.BeginGroup(Position, this);
-            GUILayout.BeginHorizontal(Style, GUILayout.Width(Width), GUILayout.Height(Height));
+            GUILayout.BeginHorizontal(Style, GUILayout.Width(FixedWidth), GUILayout.Height(FixedHeight));
             foreach (var item in Items)
             {
                 item.RenderLayout();

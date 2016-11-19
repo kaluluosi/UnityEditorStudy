@@ -58,9 +58,9 @@ public class ControlsWindow : EditorWindow
 
         image = new Image() { Mode = ScaleMode.ScaleToFit, AlphaBlend = true, Position = new Rect(0, 180, 100, 100) };
 
-        txtBox = new TextBox() { Text = "输入文字", Position = new Rect(0, 280, 100, 20) };
+        txtBox = new TextBox() { text = "输入文字", Position = new Rect(0, 280, 100, 20) };
 
-        multiLineTxtBox = new TextBox() { Text = "输入多行文字\n另外一行", MultiLine = true, Position = new Rect(0, 310, 100, 40) };
+        multiLineTxtBox = new TextBox() { text = "输入多行文字\n另外一行", MultiLine = true, Position = new Rect(0, 310, 100, 40) };
 
         passwordBox = new PasswordBox() { Position = new Rect(0, 340, 100, 20) };
 
@@ -76,7 +76,7 @@ public class ControlsWindow : EditorWindow
             Position = new Rect(150, 5, 400, 20),
             Items = new List<Control>()
             {
-                new Button("Hello") { ImagePath="SceneAsset Icon",Style="toolbarbutton",Height=20,Width=60 },
+                new Button("Hello") { ImagePath="SceneAsset Icon",Style="toolbarbutton",FixedHeight=20,FixedWidth=60 },
                 new Button("Hello") {Style="toolbarbutton" },
                 new Button("Hello") { Style="toolbarbutton"} ,
                 new Button("Hello") { Style="toolbarbutton"} ,

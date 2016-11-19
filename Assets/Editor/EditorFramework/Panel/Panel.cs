@@ -21,7 +21,6 @@ namespace EditorFramework.Panel {
 
             foreach (var item in Items)
                 item.Render();
-            GUI.EndGroup();
             base.RenderLayout();
         }
 

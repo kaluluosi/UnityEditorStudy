@@ -20,7 +20,7 @@ namespace EditorFramework
             Handles.DrawLine(new Vector2(rect.x + rect.width, rect.y), new Vector2(rect.x + rect.width, rect.y + rect.height));
             Handles.DrawLine(new Vector2(rect.x + rect.width, rect.y + rect.height), new Vector2(rect.x, rect.y + rect.height));
             Handles.DrawLine(new Vector2(rect.x, rect.y + rect.height), rect.position);
-
         }
+
     }
 }

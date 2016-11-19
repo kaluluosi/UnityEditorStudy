@@ -4,117 +4,61 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EditorFramework {
+namespace EditorFramework
+{
     /// <summary>
     /// 控件基类
     /// </summary>
-    public abstract class Control:UIFramework,ILayoutable {
+    public abstract class Control : UIFramework, ILayoutable
+    {
+
         public GUIStyle Style { get; set; }
 
-        private Dictionary<string, GUILayoutOption> layoutOptions = new Dictionary<string,GUILayoutOption>();
-        private LayoutSetting layoutSetting = new LayoutSetting();
+        private Rect position;
+        private bool expandWidth=false,expandHeight = false;
+        private bool autoWidth=true,autoHeight = true;
 
-        public int ControlID {
+        public override Rect Position
+        {
+            get
+            {
+                return position;
+            }
+
+            set
+            {
+                position = value;
+            }
+        }
+
+        public int ControlID
+        {
             get
             {
                 return GetHashCode();
             }
         }
 
-        public float Width
-        {
-            get
-            {
-                return Position.width;
-            }
+        public float FixedWidth { get; set; }
+        public float MinWidth { get; set; }
+        public float MaxWidth { get; set; }
 
-            set
-            {
-                Position = new Rect(Position) { width = value };
-                layoutOptions["width"] = GUILayout.Width(value);
-            }
+        public float FixedHeight { get; set;
         }
-        public float MinWidth
-        {
-            get
-            {
-                return layoutSetting.MinWidth;
-            }
+        public float MinHeight { get; set; }
 
-            set
-            {
-                layoutSetting.MinWidth = value;
-                layoutOptions["MinWidth"]=GUILayout.MinWidth(value);
-            }
-        }
-
-        public float MaxWidth
-        {
-            get
-            {
-                return layoutSetting.MaxWidth;
-            }
-            set
-            {
-                layoutSetting.MaxWidth = value;
-                layoutOptions["MaxWidth"]= GUILayout.MaxWidth(value);
-            }
-        }
-
-        public float Height
-        {
-            get
-            {
-                return Position.height;
-            }
-
-            set
-            {
-                Position = new Rect(Position) { height = value };
-                layoutOptions["Height"]=GUILayout.Height(value);
-            }
-        }
-
-        public float MinHeight
-        {
-            get
-            {
-                return layoutSetting.MinHeight;
-            }
-
-            set
-            {
-                layoutSetting.MinHeight = value;
-                Position = new Rect(Position) { height = value };
-                layoutOptions["MinHeight"]= GUILayout.MinHeight(value);
-            }
-        }
-
-        public float MaxHeight
-        {
-            get
-            {
-                return layoutSetting.MaxHeight;
-            }
-
-            set
-            {
-                layoutSetting.MaxHeight = value;
-                layoutOptions["MaxHeight"]=GUILayout.MaxHeight(value);
-            }
-        }
+        public float MaxHeight { get; set; }
 
         public bool ExpandWidth
         {
             get
             {
-                return layoutSetting.ExpandWidth;
+                return expandWidth;
             }
 
             set
             {
-                layoutSetting.ExpandWidth = value;
-                layoutOptions["ExpandWidth"]=GUILayout.ExpandWidth(value);
+                expandWidth = value;
             }
         }
 
@@ -122,13 +66,12 @@ namespace EditorFramework {
         {
             get
             {
-                return layoutSetting.ExpandWidth;
+                return expandHeight;
             }
 
             set
             {
-                layoutSetting.ExpandHeight = value;
-                layoutOptions["ExpandHeight"]= GUILayout.ExpandHeight(value);
+                expandHeight = value;
             }
         }
 
@@ -136,14 +79,50 @@ namespace EditorFramework {
         {
             get
             {
-                return layoutOptions.Values.ToArray();
+                List<GUILayoutOption> layoutOptions = new List<GUILayoutOption>();
+
+                //如果扩展宽度，那么就只设置扩展宽度；
+                //如果不扩展宽度并且不自适应宽度，那么就只设置固定宽度；
+                //如果不扩展宽度但自适应宽度，那么就不设置扩展宽度也不设置固定宽度；
+                if (AutoWidth)
+                    layoutOptions.Add(GUILayout.ExpandWidth(false));
+                else if (ExpandWidth)
+                    layoutOptions.Add(GUILayout.ExpandWidth(true));
+                else
+                    layoutOptions.Add(GUILayout.Width(FixedWidth));
+
+
+                if (AutoHeight)
+                    layoutOptions.Add(GUILayout.ExpandHeight(false));
+                else if(ExpandHeight)
+                    layoutOptions.Add(GUILayout.ExpandHeight(true));
+                else
+                    layoutOptions.Add(GUILayout.Height(FixedHeight));
+
+
+                if (MinWidth > 0)
+                    layoutOptions.Add(GUILayout.MinWidth(MinWidth));
+                if (MaxWidth > 0)
+                    layoutOptions.Add(GUILayout.MaxWidth(MaxWidth));
+
+                if (MinHeight > 0)
+                    layoutOptions.Add(GUILayout.MinHeight(MinHeight));
+                if (MaxHeight > 0)
+                    layoutOptions.Add(GUILayout.MaxHeight(MaxHeight));
+
+
+                return layoutOptions.ToArray();
             }
         }
 
-        public virtual void RenderLayout() {
+        public bool AutoWidth { get { return autoWidth; } set { autoWidth = value; }}
+        public bool AutoHeight { get { return autoHeight; } set { autoHeight = value; } }
+
+        public virtual void RenderLayout()
+        {
             Rect newPosition = GUILayoutUtility.GetLastRect();
             if (newPosition.size.sqrMagnitude != 2)
-                Position = newPosition;
+                position = newPosition;
             CheckMouseEvent();
             OnRender(new DrawCanvas(Position));
         }

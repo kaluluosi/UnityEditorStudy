@@ -10,6 +10,9 @@ namespace EditorFramework
     public abstract class Visual:GUIContent
     {
 
+        public event EventHandler RenderEvent;
+
+
         public static bool DesignMode  { get; set; }
 
         private string name;
@@ -82,8 +85,14 @@ namespace EditorFramework
         /// </summary>
         /// <param name="drawContext">绘图上下文</param>
         public virtual void OnRender(DrawCanvas drawContext) {
-            if(DesignMode)
-                Drawing.DrawRectangle(Position,Color.red);
+            if (DesignMode)
+            {
+                drawContext.DrawRectangle(new Rect(Vector2.zero, Size), Color.red);
+                drawContext.Text(Size, Size.ToString(),Color.red);
+            }
+
+            if (RenderEvent != null)
+                RenderEvent(this, new EventArgs());
         }
 
         protected Texture LoadImage(string path) {

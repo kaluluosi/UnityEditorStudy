@@ -11,7 +11,6 @@ namespace EditorFramework.Controls
         public bool Repeatable { get; set; }
         public Button()
         {
-            Position = new Rect(0, 0,100, 20);
             Style = "button";
         }
 
