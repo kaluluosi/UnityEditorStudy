@@ -25,13 +25,13 @@ namespace EditorFramework {
         {
             get
             {
-                return layoutSetting.Width;
+                return Position.width;
             }
 
             set
             {
-                layoutSetting.Width = value;
-                layoutOptions.Add("Width", GUILayout.Width(value));
+                Position = new Rect(Position) { width = value };
+                layoutOptions["width"] = GUILayout.Width(value);
             }
         }
         public float MinWidth
@@ -44,7 +44,7 @@ namespace EditorFramework {
             set
             {
                 layoutSetting.MinWidth = value;
-                layoutOptions.Add("MinWidth", GUILayout.MinWidth(value));
+                layoutOptions["MinWidth"]=GUILayout.MinWidth(value);
             }
         }
 
@@ -57,7 +57,7 @@ namespace EditorFramework {
             set
             {
                 layoutSetting.MaxWidth = value;
-                layoutOptions.Add("MaxWidth", GUILayout.MaxWidth(value));
+                layoutOptions["MaxWidth"]= GUILayout.MaxWidth(value);
             }
         }
 
@@ -65,13 +65,13 @@ namespace EditorFramework {
         {
             get
             {
-                return layoutSetting.Height;
+                return Position.height;
             }
 
             set
             {
-                layoutSetting.Height = value;
-                layoutOptions.Add("Height", GUILayout.Height(value));
+                Position = new Rect(Position) { height = value };
+                layoutOptions["Height"]=GUILayout.Height(value);
             }
         }
 
@@ -85,7 +85,8 @@ namespace EditorFramework {
             set
             {
                 layoutSetting.MinHeight = value;
-                layoutOptions.Add("MinHeight", GUILayout.MinHeight(value));
+                Position = new Rect(Position) { height = value };
+                layoutOptions["MinHeight"]= GUILayout.MinHeight(value);
             }
         }
 
@@ -99,7 +100,7 @@ namespace EditorFramework {
             set
             {
                 layoutSetting.MaxHeight = value;
-                layoutOptions.Add("MaxHeight", GUILayout.MaxHeight(value));
+                layoutOptions["MaxHeight"]=GUILayout.MaxHeight(value);
             }
         }
 
@@ -113,7 +114,7 @@ namespace EditorFramework {
             set
             {
                 layoutSetting.ExpandWidth = value;
-                layoutOptions.Add("ExpandWidth", GUILayout.ExpandWidth(value));
+                layoutOptions["ExpandWidth"]=GUILayout.ExpandWidth(value);
             }
         }
 
@@ -127,7 +128,7 @@ namespace EditorFramework {
             set
             {
                 layoutSetting.ExpandHeight = value;
-                layoutOptions.Add("ExpandHeight", GUILayout.ExpandHeight(value));
+                layoutOptions["ExpandHeight"]= GUILayout.ExpandHeight(value);
             }
         }
 
@@ -140,7 +141,9 @@ namespace EditorFramework {
         }
 
         public virtual void RenderLayout() {
-            Position = GUILayoutUtility.GetLastRect();
+            Rect newPosition = GUILayoutUtility.GetLastRect();
+            if (newPosition.size.sqrMagnitude != 2)
+                Position = newPosition;
             CheckMouseEvent();
             OnRender(new DrawCanvas(Position));
         }

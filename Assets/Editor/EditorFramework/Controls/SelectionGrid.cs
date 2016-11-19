@@ -11,6 +11,7 @@ namespace EditorFramework.Controls {
 
         public SelectionGrid() {
             Col = 1;
+            Style = "button";
         }
 
         public override void Render() {
@@ -23,7 +24,7 @@ namespace EditorFramework.Controls {
 
         public override void RenderLayout() {
 
-            Selected = GUILayout.SelectionGrid(Selected, Items.ToArray(), Col, LayoutOptions);
+            Selected = GUILayout.SelectionGrid(Selected, Items.ToArray(), Col,Style, LayoutOptions);
 
             base.RenderLayout();
         }

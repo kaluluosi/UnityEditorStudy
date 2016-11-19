@@ -4,15 +4,13 @@ using UnityEngine;
 
 namespace EditorFramework.Controls {
     public class CheckBox : Control {
-        public bool IsChecked { get; set; }
-
         public event EventHandler<CheckedEventArgs> CheckedEvent;
+
+        public bool IsChecked { get; set; }
 
         public CheckBox() {
             Style = "toggle";
         }
-
-        public event EventHandler<MouseEventArgs> ClickEvent;
 
         public override void Render() {
 
@@ -30,14 +28,15 @@ namespace EditorFramework.Controls {
         }
 
         public override void RenderLayout() {
+            bool old = IsChecked;
+
             IsChecked = GUILayout.Toggle(IsChecked, this,Style, LayoutOptions);
+
+            if (old != IsChecked)
+                OnChecked(old, IsChecked);
 
             base.RenderLayout();
         }
 
-        public void OnClick() {
-            if (ClickEvent != null)
-                ClickEvent(this, new MouseEventArgs());
-        }
     }
 }

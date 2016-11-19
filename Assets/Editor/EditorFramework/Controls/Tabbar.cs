@@ -11,7 +11,7 @@ namespace EditorFramework.Controls {
 
 
         public Tabbar() {
-            Items = new List<GUIContent>();
+            Items = new List<Control>();
         }
 
         public override void Render() {

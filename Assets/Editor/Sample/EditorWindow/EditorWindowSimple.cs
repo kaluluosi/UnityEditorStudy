@@ -32,7 +32,8 @@ public class EditorWindowSimple:EditorWindow
 
         EditorGUILayout.BeginVertical(boxStyle);
         GUILayout.BeginHorizontal("toolbar");
-        GUILayout.Button("hehe","toolbarbutton",GUILayout.Width(100));
+
+        GUILayout.Button("hehe", "toolbarbutton", GUILayout.Width(100));
         GUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
 

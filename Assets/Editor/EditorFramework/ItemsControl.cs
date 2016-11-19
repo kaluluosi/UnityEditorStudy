@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace EditorFramework {
-    public class ItemsControl:Control {
+    public class ItemsControl:ControlContainer {
 
         public event EventHandler<SelectedChangedEventArgs> SelectedChangedEvent;
-        public List<GUIContent> Items { get; set; }
+
 
         private int selected = 0;
         public int Selected {
@@ -24,8 +24,8 @@ namespace EditorFramework {
             }
         }
 
-        private GUIContent selectedItem;
-        public GUIContent SelectedItem
+        private Control selectedItem;
+        public Control SelectedItem
         {
             get
             {

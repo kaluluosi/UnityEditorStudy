@@ -2,44 +2,59 @@
 using UnityEngine;
 using EditorFramework.Input;
 
-namespace EditorFramework.Controls {
-    public class Button : Control,IClickHandler {
+namespace EditorFramework.Controls
+{
+    public class Button : Control, IClickHandler
+    {
+        public event EventHandler<MouseEventArgs> ClickEvent;
 
         public bool Repeatable { get; set; }
-        public Button() {
-            Position = new Rect(0, 0, 100, 20);
+        public Button()
+        {
+            Position = new Rect(0, 0,100, 20);
             Style = "button";
         }
 
-        public event EventHandler<MouseEventArgs> ClickEvent;
+        public Button(string text) : this()
+        {
+            this.text = text;
+        }
 
-        protected virtual void OnClick() {
+
+        protected virtual void OnClick()
+        {
             if (ClickEvent != null)
                 ClickEvent(this, new MouseEventArgs());
         }
 
-        public override void Render() {
+        public override void Render()
+        {
 
-            if (Repeatable) {
-                if (GUI.RepeatButton(Position, this)) 
+            if (Repeatable)
+            {
+                if (GUI.RepeatButton(Position, this, Style))
                     OnClick();
             }
-            else {
-                if (GUI.Button(Position, this, Style)) 
+            else
+            {
+                if (GUI.Button(Position, this, Style))
                     OnClick();
             }
-
 
             base.Render();
         }
 
-        public override void RenderLayout() {
+        public override void RenderLayout()
+        {
 
-            if (Repeatable) {
-                if (GUILayout.RepeatButton(this, LayoutOptions)) 
+            if (Repeatable)
+            {
+                if (GUILayout.RepeatButton(this, Style, LayoutOptions))
                     OnClick();
-            }else {
-                if (GUILayout.Button(this, LayoutOptions)) 
+            }
+            else
+            {
+                if (GUILayout.Button(this, Style, LayoutOptions))
                     OnClick();
             }
 

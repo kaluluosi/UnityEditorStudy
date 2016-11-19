@@ -82,3 +82,5 @@ $RECYCLE.BIN/
 /Assets/Editor/Sample/EditorFramework/GUIStylesDemo.cs
 /Assets/Editor/EditorFramework/MdiPanel.cs.meta
 /Assets/Editor/EditorFramework/MdiPanel.cs
+/Assets/Editor/Sample/GUI/NewEditorScript1.cs
+*.meta

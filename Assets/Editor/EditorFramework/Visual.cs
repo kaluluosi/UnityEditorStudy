@@ -9,14 +9,36 @@ namespace EditorFramework
 {
     public abstract class Visual:GUIContent
     {
-        //To do
-        //publick VisualCollection _children;
 
-        public string Name { get; set; }
+        public static bool DesignMode  { get; set; }
+
+        private string name;
+        public string Name
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(name))
+                    return text;
+                else
+                    return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
         public virtual Rect Position { get; set; }
-        public virtual Rect Size {
+        public Rect ScreenPosition
+        {
+            get
+            {
+                Vector2 pos = GUIUtility.GUIToScreenPoint(Position.position);
+                return new Rect(pos, Position.size);
+            }
+        }
+        public virtual Vector2 Size {
             get {
-                return new Rect(0, 0, Position.width, Position.height);
+                return Position.size;
             }
         }
         public virtual Quaternion Rotation { get; set; }
@@ -60,7 +82,8 @@ namespace EditorFramework
         /// </summary>
         /// <param name="drawContext">绘图上下文</param>
         public virtual void OnRender(DrawCanvas drawContext) {
-
+            if(DesignMode)
+                Drawing.DrawRectangle(Position,Color.red);
         }
 
         protected Texture LoadImage(string path) {
@@ -73,7 +96,7 @@ namespace EditorFramework
 
             Debug.LogWarningFormat("{0} 资源不存在", path);
 
-            return null;
+            return EditorGUIUtility.Load("Texture2D Icon") as Texture;
         }
 
     }

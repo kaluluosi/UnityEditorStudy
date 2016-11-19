@@ -6,6 +6,9 @@ using System.Text;
 namespace EditorFramework.Controls {
     public abstract class ScrollBarBase:Control {
 
+        public event EventHandler<ValueChangeEventArgs> ValueChangedEvent;
+
+
         public ScrollBarBase() {
             BarSize = 5f;
         }
@@ -15,5 +18,12 @@ namespace EditorFramework.Controls {
         public float MaxValue { get; set; }
 
         public float BarSize { get; set; }
+
+        protected void OnValueChanged(float oldValue, float newValue)
+        {
+            if (ValueChangedEvent != null)
+                ValueChangedEvent(this, new ValueChangeEventArgs() { OldValue = oldValue, NewValue = newValue });
+        }
+
     }
 }

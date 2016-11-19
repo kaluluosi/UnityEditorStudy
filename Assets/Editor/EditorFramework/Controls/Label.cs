@@ -8,13 +8,18 @@ using UnityEngine;
 namespace EditorFramework.Controls {
     public class Label : Control {
 
+        public Label()
+        {
+            Style = "label";
+        }
+
         public override void Render() {
-            GUI.Label(Position, this);
+            GUI.Label(Position, this,Style);
 
             base.Render();
         }
         public override void RenderLayout() {
-            GUILayout.Label(this, LayoutOptions);
+            GUILayout.Label(this,Style, LayoutOptions);
 
             base.RenderLayout();
         }
