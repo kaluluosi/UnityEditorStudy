@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿using System;
+using System;
 using EditorFramework.Input;
 using UnityEditor;
 using UnityEngine;
