@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using EditorFramework.Input;
 using UnityEditor;
@@ -51,5 +52,16 @@ namespace EditorFramework {
                 }
             }
         }
+=======
+﻿using UnityEditor;
+using UnityEngine;
+
+namespace EditorFramework
+{
+    public class UIElement:Visual,IInputElement
+    {
+
+
+>>>>>>> origin/master
     }
 }
