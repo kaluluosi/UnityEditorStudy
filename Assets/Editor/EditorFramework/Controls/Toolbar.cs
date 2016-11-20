@@ -10,8 +10,7 @@ namespace EditorFramework.Controls
         public Toolbar()
         {
             Style = "toolbar";
-            ExpandWidth = true;
-            AutoWidth = false;
+            AdaptWidth = AdaptMode.Expand;
         }
 
 

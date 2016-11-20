@@ -14,9 +14,12 @@ namespace EditorFramework
 
         public GUIStyle Style { get; set; }
 
+        public Control()
+        {
+            Style = GUIStyle.none;
+        }
+
         private Rect position;
-        private bool expandWidth=false,expandHeight = false;
-        private bool autoWidth=true,autoHeight = true;
 
         public override Rect Position
         {
@@ -49,31 +52,6 @@ namespace EditorFramework
 
         public float MaxHeight { get; set; }
 
-        public bool ExpandWidth
-        {
-            get
-            {
-                return expandWidth;
-            }
-
-            set
-            {
-                expandWidth = value;
-            }
-        }
-
-        public bool ExpandHeight
-        {
-            get
-            {
-                return expandHeight;
-            }
-
-            set
-            {
-                expandHeight = value;
-            }
-        }
 
         public GUILayoutOption[] LayoutOptions
         {
@@ -84,20 +62,32 @@ namespace EditorFramework
                 //如果扩展宽度，那么就只设置扩展宽度；
                 //如果不扩展宽度并且不自适应宽度，那么就只设置固定宽度；
                 //如果不扩展宽度但自适应宽度，那么就不设置扩展宽度也不设置固定宽度；
-                if (AutoWidth)
-                    layoutOptions.Add(GUILayout.ExpandWidth(false));
-                else if (ExpandWidth)
-                    layoutOptions.Add(GUILayout.ExpandWidth(true));
-                else
-                    layoutOptions.Add(GUILayout.Width(FixedWidth));
 
+                switch (AdaptWidth)
+                {
+                    case AdaptMode.Auto:
+                        layoutOptions.Add(GUILayout.ExpandWidth(false));
+                        break;
+                    case AdaptMode.Expand:
+                        layoutOptions.Add(GUILayout.ExpandWidth(true));
+                        break;
+                    case AdaptMode.Fixed:
+                        layoutOptions.Add(GUILayout.Width(FixedWidth));
+                        break;
+                }
 
-                if (AutoHeight)
-                    layoutOptions.Add(GUILayout.ExpandHeight(false));
-                else if(ExpandHeight)
-                    layoutOptions.Add(GUILayout.ExpandHeight(true));
-                else
-                    layoutOptions.Add(GUILayout.Height(FixedHeight));
+                switch (AdaptHeight)
+                {
+                    case AdaptMode.Auto:
+                        layoutOptions.Add(GUILayout.ExpandHeight(false));
+                        break;
+                    case AdaptMode.Expand:
+                        layoutOptions.Add(GUILayout.ExpandHeight(true));
+                        break;
+                    case AdaptMode.Fixed:
+                        layoutOptions.Add(GUILayout.Height(FixedHeight));
+                        break;
+                }
 
 
                 if (MinWidth > 0)
@@ -115,9 +105,9 @@ namespace EditorFramework
             }
         }
 
-        public bool AutoWidth { get { return autoWidth; } set { autoWidth = value; }}
-        public bool AutoHeight { get { return autoHeight; } set { autoHeight = value; } }
 
+        public AdaptMode AdaptWidth { get; set; }
+        public AdaptMode AdaptHeight { get; set; }
         public virtual void RenderLayout()
         {
             Rect newPosition = GUILayoutUtility.GetLastRect();

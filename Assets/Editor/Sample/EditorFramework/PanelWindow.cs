@@ -3,14 +3,17 @@ using UnityEditor;
 using EditorFramework;
 using EditorFramework.Controls;
 using System.Collections.Generic;
+using EditorFramework.Panel;
 
-public class LayoutWindow : EditorWindowEx
+public class PanelWindow : EditorWindowEx
 {
-    [MenuItem("EditorFramework/LayoutWindow")]
+    [MenuItem("EditorFramework/PanelWindow")]
     static void DoIt()
     {
-        GetWindow<LayoutWindow>();
+        GetWindow<PanelWindow>();
     }
+
+    #region
 
     Button btntext;
     Button btnImg;
@@ -42,9 +45,20 @@ public class LayoutWindow : EditorWindowEx
 
     Toolbar toolbar;
 
+    #endregion
+
+    Panel panel;
+    Panel panelLayout;
+
+    StackPanel hstackpanel;
+    StackPanel vstackpanel;
+    StackPanel stackpanel;
+
     void OnEnable()
     {
-        chkDesignMode = new CheckBox() { text = "设计模式", IsChecked = Visual.DesignMode };
+        #region
+
+        chkDesignMode = new CheckBox() { text = "设计模式", IsChecked = Visual.DesignMode,Style="toolbarbutton" };
 
         btntext = new Button() { text = "文本", ImagePath = "", tooltip = "这是文本按钮" };
         btnImg = new Button() { ImagePath = "SceneAsset Icon", tooltip = "这是图形按钮"};
@@ -55,33 +69,21 @@ public class LayoutWindow : EditorWindowEx
             ImagePath = "SceneAsset Icon",
             tooltip = "这是Style设置成Box后的按钮",
             FixedWidth = 200,
-            AdaptWidth=AdaptMode.Fixed
+            AdaptWidth = AdaptMode.Fixed
         };
         btnSpecialStyle = new Button("换了样式的按钮") { Style = "ChannelStripAttenuationMarkerSquare",AdaptWidth=AdaptMode.Fixed,FixedWidth=50 };
         btnRepeat = new Button() { text = "连点按钮", Repeatable = true };
 
 
-//         //自适应
-//         btnExpandModel = new Button("模特") { FixedWidth=200,FixedHeight=50 };
-//         chkExpandWidth = new CheckBox() { text = "展开宽度",IsChecked=btnExpandModel.ExpandWidth };
-//         chkExpandHeight = new CheckBox() { text = "展开高度" ,IsChecked=btnExpandModel.ExpandHeight};
-//         chkAutoWidth = new CheckBox() { text = "自动宽度", IsChecked = btnExpandModel.AutoWidth };
-//         chkAutoHeight = new CheckBox() { text = "自动高度", IsChecked = btnExpandModel.AutoHeight };
-// 
-//         chkExpandWidth.CheckedEvent += (sender, args) => {
-//             btnExpandModel.ExpandWidth = args.NewValue;
-//         };
-//         chkExpandHeight.CheckedEvent += (sender, args) => { btnExpandModel.ExpandHeight = args.NewValue; };
-//         chkAutoWidth.CheckedEvent += (sender, args) => { btnExpandModel.AutoWidth = args.NewValue; };
-//         chkAutoHeight.CheckedEvent += (sender, args) => { btnExpandModel.AutoHeight = args.NewValue; };
-// 
+
 
         txtbox = new TextBox() {
             MultiLine = true,
             text="1233455555555555555555555555555555555",
             tooltip="文本框"
         };
-        hslider = new HorizontalSlider() { Value = btnBoxStyle.FixedWidth, MinValue = 0, MaxValue = 1000, AdaptWidth = AdaptMode.Expand };
+
+        hslider = new HorizontalSlider() { Value = btnBoxStyle.FixedWidth, MinValue = 0, MaxValue = 1000 ,AdaptWidth=AdaptMode.Expand};
         hslider2 = new HorizontalSlider() { Value = 0, MinValue = 0, MaxValue = 100, SliderStyle = "horizontalscrollbar", ThumbStyle = "ColorPickerHorizThumb", AdaptWidth = AdaptMode.Expand };
         vslider = new VerticalSlider() { Value = 0, MinValue = 0, MaxValue = 100 };
         hscrollbar = new HorizontalScrollBar() { Value = 0, MinValue = 0, MaxValue = 100, AdaptWidth = AdaptMode.Expand };
@@ -160,57 +162,75 @@ public class LayoutWindow : EditorWindowEx
             ShowNotification("Checked");
         };
 
-    }
 
+        #endregion
+
+        panel = new CanvasPanel() { Position = new Rect(200,300, 200, 200) };
+
+        btnBoxStyle.Position = new Rect(0, 0, 100, 20);
+        btnImgtext.Position = new Rect(150, 30, 100, 20);
+
+        panel.Items.Add(btnBoxStyle);
+        panel.Items.Add(btnImgtext);
+
+        hslider.Value = panel.Position.width;
+        hslider.ValueChangedEvent += (sender, args) =>
+        {
+            panel.Position = new Rect(panel.Position) { width = args.NewValue };
+        };
+
+        panelLayout = new CanvasPanel() { FixedHeight = 200, FixedWidth = 200,AdaptWidth=AdaptMode.Expand,AdaptHeight=AdaptMode.Fixed };
+        panelLayout.Items.Add(btnBoxStyle);
+        panelLayout.Items.Add(btnImgtext);
+
+
+
+        hstackpanel = new StackPanel() { Orientation=StackPanel.Direction.Horiziontal };
+        hstackpanel.Items.Add(new Button("测试"));
+        hstackpanel.Items.Add(new Button("测试"));
+        hstackpanel.Items.Add(new Button("测试"));
+        hstackpanel.Items.Add(new Button("测试"));
+        hstackpanel.Items.Add(new Button("测试"));
+        hstackpanel.Items.Add(new Button("测试"));
+
+
+        vstackpanel = new StackPanel() { Orientation = StackPanel.Direction.Vertical };
+        vstackpanel.Items.Add(new Button("测试"));
+        vstackpanel.Items.Add(new Button("测试"));
+        vstackpanel.Items.Add(new Button("测试"));
+        vstackpanel.Items.Add(new Button("测试"));
+        vstackpanel.Items.Add(new Button("测试"));
+        vstackpanel.Items.Add(new Button("测试"));
+
+
+        stackpanel = new StackPanel() { Orientation = StackPanel.Direction.Horiziontal,Position=new Rect(500,500,400,400) };
+        stackpanel.Items.Add(new Button("测试"));
+        stackpanel.Items.Add(new Button("测试"));
+        stackpanel.Items.Add(new Button("测试"));
+        stackpanel.Items.Add(new Button("测试"));
+        stackpanel.Items.Add(new Button("测试"));
+        stackpanel.Items.Add(new Button("测试"));
+        stackpanel.Items.Add(new Button("测试"));
+        stackpanel.Items.Add(new Button("测试"));
+    }
 
 
 
     void OnGUI()
     {
         toolbar.RenderLayout();
-        chkDesignMode.RenderLayout();
-
-        GUILayout.Label("按钮");
-        btntext.RenderLayout();
-        btnImg.RenderLayout();
-        btnImgtext.RenderLayout();
-        btnBoxStyle.RenderLayout();
-        btnRepeat.RenderLayout();
-        btnSpecialStyle.RenderLayout();
-// 
-//         GUILayout.Space(10);
-//         GUILayout.Label("自适应");
-//         btnExpandModel.RenderLayout();
-//         chkExpandHeight.RenderLayout();
-//         chkExpandWidth.RenderLayout();
-//         chkAutoWidth.RenderLayout();
-//         chkAutoHeight.RenderLayout();
-//         GUILayout.Space(10);
-
-        GUILayout.Label("文本框");
-        txtbox.RenderLayout();
-
-        GUILayout.Space(10);
-
-
-        GUILayout.Label("滚动条");
         hslider.RenderLayout();
 
-        hslider2.RenderLayout();
+        panel.Render();
 
-        vslider.RenderLayout();
-        hscrollbar.RenderLayout();
+        panelLayout.RenderLayout();
 
-        GUILayout.Space(10);
+        GUILayout.Label("水平StackPanel");
+        hstackpanel.RenderLayout();
+        GUILayout.Label("垂直StackPanel");
+        vstackpanel.RenderLayout();
 
-        GUILayout.Label("Tab条");
-        tabbar.RenderLayout();
-        tabbar_toolbarstyle.RenderLayout();
-
-        GUILayout.Space(10);
-
-        GUILayout.Label("单选组");
-        selectionGrid2.RenderLayout();
+        stackpanel.Render();
 
     }
 }

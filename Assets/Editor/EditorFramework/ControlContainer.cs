@@ -10,5 +10,9 @@ namespace EditorFramework
 
         public List<Control> Items { get; set; }
 
+        public ControlContainer()
+        {
+            Items = new List<Control>();
+        }
     }
 }

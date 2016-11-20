@@ -47,7 +47,7 @@ public class ControlsWindow : EditorWindow
     {
         defaultIcon = EditorGUIUtility.Load("Texture2D Icon") as Texture;
 
-        btntext = new Button() { text = "文本", ImagePath = "", tooltip = "这是文本按钮" };
+        btntext = new Button() { Position = new Rect(0,0, 100, 20), text = "文本", ImagePath = "", tooltip = "这是文本按钮" };
         btnImg = new Button() { ImagePath = "SceneAsset Icon", tooltip = "这是图形按钮", Position = new Rect(0, 30, 100, 20) };
         btnImgtext = new Button() { text = "图形+文本", ImagePath = "SceneAsset Icon", tooltip = "这是图形+文本按钮", Position = new Rect(0, 60, 100, 20) };
         btnBoxStyle = new Button() { Style = "box", text = "Box风格", ImagePath = "SceneAsset Icon", tooltip = "这是Style设置成Box后的按钮", Position = new Rect(0, 90, 100, 20) };

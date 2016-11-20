@@ -19,24 +19,37 @@ namespace EditorFramework.Panel
 
         public override void Render()
         {
-            GUI.BeginGroup(Position, this, Style);
-            if(Orientation == Direction.Horiziontal)
-            {
-                GUILayout.BeginHorizontal(LayoutOptions);
-                foreach (var item in Items)
-                    item.RenderLayout();
-                GUILayout.EndHorizontal();
-            }
-            GUI.EndGroup();
+
+            GUILayout.BeginArea(Position, this, Style);
+
+            GUILayout.BeginHorizontal();
+
+            foreach (var item in Items)
+                item.RenderLayout();
+
+            GUILayout.EndHorizontal();
+
+            GUILayout.EndArea();
+
             base.Render();
         }
 
         public override void RenderLayout()
         {
-            GUILayout.BeginHorizontal(LayoutOptions);
-            foreach (var item in Items)
-                item.RenderLayout();
-            GUILayout.EndHorizontal();
+            if (Orientation == Direction.Horiziontal)
+            {
+                GUILayout.BeginHorizontal(this,Style,LayoutOptions);
+                foreach (var item in Items)
+                    item.RenderLayout();
+                GUILayout.EndHorizontal();
+            }
+            else if (Orientation == Direction.Vertical)
+            {
+                GUILayout.BeginVertical(this, Style, LayoutOptions);
+                foreach (var item in Items)
+                    item.RenderLayout();
+                GUILayout.EndVertical();
+            }
             base.RenderLayout();
         }
     }

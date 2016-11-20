@@ -6,19 +6,26 @@ using UnityEngine;
 
 namespace EditorFramework {
 
+    public enum AdaptMode
+    {
+        Auto,
+        Expand,
+        Fixed
+    }
+
     public interface ILayoutable { 
         GUILayoutOption[] LayoutOptions { get;}
+
         float FixedWidth { get; set; }
         float MinWidth { get; set; }
         float MaxWidth { get; set; }
         float FixedHeight { get; set; }
         float MinHeight { get; set; }
         float MaxHeight { get; set; }
-        bool ExpandWidth { get; set; }
-        bool ExpandHeight { get; set; }
 
-        bool AutoWidth { get; set; }
-        bool AutoHeight { get; set; }
+
+        AdaptMode AdaptWidth { get; set; }
+        AdaptMode AdaptHeight { get; set; }
         void RenderLayout();
     }
 }
