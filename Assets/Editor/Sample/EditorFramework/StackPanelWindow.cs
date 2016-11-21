@@ -5,10 +5,12 @@ using EditorFramework.Controls;
 using System.Collections.Generic;
 using EditorFramework.Panel;
 
-public class PanelWindow : EditorWindowEx {
-    [MenuItem("EditorFramework/PanelWindow")]
-    static void DoIt() {
-        GetWindow<PanelWindow>();
+public class StackPanelWindow : EditorWindowEx
+{
+    [MenuItem("EditorFramework/StackPanelWindow")]
+    static void DoIt()
+    {
+        GetWindow<StackPanelWindow>();
     }
 
     #region
@@ -24,7 +26,8 @@ public class PanelWindow : EditorWindowEx {
     TextBox txtbox;
 
     HorizontalSlider hslider;
-    HorizontalSlider vslider;
+    HorizontalSlider hslider2;
+    VerticalSlider vslider;
 
     HorizontalScrollBar hscrollbar;
     Tabbar tabbar;
@@ -39,7 +42,6 @@ public class PanelWindow : EditorWindowEx {
     #endregion
 
     Panel mainPanel;
-    Panel canvasPanel;
 
     Panel panel;
     Panel panelLayout;
@@ -48,13 +50,14 @@ public class PanelWindow : EditorWindowEx {
     StackPanel vstackpanel;
     StackPanel stackpanel;
 
-    void OnEnable() {
+    void OnEnable()
+    {
         #region
 
-        chkDesignMode = new CheckBox() { text = "设计模式", IsChecked = Visual.DebugMode, Style = "toolbarbutton" };
+        chkDesignMode = new CheckBox() { text = "设计模式", IsChecked = Visual.DebugMode,Style="toolbarbutton" };
 
         btntext = new Button() { text = "文本", ImagePath = "", tooltip = "这是文本按钮" };
-        btnImg = new Button() { ImagePath = "SceneAsset Icon", tooltip = "这是图形按钮" };
+        btnImg = new Button() { ImagePath = "SceneAsset Icon", tooltip = "这是图形按钮"};
         btnImgtext = new Button() { text = "图形+文本", ImagePath = "SceneAsset Icon", tooltip = "这是图形+文本按钮" };
         btnBoxStyle = new Button() {
             Style = "box",
@@ -64,15 +67,18 @@ public class PanelWindow : EditorWindowEx {
             FixedWidth = 200,
             AdaptWidth = AdaptMode.Fixed
         };
-        btnSpecialStyle = new Button("换了样式的按钮") { Style = "ChannelStripAttenuationMarkerSquare", AdaptWidth = AdaptMode.Fixed, FixedWidth = 50 };
+        btnSpecialStyle = new Button("换了样式的按钮") { Style = "ChannelStripAttenuationMarkerSquare",AdaptWidth=AdaptMode.Fixed,FixedWidth=50 };
         btnRepeat = new Button() { text = "连点按钮", Repeatable = true };
 
         txtbox = new TextBox() {
             MultiLine = true,
-            text = "1233455555555555555555555555555555555",
-            tooltip = "文本框"
+            text="1233455555555555555555555555555555555",
+            tooltip="文本框"
         };
 
+        hslider = new HorizontalSlider() { Value = btnBoxStyle.FixedWidth, MinValue = 0, MaxValue = 1000 ,AdaptWidth=AdaptMode.Expand};
+        hslider2 = new HorizontalSlider() { Value = 0, MinValue = 0, MaxValue = 100, SliderStyle = "horizontalscrollbar", ThumbStyle = "ColorPickerHorizThumb", AdaptWidth = AdaptMode.Expand };
+        vslider = new VerticalSlider() { Value = 0, MinValue = 0, MaxValue = 100 };
         hscrollbar = new HorizontalScrollBar() { Value = 0, MinValue = 0, MaxValue = 100, AdaptWidth = AdaptMode.Expand };
 
         selectionGrid2 = new SelectionGrid() {
@@ -109,64 +115,57 @@ public class PanelWindow : EditorWindowEx {
         toolbar.Items.Add(chkDesignMode);
 
 
-        btnRepeat.ClickEvent += (sender, args) => {
+        btnRepeat.ClickEvent += (sender, args) =>
+        {
             Debug.Log("连点");
         };
 
-        tabbar.SelectedChangedEvent += (sender, args) => {
+        tabbar.SelectedChangedEvent += (sender, args) =>
+        {
             ShowNotification("Tabbar Changed Selection:" + tabbar.SelectedItem.text);
         };
 
-        selectionGrid2.SelectedChangedEvent += (sender, args) => {
+        selectionGrid2.SelectedChangedEvent += (sender, args) =>
+        {
             ShowNotification("SelectionGrid Changed seledted:" + args.OldSelected + " to " + args.NewSelected);
         };
 
-        chkDesignMode.CheckedEvent += (sender, args) => {
+        chkDesignMode.CheckedEvent += (sender, args) =>
+        {
             Visual.DebugMode = args.NewValue;
             ShowNotification("Checked");
         };
 
 
         #endregion
-
-
         btnBoxStyle.Position = new Rect(0, 0, 100, 20);
         btnImgtext.Position = new Rect(150, 30, 100, 20);
 
-        panel = new CanvasPanel() { Name="panel",Position = new Rect(50, 50, 200, 200) };
-        panel.AdaptHeight = panel.AdaptWidth = AdaptMode.Fixed;
-        panel.FixedWidth = panel.FixedHeight = 200;
+        panel = new CanvasPanel() { Position = new Rect(200,300, 200, 200) };
 
-
-        Button btnTemp = new Button("测试") { Position = new Rect(150, 30, 100, 20) };
+        
+        Button btnTemp = new Button("测试") { Position = new Rect(150,30,100,20) };
         Button btnTemp2 = new Button("测试2") { Position = new Rect(0, 0, 100, 20) };
         btnTemp.RenderEvent += (sender, args) => {
             Visual v = sender as Visual;
-            //             Debug.LogFormat("parent:{0} self:{1} inside:{2}", v.VisualParent.Position, v.Position,v.Renderable);
+//             Debug.LogFormat("parent:{0} self:{1} inside:{2}", v.VisualParent.Position, v.Position,v.Renderable);
         };
         panel.Items.Add(btnTemp);
         panel.Items.Add(btnTemp2);
 
-        hslider = new HorizontalSlider() { Value = panel.Width, MinValue = 0, MaxValue = 1000, AdaptWidth = AdaptMode.Expand };
-        vslider = new HorizontalSlider() { Value = panel.Height, MinValue = 0, MaxValue = 1000, AdaptWidth = AdaptMode.Expand };
-
         hslider.Value = panel.Position.width;
-        hslider.ValueChangedEvent += (sender, args) => {
-            panel.Width = args.NewValue;
+        hslider.ValueChangedEvent += (sender, args) =>
+        {
+            panel.Position = new Rect(panel.Position) { width = args.NewValue };
         };
 
-        vslider.Value = panel.Position.width;
-        vslider.ValueChangedEvent += (sender, args) => {
-            panel.Height = args.NewValue;
-        };
-
-        panelLayout = new CanvasPanel() { FixedHeight = 200, FixedWidth = 200, AdaptWidth = AdaptMode.Expand, AdaptHeight = AdaptMode.Fixed };
+        panelLayout = new CanvasPanel() { FixedHeight = 200, FixedWidth = 200,AdaptWidth=AdaptMode.Expand,AdaptHeight=AdaptMode.Fixed };
         panelLayout.Items.Add(btnBoxStyle);
         panelLayout.Items.Add(btnImgtext);
 
 
 
-        hstackpanel = new StackPanel() { Orientation = Direction.Horiziontal };
+        hstackpanel = new StackPanel() { Orientation= Direction.Horiziontal };
         hstackpanel.Items.Add(new Button("测试"));
         hstackpanel.Items.Add(new Button("测试"));
         hstackpanel.Items.Add(new Button("测试"));
@@ -184,47 +183,41 @@ public class PanelWindow : EditorWindowEx {
         vstackpanel.Items.Add(new Button("测试"));
 
 
-        stackpanel = new StackPanel() { Orientation = Direction.Horiziontal, Position = new Rect(500, 500, 400, 400) };
-        stackpanel.Items.Add(new Button("测试"));
-        stackpanel.Items.Add(new Button("测试"));
-        stackpanel.Items.Add(new Button("测试"));
-        stackpanel.Items.Add(new Button("测试"));
-        stackpanel.Items.Add(new Button("测试"));
-        stackpanel.Items.Add(new Button("测试"));
-        stackpanel.Items.Add(new Button("测试"));
-        stackpanel.Items.Add(new Button("测试"));
+        stackpanel = new StackPanel() { Orientation = Direction.Horiziontal };
+        stackpanel.Items.Add(new Button("测试"){AdaptHeight=AdaptMode.Expand,AdaptWidth=AdaptMode.Expand});
+        stackpanel.Items.Add(new Button("测试"){AdaptHeight=AdaptMode.Expand,AdaptWidth=AdaptMode.Expand});
+        stackpanel.Items.Add(new Button("测试"){AdaptHeight=AdaptMode.Expand,AdaptWidth=AdaptMode.Expand});
+        stackpanel.Items.Add(new Button("测试"){AdaptHeight=AdaptMode.Expand,AdaptWidth=AdaptMode.Expand});
+        stackpanel.Items.Add(new Button("测试"){AdaptHeight=AdaptMode.Expand,AdaptWidth=AdaptMode.Expand});
+        stackpanel.Items.Add(new Button("测试"){AdaptHeight=AdaptMode.Expand,AdaptWidth=AdaptMode.Expand});
+        stackpanel.Items.Add(new Button("测试"){AdaptHeight=AdaptMode.Expand,AdaptWidth=AdaptMode.Expand});
+        stackpanel.Items.Add(new Button("测试"){AdaptHeight=AdaptMode.Expand,AdaptWidth=AdaptMode.Expand});
 
-        mainPanel = new StackPanel() { Orientation = Direction.Vertical, AdaptHeight = AdaptMode.Expand, AdaptWidth = AdaptMode.Expand };
+        mainPanel = new StackPanel() { Orientation=Direction.Vertical, AdaptHeight = AdaptMode.Expand, AdaptWidth = AdaptMode.Expand };
         mainPanel.Items.Add(toolbar);
         mainPanel.Items.Add(hslider);
-        mainPanel.Items.Add(vslider);
-        canvasPanel = new CanvasPanel() { AdaptHeight = AdaptMode.Expand, AdaptWidth = AdaptMode.Expand };
-        canvasPanel.Items.Add(panel);
-        mainPanel.Items.Add(canvasPanel);
-//         mainPanel.Items.Add(panel);
-
-
+        mainPanel.Items.Add(panelLayout);
+        mainPanel.Items.Add(new Label("Horizontal StackPanel"));
+        mainPanel.Items.Add(hstackpanel);
+        mainPanel.Items.Add(new Label("Vertical StackPanel"));
+        mainPanel.Items.Add(vstackpanel);
+        mainPanel.Items.Add(new Label("Vertical StackPanel"));
+        mainPanel.Items.Add(stackpanel);
     }
 
+    Vector2 scrollPosition = new Vector2();
 
-    void OnGUI() {
-        //         toolbar.RenderLayout();
-        //         hslider.RenderLayout();
+    void OnGUI()
+    {
 
-        //         panel.Render();
+        //         mainPanel.RenderLayout();
 
-        //         panelLayout.RenderLayout();
-        // 
-        //         GUILayout.Label("水平StackPanel");
-        //         hstackpanel.RenderLayout();
-        //         GUILayout.Label("垂直StackPanel");
-        //         vstackpanel.RenderLayout();
-
-        //         stackpanel.Render();
-
-        //         Drawing.DrawRectangle(r1, Color.red);
-        //         Drawing.DrawRectangle(r2, Color.red);
-
-        mainPanel.RenderLayout();
+        scrollPosition =GUILayout.BeginScrollView(scrollPosition,GUILayout.Height(300));
+        for(int i = 0; i < 100; i++) {
+            GUILayout.Button("测试");
+            Rect rect = GUILayoutUtility.GetLastRect();
+            Drawing.DrawRectangle(rect,Color.red);
+        }
+        GUILayout.EndScrollView();
     }
 }

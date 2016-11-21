@@ -11,7 +11,6 @@ namespace EditorFramework.Controls {
 
 
         public Tabbar() {
-            Items = new List<Control>();
             Style = "button";
         }
 

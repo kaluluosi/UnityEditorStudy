@@ -54,7 +54,7 @@ public class ControlsWindow : EditorWindow
 
         label = new Label() { text = "标签", Position = new Rect(0, 120, 100, 20) };
 
-        chkBox = new CheckBox() { text = "选项框", tooltip = "这是一个选项框", IsChecked = Visual.DesignMode, Position = new Rect(0, 150, 100, 20) };
+        chkBox = new CheckBox() { text = "选项框", tooltip = "这是一个选项框", IsChecked = Visual.DebugMode, Position = new Rect(0, 150, 100, 20) };
 
         image = new Image() { Mode = ScaleMode.ScaleToFit, AlphaBlend = true, Position = new Rect(0, 180, 100, 100) };
 
@@ -73,17 +73,15 @@ public class ControlsWindow : EditorWindow
 
         toolbar = new Toolbar()
         {
-            Position = new Rect(150, 5, 400, 20),
-            Items = new List<Control>()
-            {
-                new Button("Hello") { ImagePath="SceneAsset Icon",Style="toolbarbutton",FixedHeight=20,FixedWidth=60 },
-                new Button("Hello") {Style="toolbarbutton" },
-                new Button("Hello") { Style="toolbarbutton"} ,
-                new Button("Hello") { Style="toolbarbutton"} ,
-            }
+            Position = new Rect(150, 5, 400, 20),            
         };
 
-
+        toolbar.Items.Add(new Button("Hello") { ImagePath = "SceneAsset Icon", Style = "toolbarbutton", FixedHeight = 20, FixedWidth = 60 });
+        toolbar.Items.Add(new Button("Hello") { Style = "toolbarbutton" });
+        toolbar.Items.Add(new Button("Hello") { Style = "toolbarbutton" });
+        toolbar.Items.Add(new Button("Hello") { Style = "toolbarbutton" });
+        toolbar.Items.Add(new Button("Hello") { Style = "toolbarbutton" });
+        toolbar.Items.Add(new Button("Hello") { Style = "toolbarbutton" });
 
         btnImg.ClickEvent += (sender, args) =>
         {
@@ -103,7 +101,7 @@ public class ControlsWindow : EditorWindow
         chkBox.CheckedEvent += (sender, args) =>
         {
             ShowMessage(chkBox.text + " is checked:" + args.OldValue + " to " + args.NewValue);
-            Visual.DesignMode = args.NewValue;
+            Visual.DebugMode = args.NewValue;
         };
 
         txtBox.TextChangedEvent += (sender, args) =>

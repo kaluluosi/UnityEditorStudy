@@ -4,11 +4,9 @@ using EditorFramework;
 using EditorFramework.Controls;
 using System.Collections.Generic;
 
-public class LayoutWindow : EditorWindowEx
-{
+public class LayoutWindow : EditorWindowEx {
     [MenuItem("EditorFramework/LayoutWindow")]
-    static void DoIt()
-    {
+    static void DoIt() {
         GetWindow<LayoutWindow>();
     }
 
@@ -42,12 +40,11 @@ public class LayoutWindow : EditorWindowEx
 
     Toolbar toolbar;
 
-    void OnEnable()
-    {
-        chkDesignMode = new CheckBox() { text = "设计模式", IsChecked = Visual.DesignMode };
+    void OnEnable() {
+        chkDesignMode = new CheckBox() { text = "设计模式", IsChecked = Visual.DebugMode };
 
         btntext = new Button() { text = "文本", ImagePath = "", tooltip = "这是文本按钮" };
-        btnImg = new Button() { ImagePath = "SceneAsset Icon", tooltip = "这是图形按钮"};
+        btnImg = new Button() { ImagePath = "SceneAsset Icon", tooltip = "这是图形按钮" };
         btnImgtext = new Button() { text = "图形+文本", ImagePath = "SceneAsset Icon", tooltip = "这是图形+文本按钮" };
         btnBoxStyle = new Button() {
             Style = "box",
@@ -55,108 +52,88 @@ public class LayoutWindow : EditorWindowEx
             ImagePath = "SceneAsset Icon",
             tooltip = "这是Style设置成Box后的按钮",
             FixedWidth = 200,
-            AdaptWidth=AdaptMode.Fixed
+            AdaptWidth = AdaptMode.Fixed
         };
-        btnSpecialStyle = new Button("换了样式的按钮") { Style = "ChannelStripAttenuationMarkerSquare",AdaptWidth=AdaptMode.Fixed,FixedWidth=50 };
+        btnSpecialStyle = new Button("换了样式的按钮") { Style = "ChannelStripAttenuationMarkerSquare", AdaptWidth = AdaptMode.Fixed, FixedWidth = 50 };
         btnRepeat = new Button() { text = "连点按钮", Repeatable = true };
 
 
-//         //自适应
-//         btnExpandModel = new Button("模特") { FixedWidth=200,FixedHeight=50 };
-//         chkExpandWidth = new CheckBox() { text = "展开宽度",IsChecked=btnExpandModel.ExpandWidth };
-//         chkExpandHeight = new CheckBox() { text = "展开高度" ,IsChecked=btnExpandModel.ExpandHeight};
-//         chkAutoWidth = new CheckBox() { text = "自动宽度", IsChecked = btnExpandModel.AutoWidth };
-//         chkAutoHeight = new CheckBox() { text = "自动高度", IsChecked = btnExpandModel.AutoHeight };
-// 
-//         chkExpandWidth.CheckedEvent += (sender, args) => {
-//             btnExpandModel.ExpandWidth = args.NewValue;
-//         };
-//         chkExpandHeight.CheckedEvent += (sender, args) => { btnExpandModel.ExpandHeight = args.NewValue; };
-//         chkAutoWidth.CheckedEvent += (sender, args) => { btnExpandModel.AutoWidth = args.NewValue; };
-//         chkAutoHeight.CheckedEvent += (sender, args) => { btnExpandModel.AutoHeight = args.NewValue; };
-// 
+        //         //自适应
+        //         btnExpandModel = new Button("模特") { FixedWidth=200,FixedHeight=50 };
+        //         chkExpandWidth = new CheckBox() { text = "展开宽度",IsChecked=btnExpandModel.ExpandWidth };
+        //         chkExpandHeight = new CheckBox() { text = "展开高度" ,IsChecked=btnExpandModel.ExpandHeight};
+        //         chkAutoWidth = new CheckBox() { text = "自动宽度", IsChecked = btnExpandModel.AutoWidth };
+        //         chkAutoHeight = new CheckBox() { text = "自动高度", IsChecked = btnExpandModel.AutoHeight };
+        // 
+        //         chkExpandWidth.CheckedEvent += (sender, args) => {
+        //             btnExpandModel.ExpandWidth = args.NewValue;
+        //         };
+        //         chkExpandHeight.CheckedEvent += (sender, args) => { btnExpandModel.ExpandHeight = args.NewValue; };
+        //         chkAutoWidth.CheckedEvent += (sender, args) => { btnExpandModel.AutoWidth = args.NewValue; };
+        //         chkAutoHeight.CheckedEvent += (sender, args) => { btnExpandModel.AutoHeight = args.NewValue; };
+        // 
 
         txtbox = new TextBox() {
             MultiLine = true,
-            text="1233455555555555555555555555555555555",
-            tooltip="文本框"
+            text = "1233455555555555555555555555555555555",
+            tooltip = "文本框"
         };
         hslider = new HorizontalSlider() { Value = btnBoxStyle.FixedWidth, MinValue = 0, MaxValue = 1000, AdaptWidth = AdaptMode.Expand };
         hslider2 = new HorizontalSlider() { Value = 0, MinValue = 0, MaxValue = 100, SliderStyle = "horizontalscrollbar", ThumbStyle = "ColorPickerHorizThumb", AdaptWidth = AdaptMode.Expand };
         vslider = new VerticalSlider() { Value = 0, MinValue = 0, MaxValue = 100 };
         hscrollbar = new HorizontalScrollBar() { Value = 0, MinValue = 0, MaxValue = 100, AdaptWidth = AdaptMode.Expand };
 
-        selectionGrid2 = new SelectionGrid()
-        {
-            Items = new List<Control>()
-            {
-                new Button("按钮1") { Style="box"},
-                new Button("按钮2"),
-                new Button("按钮3"),
-            },
+        selectionGrid2 = new SelectionGrid() {
             Col = 2,
             AdaptWidth = AdaptMode.Expand
         };
+        selectionGrid2.Items.Add(new Button("按钮1") { Style = "box" });
+        selectionGrid2.Items.Add(new Button("按钮2"));
+        selectionGrid2.Items.Add(new Button("按钮3"));
 
-        tabbar = new Tabbar()
-        {
-            Items = new List<Control>() {
-                new Button("按钮1"),
-                new Button("按钮2"),
-                new Button("按钮3"),
-                btnBoxStyle,
-                btnImgtext
-            },
-        };
+        tabbar = new Tabbar();
+        tabbar.Items.Add(new Button("按钮1"));
+        tabbar.Items.Add(new Button("按钮2"));
+        tabbar.Items.Add(new Button("按钮3"));
+        tabbar.Items.Add(btnBoxStyle);
+        tabbar.Items.Add(btnImgtext);
 
-        tabbar_toolbarstyle = new Tabbar()
-        {
-            Items = new List<Control>() {
-                new Button("按钮1"),
-                new Button("按钮2"),
-                new Button("按钮3"),
-                btnBoxStyle,
-                btnImgtext
-            },
+        tabbar_toolbarstyle = new Tabbar() {
             Style = "toolbarbutton"
         };
+        tabbar_toolbarstyle.Items.Add(new Button("按钮1"));
+        tabbar_toolbarstyle.Items.Add(new Button("按钮2"));
+        tabbar_toolbarstyle.Items.Add(new Button("按钮3"));
+        tabbar_toolbarstyle.Items.Add(btnBoxStyle);
+        tabbar_toolbarstyle.Items.Add(btnImgtext);
 
-        toolbar = new Toolbar()
-        {
-            Items = new List<Control>()
-            {
-                new Button("Hello") { ImagePath="SceneAsset Icon",Style="toolbarbutton" },
-                new Button("Hello2") {Style="toolbarbutton" },
-                new Button("Hello3") { Style="toolbarbutton"} ,
-                new Button("Hello4") { Style="toolbarbutton"} ,
-                chkDesignMode
-            }
+        toolbar = new Toolbar() {
         };
+        toolbar.Items.Add(new Button("Hello") { ImagePath = "SceneAsset Icon", Style = "toolbarbutton" });
+        toolbar.Items.Add(new Button("Hello2") { Style = "toolbarbutton" });
+        toolbar.Items.Add(new Button("Hello3") { Style = "toolbarbutton" });
+        toolbar.Items.Add(new Button("Hello4") { Style = "toolbarbutton" });
+        toolbar.Items.Add(chkDesignMode);
 
-        btnBoxStyle.RenderEvent += (sender, args) =>
-        {
+        btnBoxStyle.RenderEvent += (sender, args) => {
             //Debug.Log(btnBoxStyle.Width);
         };
 
 
-        btnRepeat.ClickEvent += (sender, args) =>
-        {
+        btnRepeat.ClickEvent += (sender, args) => {
             Debug.Log("连点");
         };
 
-        tabbar.SelectedChangedEvent += (sender, args) =>
-        {
+        tabbar.SelectedChangedEvent += (sender, args) => {
             ShowNotification("Tabbar Changed Selection:" + tabbar.SelectedItem.text);
         };
 
-        selectionGrid2.SelectedChangedEvent += (sender, args) =>
-        {
+        selectionGrid2.SelectedChangedEvent += (sender, args) => {
             ShowNotification("SelectionGrid Changed seledted:" + args.OldSelected + " to " + args.NewSelected);
         };
 
-        chkDesignMode.CheckedEvent += (sender, args) =>
-        {
-            Visual.DesignMode = args.NewValue;
+        chkDesignMode.CheckedEvent += (sender, args) => {
+            Visual.DebugMode = args.NewValue;
             ShowNotification("Checked");
         };
 
@@ -165,8 +142,7 @@ public class LayoutWindow : EditorWindowEx
 
 
 
-    void OnGUI()
-    {
+    void OnGUI() {
         toolbar.RenderLayout();
         chkDesignMode.RenderLayout();
 
@@ -177,15 +153,15 @@ public class LayoutWindow : EditorWindowEx
         btnBoxStyle.RenderLayout();
         btnRepeat.RenderLayout();
         btnSpecialStyle.RenderLayout();
-// 
-//         GUILayout.Space(10);
-//         GUILayout.Label("自适应");
-//         btnExpandModel.RenderLayout();
-//         chkExpandHeight.RenderLayout();
-//         chkExpandWidth.RenderLayout();
-//         chkAutoWidth.RenderLayout();
-//         chkAutoHeight.RenderLayout();
-//         GUILayout.Space(10);
+        // 
+        //         GUILayout.Space(10);
+        //         GUILayout.Label("自适应");
+        //         btnExpandModel.RenderLayout();
+        //         chkExpandHeight.RenderLayout();
+        //         chkExpandWidth.RenderLayout();
+        //         chkAutoWidth.RenderLayout();
+        //         chkAutoHeight.RenderLayout();
+        //         GUILayout.Space(10);
 
         GUILayout.Label("文本框");
         txtbox.RenderLayout();

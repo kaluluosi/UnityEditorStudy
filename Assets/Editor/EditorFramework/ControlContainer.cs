@@ -8,11 +8,11 @@ namespace EditorFramework
     public abstract class ControlContainer:Control
     {
 
-        public List<Control> Items { get; set; }
+        public ControlCollection Items { get; set; }
 
         public ControlContainer()
         {
-            Items = new List<Control>();
+            Items = new ControlCollection(this);
         }
     }
 }

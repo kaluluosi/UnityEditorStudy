@@ -15,23 +15,28 @@ namespace EditorFramework.Panel
         {
             GUI.BeginGroup(Position, this, Style);
             foreach (var item in Items)
-            {
-                item.Render();
-            }
+                if (IsInVisableArea(item)) {
+                    item.Render();
+                }
             GUI.EndGroup();
             base.Render();
         }
 
         public override void RenderLayout()
         {
-            GUILayout.Box(this,GUIStyle.none,LayoutOptions);
-            Rect boxRect = GUILayoutUtility.GetLastRect();
-            GUI.BeginGroup(boxRect);
+            var style = GUIStyle.none;
+            if (DebugMode)
+                style = "box";
+            GUILayout.Box(this,style,LayoutOptions);
+            Position =GUILayoutUtility.GetLastRect();
+
+            GUI.BeginGroup(Position);
             foreach (var item in Items)
-            {
-                item.Render();
-            }
+                if (IsInVisableArea(item)) {
+                    item.Render();
+                }
             GUI.EndGroup();
+
             base.RenderLayout();
         }
 

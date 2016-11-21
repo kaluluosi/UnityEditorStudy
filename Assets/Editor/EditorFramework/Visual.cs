@@ -1,21 +1,19 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorFramework
-{
-    public abstract class Visual:GUIContent
-    {
+namespace EditorFramework {
+    public abstract class Visual : GUIContent, IVisual {
 
         public event EventHandler RenderEvent;
 
 
-        public static bool DesignMode  { get; set; }
+        public static bool DebugMode  { get; set; }
 
         private string name;
+        private Rect position;
+
+        private string imagePath;
         public string Name
         {
             get
@@ -30,7 +28,11 @@ namespace EditorFramework
                 name = value;
             }
         }
-        public virtual Rect Position { get; set; }
+        public virtual Rect Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
         public Rect ScreenPosition
         {
             get
@@ -49,9 +51,8 @@ namespace EditorFramework
 
         public int VisualChildCount { get; set; }
 
-        public Visual VisualParent { get; set; }
+        public IVisual VisualParent { get; set; }
 
-        private string imagePath;
         public string ImagePath
         {
             get
@@ -66,6 +67,55 @@ namespace EditorFramework
             }
         }
 
+        public float X
+        {
+            get
+            {
+                return position.x;
+            }
+            set
+            {
+                position.x = value;
+            }
+        }
+        public float Y
+        {
+            get
+            {
+                return position.y;
+            }
+
+            set
+            {
+                position.y = value;
+            }
+        }
+
+        public float Width
+        {
+            get
+            {
+                return position.width;
+            }
+
+            set
+            {
+                position.width = value;
+            }
+        }
+
+        public float Height
+        {
+            get
+            {
+                return position.height;
+            }
+
+            set
+            {
+                position.height = value;
+            }
+        }
 
         public Visual()
         {
@@ -85,15 +135,16 @@ namespace EditorFramework
         /// </summary>
         /// <param name="drawContext">绘图上下文</param>
         public virtual void OnRender(DrawCanvas drawContext) {
-            if (DesignMode)
+            if (DebugMode)
             {
                 drawContext.DrawRectangle(new Rect(Vector2.zero, Size), Color.red);
-                drawContext.Text(Size, Size.ToString(),Color.red);
+                drawContext.Text(Size, Position.ToString(),Color.red);
             }
 
             if (RenderEvent != null)
                 RenderEvent(this, new EventArgs());
         }
+
 
         protected Texture LoadImage(string path) {
             if (string.IsNullOrEmpty(path)) return null;

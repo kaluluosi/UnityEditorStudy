@@ -8,6 +8,10 @@ using UnityEngine;
 namespace EditorFramework.Controls {
     public class Label : Control {
 
+        public Label(string text):this() {
+            this.text = text;
+        }
+
         public Label()
         {
             Style = "label";

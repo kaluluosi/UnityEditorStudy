@@ -17,21 +17,7 @@ namespace EditorFramework
         public Control()
         {
             Style = GUIStyle.none;
-        }
-
-        private Rect position;
-
-        public override Rect Position
-        {
-            get
-            {
-                return position;
-            }
-
-            set
-            {
-                position = value;
-            }
+            Initialized = false;
         }
 
         public int ControlID
@@ -108,16 +94,19 @@ namespace EditorFramework
 
         public AdaptMode AdaptWidth { get; set; }
         public AdaptMode AdaptHeight { get; set; }
+
+        public bool Initialized { get; set; }
+
         public virtual void RenderLayout()
         {
             Rect newPosition = GUILayoutUtility.GetLastRect();
-            if (newPosition.size.sqrMagnitude != 2)
-                position = newPosition;
+            if (newPosition.size.sqrMagnitude != 2) {
+                Position = newPosition;
+                Initialized = true;
+            }
             CheckMouseEvent();
             OnRender(new DrawCanvas(Position));
         }
-
-
 
     }
 }
