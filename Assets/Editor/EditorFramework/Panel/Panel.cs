@@ -8,6 +8,7 @@ namespace EditorFramework.Panel
 {
     public abstract class Panel:ControlContainer
     {
+        [Obsolete("没什么卵用，因此废弃")]
         public bool IsInVisableArea(Control control) {
 
             Rect rect = control.Position;
@@ -20,8 +21,8 @@ namespace EditorFramework.Panel
 
             bool result = area.Contains(p1) || area.Contains(p2) || area.Contains(p3) || area.Contains(p4);
 
-            if (DebugMode)
-                Debug.Log(control.Name + " 在"+Name+" "+area+"内:" + result);
+//             if (DebugMode)
+//                 Debug.Log(control.Name + " 在"+Name+" "+area+"内:" + result);
             return result;
         }
 

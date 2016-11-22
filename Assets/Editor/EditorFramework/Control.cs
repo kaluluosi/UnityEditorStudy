@@ -102,21 +102,24 @@ namespace EditorFramework {
             }
         }
 
-        public virtual void RenderLayout() {
-
-            if (Event.current.type == EventType.repaint) {
-                Rect newPosition = GUILayoutUtility.GetLastRect();
-                Position = newPosition;
-                Initialized = true;
-            }
-
+        public virtual void RenderLayout()
+        {
+            UpdatePosition();
             CheckMouseEvent();
             OnRender(new DrawCanvas(Position));
         }
 
+        protected virtual void UpdatePosition()
+        {
+            if (Event.current.type == EventType.repaint)
+            {
+                Rect newPosition = GUILayoutUtility.GetLastRect();
+                Position = newPosition;
+                Initialized = true;
+            }
+        }
+
         public override void OnRender(DrawCanvas drawContext) {
-
-
             base.OnRender(drawContext);
         }
 
