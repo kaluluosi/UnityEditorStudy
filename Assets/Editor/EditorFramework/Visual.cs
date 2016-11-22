@@ -135,6 +135,7 @@ namespace EditorFramework {
         /// </summary>
         /// <param name="drawContext">绘图上下文</param>
         public virtual void OnRender(DrawCanvas drawContext) {
+
             if (DebugMode)
             {
                 drawContext.DrawRectangle(new Rect(Vector2.zero, Size), Color.red);

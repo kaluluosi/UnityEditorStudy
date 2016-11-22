@@ -12,6 +12,10 @@ namespace EditorFramework.Controls {
             Style = "toggle";
         }
 
+        public CheckBox(string text) : this() {
+            this.text = text;
+        }
+
         public override void Render() {
 
             bool old = IsChecked;

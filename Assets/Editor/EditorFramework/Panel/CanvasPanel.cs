@@ -24,10 +24,7 @@ namespace EditorFramework.Panel
 
         public override void RenderLayout()
         {
-            var style = GUIStyle.none;
-            if (DebugMode)
-                style = "box";
-            GUILayout.Box(this,style,LayoutOptions);
+            GUILayout.Box(this,Style,LayoutOptions);
             Position =GUILayoutUtility.GetLastRect();
 
             GUI.BeginGroup(Position);

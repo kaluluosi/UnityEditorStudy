@@ -49,6 +49,7 @@ public class StackPanelWindow : EditorWindowEx
     StackPanel hstackpanel;
     StackPanel vstackpanel;
     StackPanel stackpanel;
+    private StackPanel floatstackpanel;
 
     void OnEnable()
     {
@@ -193,6 +194,17 @@ public class StackPanelWindow : EditorWindowEx
         stackpanel.Items.Add(new Button("测试"){AdaptHeight=AdaptMode.Expand,AdaptWidth=AdaptMode.Expand});
         stackpanel.Items.Add(new Button("测试"){AdaptHeight=AdaptMode.Expand,AdaptWidth=AdaptMode.Expand});
 
+        floatstackpanel = new StackPanel() { Orientation = Direction.Horiziontal ,Position=new Rect(100,100,500,200)};
+        floatstackpanel.Items.Add(new Button("测试") { });
+        floatstackpanel.Items.Add(new Button("测试") { });
+        floatstackpanel.Items.Add(new Button("测试") { });
+        floatstackpanel.Items.Add(new Button("测试") { });
+        floatstackpanel.Items.Add(new Button("测试") { });
+        floatstackpanel.Items.Add(new Button("测试") { });
+        floatstackpanel.Items.Add(new Button("测试") { });
+        floatstackpanel.Items.Add(new Button("测试") { });
+
+
         mainPanel = new StackPanel() { Orientation=Direction.Vertical, AdaptHeight = AdaptMode.Expand, AdaptWidth = AdaptMode.Expand };
         mainPanel.Items.Add(toolbar);
         mainPanel.Items.Add(hslider);
@@ -203,21 +215,24 @@ public class StackPanelWindow : EditorWindowEx
         mainPanel.Items.Add(vstackpanel);
         mainPanel.Items.Add(new Label("Vertical StackPanel"));
         mainPanel.Items.Add(stackpanel);
+
     }
 
-    Vector2 scrollPosition = new Vector2();
 
     void OnGUI()
     {
 
-        //         mainPanel.RenderLayout();
+        mainPanel.RenderLayout();
+        floatstackpanel.Render();
 
-        scrollPosition =GUILayout.BeginScrollView(scrollPosition,GUILayout.Height(300));
-        for(int i = 0; i < 100; i++) {
-            GUILayout.Button("测试");
-            Rect rect = GUILayoutUtility.GetLastRect();
-            Drawing.DrawRectangle(rect,Color.red);
-        }
-        GUILayout.EndScrollView();
+        //scrollPosition =GUILayout.BeginScrollView(scrollPosition,GUILayout.Height(300));
+        //         for(int i = 0; i < 100; i++) {
+        //             GUILayout.Button("测试");
+        //             Rect rect = GUILayoutUtility.GetLastRect();
+        //             Drawing.DrawRectangle(rect,Color.red);
+        //         }
+        //GUILayout.Box("box",GUILayout.Height(1000));
+
+        //GUILayout.EndScrollView();
     }
 }

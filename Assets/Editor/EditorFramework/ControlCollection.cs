@@ -28,5 +28,6 @@ namespace EditorFramework {
             item.VisualParent = Owner;
             base.SetItem(index, item);
         }
+
     }
 }

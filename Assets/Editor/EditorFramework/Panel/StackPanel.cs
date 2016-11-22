@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace EditorFramework.Panel {
-    public enum Direction {
-        Horiziontal,
-        Vertical
-    }
     public class StackPanel : Panel {
+
+        public StackPanel() {
+            Orientation = Direction.Vertical;
+        }
 
         public Direction Orientation { get; set; }
 
@@ -22,10 +24,10 @@ namespace EditorFramework.Panel {
             GUILayout.EndArea();
 
             base.Render();
+
         }
 
         public override void RenderLayout() {
-
             if (Orientation == Direction.Horiziontal) {
                 GUILayout.BeginHorizontal(this, Style, LayoutOptions);
                 foreach (var item in Items) {
