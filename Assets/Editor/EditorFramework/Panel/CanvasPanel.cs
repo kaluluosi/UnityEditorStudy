@@ -17,19 +17,18 @@ namespace EditorFramework.Panel
             foreach (var item in Items)
                 item.Render();
             GUI.EndGroup();
-            base.Render();
+
+            OnRender(new DrawCanvas(Position));
+            CheckMouseEvent();
         }
 
         public override void RenderLayout()
         {
-            GUILayout.Box(this, Style, LayoutOptions);
-            Position = GUILayoutUtility.GetLastRect();
-
-            GUI.BeginGroup(Position);
+            GUILayout.Box("",GUIStyle.none, LayoutOptions);
+            GUI.BeginGroup(Position, this, Style);
             foreach (var item in Items)
                 item.Render();
             GUI.EndGroup();
-
             AfterLayout();
         }
 

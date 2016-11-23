@@ -44,7 +44,7 @@ public class ScrollPanelWindow : EditorWindowEx
             hscrollpanel.Items.Add(new Button("测试" + i));
         }
 
-
+        Repaint();
     }
 
     Button btnBox = new Button("box") { StyleName = "button" };

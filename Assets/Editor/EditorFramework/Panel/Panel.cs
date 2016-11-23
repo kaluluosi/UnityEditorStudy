@@ -32,7 +32,6 @@ namespace EditorFramework.Panel
             RenderLayout();
 
             GUILayout.EndArea();
-
         }
 
     }

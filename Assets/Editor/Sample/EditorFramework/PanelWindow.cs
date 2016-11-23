@@ -209,24 +209,24 @@ public class PanelWindow : EditorWindowEx {
 
 
     void OnGUI() {
-        //         toolbar.RenderLayout();
-        //         hslider.RenderLayout();
+        //toolbar.RenderLayout();
+        //hslider.RenderLayout();
 
-        panel.Render();
+        //panel.Render();
 
-        //         panelLayout.RenderLayout();
-        // 
-        //         GUILayout.Label("水平StackPanel");
-        //         hstackpanel.RenderLayout();
-        //         GUILayout.Label("垂直StackPanel");
-        //         vstackpanel.RenderLayout();
+        //panelLayout.RenderLayout();
 
-        //         stackpanel.Render();
+        //GUILayout.Label("水平StackPanel");
+        //hstackpanel.RenderLayout();
+        //GUILayout.Label("垂直StackPanel");
+        //vstackpanel.RenderLayout();
 
-        //         Drawing.DrawRectangle(r1, Color.red);
-        //         Drawing.DrawRectangle(r2, Color.red);
+        //stackpanel.Render();
 
-        tabbar.RenderLayout();
-//         mainPanel.RenderLayout();
+        //Drawing.DrawRectangle(r1, Color.red);
+        //Drawing.DrawRectangle(r2, Color.red);
+
+        //tabbar.RenderLayout();
+        mainPanel.RenderLayout();
     }
 }
