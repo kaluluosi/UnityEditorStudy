@@ -14,7 +14,7 @@ namespace EditorFramework.Panel
             StyleName = "scrollview";
         }
 
-//         public Direction Orientation { get; set; }
+        //         public Direction Orientation { get; set; }
 
         private Vector2 contentSize;
         public Vector2 ContentSize
@@ -25,22 +25,22 @@ namespace EditorFramework.Panel
 
         protected override void UpdatePosition()
         {
+            if (Items.Count != 0 && !Initialized)
+            {
+                if (Orientation == Direction.Vertical)
+                {
+                    contentSize.y = Items.Sum(item => item.Height + item.Style.margin.top) + Items.Average(item=>(float)item.Style.margin.top);
+                    contentSize.x = Items.Max(item => item.Width) + Items.Average(item=>(float)item.Style.margin.left)*2;
+                }
+                else if (Orientation == Direction.Horiziontal)
+                {
+                    contentSize.y = Items.Max(item => item.Height)+ Items.Average(item => (float)item.Style.margin.top)*2;
+                    contentSize.x = Items.Sum(item => item.Width + item.Style.margin.left) + Items.Average(item => (float)item.Style.margin.left);
+                }
+            }
+
             if (Event.current.type == EventType.repaint)
             {
-
-                if (Items.Count != 0)
-                {
-                    if (Orientation == Direction.Vertical)
-                    {
-                        contentSize.y = Items.Sum(item => item.Height + item.Style.margin.top) + 4;
-                        contentSize.x = Items.Max(item => item.Width) + 3;
-                    }
-                    else if (Orientation == Direction.Horiziontal)
-                    {
-                        contentSize.y = Items.Max(item => item.Height);
-                        contentSize.x = Items.Sum(item => item.Width + item.Style.margin.left) +4;
-                    }
-                }
 
                 Rect newRect = GUILayoutUtility.GetLastRect();
 
@@ -51,7 +51,7 @@ namespace EditorFramework.Panel
                 //暂时没有解决办法，因此先用下面本方法解决。
                 //2016年11月23日：发现是unity的bug
                 //Debug.Log(Position);
-                if (Mathf.Abs(Position.width-newRect.width)>6||Mathf.Abs(Position.height-newRect.height)>6)
+                if (Mathf.Abs(Position.width - newRect.width) > 6 || Mathf.Abs(Position.height - newRect.height) > 6)
                 {
                     Position = newRect;
                     initialized = false;
@@ -63,15 +63,15 @@ namespace EditorFramework.Panel
         }
 
 
-//         public override void Render()
-//         {
-//             GUILayout.BeginArea(Position);
-// 
-//             RenderLayout();
-// 
-//             GUILayout.EndArea();
-// 
-//         }
+        //         public override void Render()
+        //         {
+        //             GUILayout.BeginArea(Position);
+        // 
+        //             RenderLayout();
+        // 
+        //             GUILayout.EndArea();
+        // 
+        //         }
 
         public override void RenderLayout()
         {
@@ -79,7 +79,7 @@ namespace EditorFramework.Panel
 
             if (initialized)
             {
-//                 Debug.Log("ContentSize:" + ContentSize);
+                //                 Debug.Log("ContentSize:" + ContentSize);
                 //                 Debug.Log("Position:"+Position);
                 GUILayout.Box("", "scrollview", GUILayout.Height(ContentSize.y), GUILayout.Width(ContentSize.x));
             }

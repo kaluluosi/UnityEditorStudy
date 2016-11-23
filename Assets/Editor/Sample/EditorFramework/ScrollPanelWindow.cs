@@ -38,7 +38,7 @@ public class ScrollPanelWindow : EditorWindowEx
             vscrollpanel.Items.Add(new Button("测试" + i) { AdaptWidth = AdaptMode.Expand });
         }
 
-        hscrollpanel = new ScrollPanel() { Orientation = Direction.Horiziontal,AdaptHeight=AdaptMode.Fixed,FixedHeight=50 };
+        hscrollpanel = new ScrollPanel() { Orientation = Direction.Horiziontal/*,AdaptHeight=AdaptMode.Fixed,FixedHeight=50*/ };
         for (int i = 0; i < 100; i++)
         {
             hscrollpanel.Items.Add(new Button("测试" + i));
