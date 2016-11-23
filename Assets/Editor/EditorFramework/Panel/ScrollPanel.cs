@@ -25,6 +25,7 @@ namespace EditorFramework.Panel
 
         protected override void UpdatePosition()
         {
+
             if (Items.Count != 0 && !Initialized)
             {
                 if (Orientation == Direction.Vertical)
