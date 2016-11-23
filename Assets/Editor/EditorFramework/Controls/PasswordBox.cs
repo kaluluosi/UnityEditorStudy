@@ -12,7 +12,7 @@ namespace EditorFramework.Controls {
         public int MaxLength { get; set; }
 
         public PasswordBox() {
-            Style = "textfield";
+            StyleName = "textfield";
             Password = "";
             MaskChar = '*';
             MaxLength = 100;

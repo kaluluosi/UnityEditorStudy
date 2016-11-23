@@ -4,8 +4,8 @@ namespace EditorFramework.Controls {
     public class HorizontalSlider:SliderBase {
 
         public HorizontalSlider() {
-            SliderStyle = "horizontalslider";
-            ThumbStyle = "horizontalsliderthumb";
+            SliderStyleName = "horizontalslider";
+            ThumbStyleName = "horizontalsliderthumb";
         }
 
         public override void Render() {

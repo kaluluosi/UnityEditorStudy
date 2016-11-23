@@ -11,7 +11,7 @@ namespace EditorFramework.Controls
         public bool Repeatable { get; set; }
         public Button()
         {
-            Style = "button";
+            StyleName = "button";
         }
 
         public Button(string text) : this()

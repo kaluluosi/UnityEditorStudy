@@ -14,7 +14,7 @@ namespace EditorFramework.Controls {
 
         public Label()
         {
-            Style = "label";
+            StyleName = "label";
         }
 
         public override void Render() {

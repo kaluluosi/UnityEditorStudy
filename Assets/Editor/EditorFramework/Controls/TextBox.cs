@@ -14,7 +14,7 @@ namespace EditorFramework.Controls
 
         public TextBox() {
             MaxLength = 180;
-            Style = "textfield";
+            StyleName = "textfield";
         }
 
         public override void Render() {

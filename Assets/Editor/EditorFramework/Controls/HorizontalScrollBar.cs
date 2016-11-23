@@ -4,7 +4,7 @@ namespace EditorFramework.Controls {
     public class HorizontalScrollBar : ScrollBarBase {
 
         public HorizontalScrollBar() {
-            Style = "horizontalscrollbar";
+            StyleName = "horizontalscrollbar";
         }
 
         public override void Render() {

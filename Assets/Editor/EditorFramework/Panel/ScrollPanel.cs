@@ -6,15 +6,15 @@ using UnityEngine;
 
 namespace EditorFramework.Panel
 {
-    public class ScrollPanel : Panel
+    public class ScrollPanel : StackPanel
     {
         public ScrollPanel()
         {
             Orientation = Direction.Vertical;
-            Style = "scrollview";
+            StyleName = "scrollview";
         }
 
-        public Direction Orientation { get; set; }
+//         public Direction Orientation { get; set; }
 
         private Vector2 contentSize;
         public Vector2 ContentSize
@@ -37,7 +37,7 @@ namespace EditorFramework.Panel
                     }
                     else if (Orientation == Direction.Horiziontal)
                     {
-                        contentSize.y = Items.Max(item => item.Height) +4+4;
+                        contentSize.y = Items.Max(item => item.Height);
                         contentSize.x = Items.Sum(item => item.Width + item.Style.margin.left) +4;
                     }
                 }
@@ -49,7 +49,8 @@ namespace EditorFramework.Panel
                 //这里有个很奇怪的现象，当scrollPanel的布局方向是Horizontal的时候，Posistion每一次OnGUI height都会有2像素的偏差。
                 //这会导致界面不断的初始化布局，从而导致横向滚动条上下跳动。
                 //暂时没有解决办法，因此先用下面本方法解决。
-//                 Debug.Log(Position);
+                //2016年11月23日：发现是unity的bug
+                //Debug.Log(Position);
                 if (Mathf.Abs(Position.width-newRect.width)>6||Mathf.Abs(Position.height-newRect.height)>6)
                 {
                     Position = newRect;
@@ -62,15 +63,15 @@ namespace EditorFramework.Panel
         }
 
 
-        public override void Render()
-        {
-            GUILayout.BeginArea(Position);
-
-            RenderLayout();
-
-            GUILayout.EndArea();
-
-        }
+//         public override void Render()
+//         {
+//             GUILayout.BeginArea(Position);
+// 
+//             RenderLayout();
+// 
+//             GUILayout.EndArea();
+// 
+//         }
 
         public override void RenderLayout()
         {
@@ -114,9 +115,14 @@ namespace EditorFramework.Panel
 
             GUILayout.EndScrollView();
 
-            base.RenderLayout();
+            AfterLayout();
         }
 
+        /// <summary>
+        /// 判断item是否再scrollpanel的可视范围内
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool IsInView(Control item)
         {
             float y = ScrollPosistion.y - item.Height;

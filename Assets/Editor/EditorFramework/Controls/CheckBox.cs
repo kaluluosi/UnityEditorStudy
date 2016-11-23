@@ -9,7 +9,7 @@ namespace EditorFramework.Controls {
         public bool IsChecked { get; set; }
 
         public CheckBox() {
-            Style = "toggle";
+            StyleName = "toggle";
         }
 
         public CheckBox(string text) : this() {

@@ -23,9 +23,16 @@ namespace EditorFramework.Controls {
         }
         public float MinValue { get; set; }
         public float MaxValue { get; set; }
-        public GUIStyle SliderStyle { get; set; }
-        public GUIStyle ThumbStyle { get; set; }
 
+        public string SliderStyleName { get; set; }
+        public GUIStyle SliderStyle {
+            get { return string.IsNullOrEmpty(SliderStyleName) ? GUIStyle.none : SliderStyleName; }
+        }
+
+        public string ThumbStyleName { get; set; }
+        public GUIStyle ThumbStyle{
+            get { return string.IsNullOrEmpty(ThumbStyleName) ? GUIStyle.none : ThumbStyleName; }
+        }
 
         protected void OnValueChanged(float oldValue, float newValue)
         {

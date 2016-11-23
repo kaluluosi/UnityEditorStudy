@@ -10,10 +10,14 @@ namespace EditorFramework {
     /// </summary>
     public abstract class Control : UIFramework, ILayoutable {
 
-        public GUIStyle Style { get; set; }
+        public string StyleName { get; set; }
+        public GUIStyle Style
+        {
+            get { return string.IsNullOrEmpty(StyleName) ? GUIStyle.none:StyleName; }
+        }
 
         public Control() {
-            Style = GUIStyle.none;
+            StyleName = "";
             initialized = false;
         }
 
@@ -102,8 +106,11 @@ namespace EditorFramework {
             }
         }
 
-        public virtual void RenderLayout()
-        {
+        public virtual void RenderLayout() {
+            AfterLayout();
+        }
+
+        protected void AfterLayout() {
             UpdatePosition();
             CheckMouseEvent();
             OnRender(new DrawCanvas(Position));

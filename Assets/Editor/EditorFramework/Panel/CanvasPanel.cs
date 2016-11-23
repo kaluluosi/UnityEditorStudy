@@ -30,7 +30,7 @@ namespace EditorFramework.Panel
                 item.Render();
             GUI.EndGroup();
 
-            base.RenderLayout();
+            AfterLayout();
         }
 
     }

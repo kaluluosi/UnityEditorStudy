@@ -10,7 +10,7 @@ namespace EditorFramework.Controls
 
         public Toolbar()
         {
-            Style = "toolbar";
+            StyleName = "toolbar";
             AdaptWidth = AdaptMode.Expand;
             Orientation = Direction.Horiziontal;
         }

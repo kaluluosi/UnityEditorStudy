@@ -11,21 +11,21 @@ namespace EditorFramework.Panel {
 
         public Direction Orientation { get; set; }
 
-        public override void Render() {
-
-            GUILayout.BeginArea(Position, this, Style);
-
-            GUILayout.BeginHorizontal();
-            foreach (var item in Items) {
-                item.RenderLayout();
-            }
-            GUILayout.EndHorizontal();
-
-            GUILayout.EndArea();
-
-            base.Render();
-
-        }
+//         public override void Render() {
+// 
+//             GUILayout.BeginArea(Position, this, Style);
+// 
+//             GUILayout.BeginHorizontal();
+//             foreach (var item in Items) {
+//                 item.RenderLayout();
+//             }
+//             GUILayout.EndHorizontal();
+// 
+//             GUILayout.EndArea();
+// 
+//             base.Render();
+// 
+//         }
 
         public override void RenderLayout() {
             if (Orientation == Direction.Horiziontal) {
@@ -43,7 +43,7 @@ namespace EditorFramework.Panel {
                 GUILayout.EndVertical();
             }
 
-            base.RenderLayout();
+            AfterLayout();
         }
     }
 }

@@ -55,20 +55,20 @@ public class StackPanelWindow : EditorWindowEx
     {
         #region
 
-        chkDesignMode = new CheckBox() { text = "设计模式", IsChecked = Visual.DebugMode,Style="toolbarbutton" };
+        chkDesignMode = new CheckBox() { text = "设计模式", IsChecked = Visual.DebugMode,StyleName="toolbarbutton" };
 
         btntext = new Button() { text = "文本", ImagePath = "", tooltip = "这是文本按钮" };
         btnImg = new Button() { ImagePath = "SceneAsset Icon", tooltip = "这是图形按钮"};
         btnImgtext = new Button() { text = "图形+文本", ImagePath = "SceneAsset Icon", tooltip = "这是图形+文本按钮" };
         btnBoxStyle = new Button() {
-            Style = "box",
+            StyleName = "box",
             text = "Box风格",
             ImagePath = "SceneAsset Icon",
             tooltip = "这是Style设置成Box后的按钮",
             FixedWidth = 200,
             AdaptWidth = AdaptMode.Fixed
         };
-        btnSpecialStyle = new Button("换了样式的按钮") { Style = "ChannelStripAttenuationMarkerSquare",AdaptWidth=AdaptMode.Fixed,FixedWidth=50 };
+        btnSpecialStyle = new Button("换了样式的按钮") { StyleName = "ChannelStripAttenuationMarkerSquare",AdaptWidth=AdaptMode.Fixed,FixedWidth=50 };
         btnRepeat = new Button() { text = "连点按钮", Repeatable = true };
 
         txtbox = new TextBox() {
@@ -78,7 +78,7 @@ public class StackPanelWindow : EditorWindowEx
         };
 
         hslider = new HorizontalSlider() { Value = btnBoxStyle.FixedWidth, MinValue = 0, MaxValue = 1000 ,AdaptWidth=AdaptMode.Expand};
-        hslider2 = new HorizontalSlider() { Value = 0, MinValue = 0, MaxValue = 100, SliderStyle = "horizontalscrollbar", ThumbStyle = "ColorPickerHorizThumb", AdaptWidth = AdaptMode.Expand };
+        hslider2 = new HorizontalSlider() { Value = 0, MinValue = 0, MaxValue = 100, SliderStyleName = "horizontalscrollbar", ThumbStyleName = "ColorPickerHorizThumb", AdaptWidth = AdaptMode.Expand };
         vslider = new VerticalSlider() { Value = 0, MinValue = 0, MaxValue = 100 };
         hscrollbar = new HorizontalScrollBar() { Value = 0, MinValue = 0, MaxValue = 100, AdaptWidth = AdaptMode.Expand };
 
@@ -87,7 +87,7 @@ public class StackPanelWindow : EditorWindowEx
             AdaptWidth = AdaptMode.Expand
         };
 
-        selectionGrid2.Items.Add(new Button("按钮1") { Style = "box" });
+        selectionGrid2.Items.Add(new Button("按钮1") { StyleName = "box" });
         selectionGrid2.Items.Add(new Button("按钮2"));
         selectionGrid2.Items.Add(new Button("按钮3"));
 
@@ -99,7 +99,7 @@ public class StackPanelWindow : EditorWindowEx
         tabbar.Items.Add(btnImgtext);
 
         tabbar_toolbarstyle = new Tabbar() {
-            Style = "toolbarbutton"
+            StyleName = "toolbarbutton"
         };
         tabbar_toolbarstyle.Items.Add(new Button("按钮1"));
         tabbar_toolbarstyle.Items.Add(new Button("按钮2"));
@@ -109,10 +109,10 @@ public class StackPanelWindow : EditorWindowEx
 
         toolbar = new Toolbar() {
         };
-        toolbar.Items.Add(new Button("Hello") { ImagePath = "SceneAsset Icon", Style = "toolbarbutton" });
-        toolbar.Items.Add(new Button("Hello2") { Style = "toolbarbutton" });
-        toolbar.Items.Add(new Button("Hello3") { Style = "toolbarbutton" });
-        toolbar.Items.Add(new Button("Hello4") { Style = "toolbarbutton" });
+        toolbar.Items.Add(new Button("Hello") { ImagePath = "SceneAsset Icon", StyleName = "toolbarbutton" });
+        toolbar.Items.Add(new Button("Hello2") { StyleName = "toolbarbutton" });
+        toolbar.Items.Add(new Button("Hello3") { StyleName = "toolbarbutton" });
+        toolbar.Items.Add(new Button("Hello4") { StyleName = "toolbarbutton" });
         toolbar.Items.Add(chkDesignMode);
 
 

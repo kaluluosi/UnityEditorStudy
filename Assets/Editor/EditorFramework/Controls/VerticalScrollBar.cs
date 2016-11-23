@@ -4,7 +4,7 @@ namespace EditorFramework.Controls {
     public class VerticalScrollBar : ScrollBarBase {
 
         public VerticalScrollBar() {
-            Style = "verticalscrollbar";
+            StyleName = "verticalscrollbar";
         }
 
         public override void Render() {

@@ -11,7 +11,7 @@ namespace EditorFramework.Controls {
 
 
         public Tabbar() {
-            Style = "button";
+            StyleName = "button";
         }
 
         public override void Render() {

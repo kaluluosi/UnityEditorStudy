@@ -11,7 +11,7 @@ namespace EditorFramework.Controls {
 
         public SelectionGrid() {
             Col = 1;
-            Style = "button";
+            StyleName = "button";
         }
 
         public override void Render() {
