@@ -17,7 +17,9 @@ namespace EditorFramework.Panel
             foreach (var item in Items)
                 item.Render();
             GUI.EndGroup();
-            base.Render();
+
+            CheckMouseEvent();
+            OnRender(new DrawCanvas(Position));
         }
 
         protected override void RenderContent()
