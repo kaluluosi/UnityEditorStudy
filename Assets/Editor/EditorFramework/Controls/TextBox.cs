@@ -7,6 +7,8 @@ namespace EditorFramework.Controls
 
         public event EventHandler<TextChangedEventArgs> TextChangedEvent;
 
+        public Predicate<string> Validate = (str) => { return false; };
+        private bool error=false;
 
         public bool MultiLine { get; set; }
 
@@ -26,7 +28,11 @@ namespace EditorFramework.Controls
                 text = GUI.TextField(Position, text, MaxLength, Style);
 
             if (old != text)
+            {
                 OnTextChanged(old,text);
+            }
+
+            Check();
 
             base.Render();
         }
@@ -37,13 +43,30 @@ namespace EditorFramework.Controls
         }
 
         public override void RenderLayout() {
+            string old = text;
 
             if (MultiLine)
                 text = GUILayout.TextArea(text, MaxLength, Style, LayoutOptions);
             else
                 text = GUILayout.TextField(text, MaxLength, Style, LayoutOptions);
 
+            if (old != text)
+            {
+                OnTextChanged(old, text);
+            }
+
+            Check();
+
             base.RenderLayout();
+        }
+
+        private void Check()
+        {
+            error = Validate(text);
+
+            if (error)
+                Drawing.DrawRectangle(Position, Color.red);
+
         }
 
     }
