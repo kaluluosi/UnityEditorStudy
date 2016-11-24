@@ -11,6 +11,11 @@ namespace EditorFramework.Panel
         public int Col { get; set; }
         private Vector2 cellSize=new Vector2(-1,-1);
 
+        public GridPanel()
+        {
+            Col = 4;
+        }
+
         public Vector2 CellSize
         {
             get { return cellSize; }
