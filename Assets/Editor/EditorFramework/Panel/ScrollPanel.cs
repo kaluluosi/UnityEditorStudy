@@ -25,23 +25,31 @@ namespace EditorFramework.Panel
 
         protected override void UpdatePosition()
         {
-
-            if (Items.Count != 0 && !Initialized)
+            //当item有效并且 ScrollPanel Initialized 后计算 ContentSize
+            if (Items.Count != 0 && Items != null&&Initialized)
             {
+                //2016年11月25日:更完美的计算尺寸
                 if (Orientation == Direction.Vertical)
                 {
-                    contentSize.y = Items.Sum(item => item.Height + item.Style.margin.top) + Items.Average(item=>(float)item.Style.margin.top);
+                    contentSize.y = Items.Sum(item => item.Height + item.Style.margin.top) +Items.Average(item=>(float)item.Style.margin.top);
                     contentSize.x = Items.Max(item => item.Width) + Items.Average(item=>(float)item.Style.margin.left)*2;
                 }
                 else if (Orientation == Direction.Horiziontal)
                 {
-                    contentSize.y = Items.Max(item => item.Height)+ Items.Average(item => (float)item.Style.margin.top)*2;
-                    contentSize.x = Items.Sum(item => item.Width + item.Style.margin.left) + Items.Average(item => (float)item.Style.margin.left);
+                    contentSize.y = Items.Max(item => item.Height)+Items.Average(item=>(float)item.Style.margin.top)*2;
+                    contentSize.x = Items.Sum(item => item.Width + item.Style.margin.left)+Items.Average(item=>(float)item.Style.margin.left);
                 }
+            }
+            else 
+            {
+                //在开发ItemTool的时候发现 scrollview.Items.Clear()的时候 界面仍然有滚动条，
+                //因此加了这段代码去重置掉 ContentSize
+                contentSize = Vector2.zero;
             }
 
             if (Event.current.type == EventType.repaint)
             {
+
 
                 Rect newRect = GUILayoutUtility.GetLastRect();
 
@@ -74,7 +82,7 @@ namespace EditorFramework.Panel
         // 
         //         }
 
-        public override void RenderLayout()
+        protected override void RenderContent()
         {
             ScrollPosistion = GUILayout.BeginScrollView(ScrollPosistion, Style, LayoutOptions);
 
@@ -95,7 +103,10 @@ namespace EditorFramework.Panel
                         item.RenderLayout();
                     }
                     else if (IsInView(item))
+                    {
                         item.Render();
+                        //Debug.Log(item.Name + "看到你了");
+                    }
                 }
                 GUILayout.EndHorizontal();
             }
@@ -109,14 +120,16 @@ namespace EditorFramework.Panel
                         item.RenderLayout();
                     }
                     else if (IsInView(item))
+                    {
                         item.Render();
+                        //Debug.Log(item.Name + "看到你了");
+                    }
                 }
                 GUILayout.EndVertical();
             }
 
             GUILayout.EndScrollView();
 
-            AfterLayout();
         }
 
         /// <summary>

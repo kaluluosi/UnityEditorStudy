@@ -19,13 +19,12 @@ namespace EditorFramework.Controls {
         }
 
         public override void Render() {
-            GUI.DrawTexture(Position,image, Mode, AlphaBlend);
-
+            GUI.Box(Position, this, Style);
             base.Render();
         }
 
         public override void RenderLayout() {
-            GUILayout.Box(this, GUIStyle.none);
+            GUILayout.Box(this,Style,LayoutOptions);
             base.RenderLayout();
         }
 

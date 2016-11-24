@@ -27,23 +27,31 @@ namespace EditorFramework.Panel {
 // 
 //         }
 
-        public override void RenderLayout() {
-            if (Orientation == Direction.Horiziontal) {
+        //public override void RenderLayout() {
+
+        //    AfterLayout();
+        //}
+
+        protected override void RenderContent()
+        {
+            if (Orientation == Direction.Horiziontal)
+            {
                 GUILayout.BeginHorizontal(this, Style, LayoutOptions);
-                foreach (var item in Items) {
+                foreach (var item in Items)
+                {
                     item.RenderLayout();
                 }
                 GUILayout.EndHorizontal();
             }
-            else if (Orientation == Direction.Vertical) {
+            else if (Orientation == Direction.Vertical)
+            {
                 GUILayout.BeginVertical(this, Style, LayoutOptions);
-                foreach (var item in Items) {
+                foreach (var item in Items)
+                {
                     item.RenderLayout();
                 }
                 GUILayout.EndVertical();
             }
-
-            AfterLayout();
         }
     }
 }

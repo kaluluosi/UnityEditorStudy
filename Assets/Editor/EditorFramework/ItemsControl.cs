@@ -24,18 +24,16 @@ namespace EditorFramework {
             }
         }
 
-        private Control selectedItem;
         public Control SelectedItem
         {
             get
             {
-                return selectedItem = Items[Selected];
+                return Items[Selected];
             }
             set
             {
                 if (Items.Contains(value)) {
                     Selected = Items.IndexOf(value);
-                    selectedItem = value;
                 }
             }
         }

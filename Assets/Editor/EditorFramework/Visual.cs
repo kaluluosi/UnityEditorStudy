@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -57,7 +58,7 @@ namespace EditorFramework {
         {
             get
             {
-                return ImagePath;
+                return imagePath;
             }
             set
             {
@@ -148,16 +149,17 @@ namespace EditorFramework {
 
 
         protected Texture LoadImage(string path) {
-            if (string.IsNullOrEmpty(path)) return null;
+
+            if (string.IsNullOrEmpty(path))
+                return EditorGUIUtility.Load("Texture2D Icon") as Texture;
+
 
             object resource = EditorGUIUtility.Load(path);
-
             if (resource is Texture)
                 return resource as Texture;
+            else
+                return EditorGUIUtility.Load("Texture2D Icon") as Texture;
 
-            Debug.LogWarningFormat("{0} 资源不存在", path);
-
-            return EditorGUIUtility.Load("Texture2D Icon") as Texture;
         }
 
     }

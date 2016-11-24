@@ -26,13 +26,21 @@ namespace EditorFramework.Panel
             return result;
         }
 
-        public override void Render() {
+        public override void Render()
+        {
             GUILayout.BeginArea(Position);
 
-            RenderLayout();
+            RenderContent();
 
             GUILayout.EndArea();
+
         }
 
+        public override void RenderLayout()
+        {
+            RenderContent();
+            base.RenderLayout();
+        }
+        protected abstract void RenderContent();
     }
 }

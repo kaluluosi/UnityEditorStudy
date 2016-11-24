@@ -6,9 +6,9 @@ namespace EditorFramework.Controls
     public class TextBox : Control {
 
         public event EventHandler<TextChangedEventArgs> TextChangedEvent;
-
-        public Predicate<string> Validate = (str) => { return false; };
-        private bool error=false;
+        
+        //输入值校验委托，如果值不对输入框会显示红框（或者别的做法）
+        public Predicate<string> Validate = (str) => { return true; };
 
         public bool MultiLine { get; set; }
 
@@ -62,9 +62,8 @@ namespace EditorFramework.Controls
 
         private void Check()
         {
-            error = Validate(text);
 
-            if (error)
+            if (!Validate(text))
                 Drawing.DrawRectangle(Position, Color.red);
 
         }

@@ -8,42 +8,23 @@ namespace EditorFramework.Panel
 {
     public class GridPanel:Panel
     {
+        public int Col { get; set; }
         private Vector2 cellSize=new Vector2(-1,-1);
-        private Vector2 space = new Vector2(4, 4);
-        private int col = 4;
-        public int Col
-        {
-            get { return col; }
-            set { col = value; }
-        }
 
-
-        public Vector2 Space
-        {
-            get
-            {
-                return space;
-            }
-
-            set
-            {
-                space = value;
-            }
-        }
         public Vector2 CellSize
         {
             get { return cellSize; }
             set { cellSize = value; }
         }
 
-
         protected override void UpdatePosition()
         {
-            cellSize.x = Width / Col - space.x;
+            cellSize.x = Width / Col - 4;
+
             base.UpdatePosition();
         }
 
-        public override void RenderLayout()
+        protected override void RenderContent()
         {
             GUILayout.BeginVertical(this,Style,LayoutOptions);
             for (int i = 0; i < Items.Count; i+=Col)
@@ -70,7 +51,7 @@ namespace EditorFramework.Panel
                 GUILayout.EndHorizontal();
             }
             GUILayout.EndVertical();
-            base.RenderLayout();
         }
+
     }
 }

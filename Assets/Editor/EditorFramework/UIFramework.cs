@@ -6,5 +6,7 @@ namespace EditorFramework {
     /// </summary>
     public abstract class UIFramework:UIElement {
 
+        public virtual object DataContext { get; set; }
+
     }
 }

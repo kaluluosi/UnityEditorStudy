@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace EditorFramework.Controls
 {
@@ -18,6 +19,12 @@ namespace EditorFramework.Controls
             {
                 AdaptHeight = AdaptMode.Expand;
             }
+        }
+
+        public override void RenderLayout()
+        {
+            GUILayout.Box("", GUIStyle.none, LayoutOptions);
+            base.RenderLayout();
         }
     }
 }

@@ -17,6 +17,8 @@ namespace EditorFramework.Controls {
         public override void Render() {
 
             Selected = GUI.Toolbar(Position, Selected, Items.ToArray(),Style);
+            if (SelectedItem != null)
+                SelectedItem.Render();
 
             base.Render();
         }
@@ -24,6 +26,9 @@ namespace EditorFramework.Controls {
         public override void RenderLayout() {
 
             Selected = GUILayout.Toolbar(Selected, Items.ToArray(), Style,LayoutOptions);
+
+            if (SelectedItem != null)
+                SelectedItem.RenderLayout();
 
             base.RenderLayout();
         }
