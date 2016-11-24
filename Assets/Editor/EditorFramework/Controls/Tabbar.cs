@@ -6,29 +6,55 @@ using EditorFramework;
 using EditorFramework.Controls;
 using UnityEngine;
 
-namespace EditorFramework.Controls {
-    public class Tabbar:ItemsControl {
+namespace EditorFramework.Controls
+{
 
+    public enum DisplayMode
+    {
+        Top,
+        Bottom,
+        None
+    }
 
-        public Tabbar() {
+    public class Tabbar : ItemsControl
+    {
+
+        public DisplayMode Mode { get; set; }
+
+        public Tabbar()
+        {
             StyleName = "button";
+            Mode = DisplayMode.None;
+
         }
 
-        public override void Render() {
+        public override void Render()
+        {
 
-            Selected = GUI.Toolbar(Position, Selected, Items.ToArray(),Style);
-            if (SelectedItem != null)
-                SelectedItem.Render();
+            if (Mode == DisplayMode.Top)
+                if (SelectedItem != null)
+                    SelectedItem.Render();
+
+            Selected = GUI.Toolbar(Position, Selected, Items.ToArray(), Style);
+
+            if (Mode == DisplayMode.Bottom)
+                if (SelectedItem != null)
+                    SelectedItem.Render();
 
             base.Render();
         }
 
-        public override void RenderLayout() {
+        public override void RenderLayout()
+        {
+            if (Mode == DisplayMode.Top)
+                if (SelectedItem != null)
+                    SelectedItem.RenderLayout();
 
-            Selected = GUILayout.Toolbar(Selected, Items.ToArray(), Style,LayoutOptions);
+            Selected = GUILayout.Toolbar(Selected, Items.ToArray(), Style, LayoutOptions);
 
-            if (SelectedItem != null)
-                SelectedItem.RenderLayout();
+            if (Mode == DisplayMode.Bottom)
+                if (SelectedItem != null)
+                    SelectedItem.RenderLayout();
 
             base.RenderLayout();
         }
