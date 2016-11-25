@@ -12,6 +12,7 @@ namespace EditorFramework.Panel
         {
             Orientation = Direction.Vertical;
             StyleName = "scrollview";
+            AutoResize = false;
         }
 
         //         public Direction Orientation { get; set; }
@@ -22,6 +23,7 @@ namespace EditorFramework.Panel
             get { return contentSize; }
         }
         public Vector2 ScrollPosistion { get; set; }
+        public bool AutoResize { get; internal set; }
 
         protected override void UpdatePosition()
         {
@@ -64,8 +66,9 @@ namespace EditorFramework.Panel
                 {
                     Position = newRect;
                     initialized = false;
-                    foreach (var item in Items)
-                        item.Initialized = false;
+                    if(AutoResize)
+                        foreach (var item in Items)
+                            item.Initialized = false;
                 }
 
             }
