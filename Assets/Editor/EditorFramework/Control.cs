@@ -10,6 +10,10 @@ namespace EditorFramework {
     /// </summary>
     public abstract class Control : UIFramework, ILayoutable {
 
+        public event EventHandler InitializedEvent;
+
+        
+
         public string StyleName { get; set; }
         public GUIStyle Style
         {
@@ -19,7 +23,9 @@ namespace EditorFramework {
         public Control() {
             StyleName = "";
             initialized = false;
+            Visable = true;
         }
+
 
         public int ControlID
         {
@@ -28,6 +34,8 @@ namespace EditorFramework {
                 return GetHashCode();
             }
         }
+
+        public bool Visable { get; set; }
 
         public float FixedWidth { get; set; }
         public float MinWidth { get; set; }
@@ -102,6 +110,9 @@ namespace EditorFramework {
             get { return initialized; }
             set
             {
+                if (value == true&&initialized==false)
+                    OnInitialized();
+
                 initialized = value;
             }
         }
@@ -113,7 +124,7 @@ namespace EditorFramework {
         protected void AfterLayout() {
             UpdatePosition();
             CheckMouseEvent();
-            OnRender(new DrawCanvas(Position));
+            OnRender();
         }
 
         protected virtual void UpdatePosition()
@@ -126,9 +137,21 @@ namespace EditorFramework {
             }
         }
 
-        public override void OnRender(DrawCanvas drawContext) {
-            base.OnRender(drawContext);
+        public override void OnRender()
+        {
+            base.OnRender();
         }
 
+
+        public virtual Rect GetContentSize(){
+            return new Rect(Vector2.zero,Style.CalcSize(this));
+        }
+
+
+        protected void OnInitialized()
+        {
+            if (InitializedEvent != null)
+                InitializedEvent(this, new EventArgs());
+        }
     }
 }

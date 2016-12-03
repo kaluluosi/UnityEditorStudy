@@ -19,7 +19,7 @@ namespace EditorFramework.Panel
             GUI.EndGroup();
 
             CheckMouseEvent();
-            OnRender(new DrawCanvas(Position));
+            OnRender();
         }
 
         protected override void RenderContent()

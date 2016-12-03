@@ -1,35 +1,48 @@
 ﻿using System;
 using UnityEngine;
+using UnityEditor;
 
 namespace EditorFramework.Controls
 {
-    public class TextBox : Control {
+    public class TextBox : Control
+    {
 
         public event EventHandler<TextChangedEventArgs> TextChangedEvent;
-        
+
         //输入值校验委托，如果值不对输入框会显示红框（或者别的做法）
         public Predicate<string> Validate = (str) => { return true; };
 
         public bool MultiLine { get; set; }
 
-        public int MaxLength { get; set; }
+        public TextBox()
+        {
 
-        public TextBox() {
-            MaxLength = 180;
             StyleName = "textfield";
+            ReadOnly = false;
         }
 
-        public override void Render() {
-            string old = text;
+        public bool ReadOnly { get; set; }
 
-            if (MultiLine)
-                text = GUI.TextArea(Position, text, MaxLength, Style);
-            else
-                text = GUI.TextField(Position, text, MaxLength, Style);
+        public override void Render()
+        {
 
-            if (old != text)
+            if (ReadOnly)
             {
-                OnTextChanged(old,text);
+                EditorGUI.SelectableLabel(Position, text, Style);
+            }
+            else
+            {
+                string old = text;
+                if (MultiLine)
+                    text = EditorGUI.TextArea(Position, text, Style);
+                else
+                    text = EditorGUI.TextField(Position, text, Style);
+
+                if (old != text)
+                {
+                    OnTextChanged(old, text);
+                }
+
             }
 
             Check();
@@ -37,23 +50,33 @@ namespace EditorFramework.Controls
             base.Render();
         }
 
-        private void OnTextChanged(string oldValue ,string newValue) {
-            if(TextChangedEvent!=null)
+        private void OnTextChanged(string oldValue, string newValue)
+        {
+            if (TextChangedEvent != null)
                 TextChangedEvent(this, new TextChangedEventArgs() { OldValue = oldValue, NewValue = text });
         }
 
-        public override void RenderLayout() {
-            string old = text;
-
-            if (MultiLine)
-                text = GUILayout.TextArea(text, MaxLength, Style, LayoutOptions);
-            else
-                text = GUILayout.TextField(text, MaxLength, Style, LayoutOptions);
-
-            if (old != text)
+        public override void RenderLayout()
+        {
+            if (ReadOnly)
             {
-                OnTextChanged(old, text);
+                EditorGUILayout.SelectableLabel(text, Style, LayoutOptions);
             }
+            else
+            {
+                string old = text;
+
+                if (MultiLine)
+                    text = EditorGUILayout.TextArea(text, Style, LayoutOptions);
+                else
+                    text = EditorGUILayout.TextField(text, Style, LayoutOptions);
+
+                if (old != text)
+                {
+                    OnTextChanged(old, text);
+                }
+            }
+
 
             Check();
 

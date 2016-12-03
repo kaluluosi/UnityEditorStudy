@@ -19,9 +19,9 @@ namespace EditorFramework {
         int VisualChildCount { get; set; }
         IVisual VisualParent { get; set; }
 
-        event EventHandler RenderEvent;
+        event EventHandler<RenderEventArgs> RenderEvent;
 
-        void OnRender(DrawCanvas drawContext);
+        void OnRender();
         void Render();
 
     }

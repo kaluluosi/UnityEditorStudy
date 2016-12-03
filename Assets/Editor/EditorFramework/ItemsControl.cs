@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using EditorFramework;
 
 namespace EditorFramework {
-    public class ItemsControl:ControlContainer {
+    public class ItemsControl:Control,IControlContainer {
 
         public event EventHandler<SelectedChangedEventArgs> SelectedChangedEvent;
+
+        public ItemsControl()
+        {
+            Items = new ControlCollection(this);
+        }
 
 
         private int selected = 0;
@@ -28,7 +34,10 @@ namespace EditorFramework {
         {
             get
             {
-                return Items[Selected];
+                if (Items.Count == 0)
+                    return null;
+                else
+                    return Items[selected];
             }
             set
             {
@@ -49,5 +58,7 @@ namespace EditorFramework {
                     });
         }
 
+
+        public ControlCollection Items { get; set; }
     }
 }

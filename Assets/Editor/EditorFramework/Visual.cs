@@ -6,10 +6,9 @@ using UnityEngine;
 namespace EditorFramework {
     public abstract class Visual : GUIContent, IVisual {
 
-        public event EventHandler RenderEvent;
-
-
+        public event EventHandler<RenderEventArgs> RenderEvent;
         public static bool DebugMode  { get; set; }
+        public bool SingleDebugMode { get; set; }
 
         private string name;
         private Rect position;
@@ -128,23 +127,24 @@ namespace EditorFramework {
         /// 绘制控件,会调用OnRender方法。重写此方法的时候必须要 base.Render()。
         /// </summary>
         public virtual void Render(){
-            OnRender(new DrawCanvas(Position,Scale));
+            OnRender();
         }
 
         /// <summary>
         /// 绘制控件的时候会调用此方法，用户可以在这个方法里用drawContext绘图。
         /// </summary>
-        /// <param name="drawContext">绘图上下文</param>
-        public virtual void OnRender(DrawCanvas drawContext) {
-
-            if (DebugMode)
+        /// 
+        public virtual void OnRender()
+        {
+            DrawCanvas drawContext = new DrawCanvas(position);
+            if (DebugMode||SingleDebugMode)
             {
-                drawContext.DrawRectangle(new Rect(Vector2.zero, Size), Color.red);
-                drawContext.Text(Size, Position.ToString(),Color.red);
+                Drawing.DrawRectangle(Position, Color.red);
+                drawContext.Text(new Vector2(0,Size.y), Position.ToString(), Color.red);
             }
 
             if (RenderEvent != null)
-                RenderEvent(this, new EventArgs());
+                RenderEvent(this, new RenderEventArgs() { Canvas=drawContext});
         }
 
 
@@ -161,6 +161,8 @@ namespace EditorFramework {
                 return EditorGUIUtility.Load("Texture2D Icon") as Texture;
 
         }
+
+
 
     }
 }

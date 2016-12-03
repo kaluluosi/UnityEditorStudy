@@ -3,11 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using EditorFramework;
 
 namespace EditorFramework.Panel
 {
-    public abstract class Panel:ControlContainer
+    public abstract class Panel : Control,IControlContainer
     {
+        public Panel()
+        {
+            items = new ControlCollection(this);
+        }
+
+        private ControlCollection items;
+        public virtual ControlCollection Items {
+            get { return items; }
+            set { items = value; }
+        }
         [Obsolete("没什么卵用，因此废弃")]
         public bool IsInVisableArea(Control control) {
 
@@ -42,5 +53,7 @@ namespace EditorFramework.Panel
             base.RenderLayout();
         }
         protected abstract void RenderContent();
+
+
     }
 }

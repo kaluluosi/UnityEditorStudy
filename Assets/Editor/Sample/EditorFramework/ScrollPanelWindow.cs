@@ -44,6 +44,9 @@ public class ScrollPanelWindow : EditorWindowEx
             hscrollpanel.Items.Add(new Button("测试" + i));
         }
 
+        vscrollpanel.AutoResize = true;
+        hscrollpanel.AutoResize = true;
+
         Repaint();
     }
 

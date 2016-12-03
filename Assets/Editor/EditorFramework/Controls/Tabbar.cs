@@ -25,7 +25,6 @@ namespace EditorFramework.Controls
         {
             StyleName = "button";
             Mode = DisplayMode.None;
-
         }
 
         public override void Render()
