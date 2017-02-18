@@ -8,12 +8,14 @@ namespace EditorFramework.Controls
 {
     public class Separator:Control
     {
+
         public float Pixels { get; set; }
 
         public Separator(float pixels)
         {
             Pixels = pixels;
         }
+
 
         public override void RenderLayout()
         {

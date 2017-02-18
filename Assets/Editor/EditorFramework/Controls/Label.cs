@@ -8,6 +8,8 @@ using UnityEngine;
 namespace EditorFramework.Controls {
     public class Label : Control {
 
+        public bool Selectable { get; set; }
+
         public Label(string text):this() {
             this.text = text;
         }
@@ -18,14 +20,36 @@ namespace EditorFramework.Controls {
         }
 
         public override void Render() {
-            GUI.Label(Position, this,Style);
+            if (Selectable)
+            {
+                EditorGUI.SelectableLabel(Position, text,Style);
+            }
+            else
+            { 
+                GUI.Label(Position, this,Style);
+            }
 
             base.Render();
         }
         public override void RenderLayout() {
-            GUILayout.Label(this,Style, LayoutOptions);
+
+            if (Selectable)
+            {
+                AdaptHeight = AdaptMode.Fixed;
+                FixedHeight = ContentSize.y;
+                EditorGUILayout.SelectableLabel(text, Style, LayoutOptions);
+            }
+            else
+            {
+                GUILayout.Label(this, Style, LayoutOptions);
+            }
 
             base.RenderLayout();
+        }
+
+        public static implicit operator Label(string text)
+        {
+            return new Label(text);
         }
     }
 }

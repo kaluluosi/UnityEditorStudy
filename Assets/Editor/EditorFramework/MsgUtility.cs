@@ -26,6 +26,17 @@ namespace EditorFramework
             EditorWindow.focusedWindow.ShowNotification(new GUIContent(msg, resource as Texture, tooltip));
         }
 
+        public static void Invoke(Action action, float delaytime=0)
+        {
+            EditorCoroutineRunner.StartEditorCoroutine(CallIt(action,delaytime));
+        }
+
+        private static IEnumerator CallIt(Action action,float delaytime)
+        {
+            yield return new WaitForSeconds(delaytime);
+            action();
+            yield return null;
+        }
 
         static bool waiting = false;
         static readonly string waitingIcon = "d_WaitSpin0{0}";
@@ -53,6 +64,17 @@ namespace EditorFramework
         public static void ClearWaiting()
         {
             waiting = false;
+        }
+
+        public static void MessageBox(string title, string msg)
+        {
+            EditorCoroutineRunner.StartEditorCoroutine(ShowMsgBox(title,msg));
+        }
+
+        private static IEnumerator ShowMsgBox(string title,string msg)
+        {
+            EditorUtility.DisplayDialog(title, msg, "确定");
+            yield return null;
         }
 
     }

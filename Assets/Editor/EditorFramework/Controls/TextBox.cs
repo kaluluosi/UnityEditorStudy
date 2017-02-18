@@ -11,6 +11,7 @@ namespace EditorFramework.Controls
 
         //输入值校验委托，如果值不对输入框会显示红框（或者别的做法）
         public Predicate<string> Validate = (str) => { return true; };
+        public string ValidationMsg { get; set; }
 
         public bool MultiLine { get; set; }
 
@@ -87,7 +88,10 @@ namespace EditorFramework.Controls
         {
 
             if (!Validate(text))
+            {
                 Drawing.DrawRectangle(Position, Color.red);
+                MsgUtility.ShowNotification(ValidationMsg);
+            }
 
         }
 

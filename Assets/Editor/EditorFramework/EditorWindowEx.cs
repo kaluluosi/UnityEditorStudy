@@ -1,4 +1,4 @@
-﻿using EditorFramework.Panel;
+﻿using EditorFramework.Panels;
 using System;
 using UnityEditor;
 using UnityEngine;
@@ -11,12 +11,35 @@ namespace EditorFramework {
         public EditorWindowEx()
         {
             panel = new StackPanel() { text = "EditorWindowEx.panel" };
+            panel.VisualParent = this;
+            EditorApplication.update += OnUpdate;
         }
 
-       public void ShowNotification(string message) {
-            ShowNotification(new GUIContent(message));
+        public object DataContext
+        {
+            get
+            {
+                return panel.DataContext;
+            }
+            set
+            {
+                panel.DataContext = value;
+            }
         }
 
+       public bool AutoRepaint { get; set; }
+
+       public ControlCollection Items
+       {
+           get
+           {
+               return panel.Items;
+           }
+           set
+           {
+               panel.Items = value;
+           }
+       }
 
        public string Name
        {
@@ -110,6 +133,16 @@ namespace EditorFramework {
 
        public event EventHandler<RenderEventArgs> RenderEvent;
 
+        private void OnUpdate()
+        {
+            if (AutoRepaint)
+                Repaint();
+        }
+
+       public void ShowNotification(string message) {
+            ShowNotification(new GUIContent(message));
+       }
+
        public void OnRender()
        {
            if (RenderEvent != null)
@@ -120,18 +153,6 @@ namespace EditorFramework {
        {
            panel.RenderLayout();
            OnRender();
-       }
-
-       public ControlCollection Items
-       {
-           get
-           {
-               return panel.Items;
-           }
-           set
-           {
-               panel.Items = value;
-           }
        }
 
        void OnGUI()

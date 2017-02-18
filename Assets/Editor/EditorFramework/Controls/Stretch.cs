@@ -1,4 +1,4 @@
-﻿using EditorFramework.Panel;
+﻿using EditorFramework.Panels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

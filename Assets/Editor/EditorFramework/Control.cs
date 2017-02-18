@@ -4,23 +4,52 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EditorFramework {
+namespace EditorFramework
+{
     /// <summary>
     /// 控件基类
     /// </summary>
-    public abstract class Control : UIFramework, ILayoutable {
+    public abstract class Control : UIFramework, ILayoutable
+    {
 
         public event EventHandler InitializedEvent;
 
-        
 
-        public string StyleName { get; set; }
+        private string stylename;
+        public string StyleName
+        {
+            get
+            {
+                return stylename;
+            }
+            set
+            {
+                if (stylename == value)
+                    return;
+                stylename = value;
+                style = null;
+            }
+        }
+        private GUIStyle style;
         public GUIStyle Style
         {
-            get { return string.IsNullOrEmpty(StyleName) ? GUIStyle.none:StyleName; }
+            get
+            {
+                if (style == null)
+                    style = string.IsNullOrEmpty(StyleName) ? GUIStyle.none : new GUIStyle(StyleName) { richText = EnableRichText };
+
+                return style;
+            }
+            set
+            {
+                style = value;
+            }
         }
 
-        public Control() {
+        public bool EnableRichText { get; set; }
+
+        public Control()
+        {
             StyleName = "";
             initialized = false;
             Visable = true;
@@ -43,7 +72,8 @@ namespace EditorFramework {
 
         public float FixedHeight
         {
-            get; set;
+            get;
+            set;
         }
         public float MinHeight { get; set; }
 
@@ -60,7 +90,8 @@ namespace EditorFramework {
                 //如果不扩展宽度并且不自适应宽度，那么就只设置固定宽度；
                 //如果不扩展宽度但自适应宽度，那么就不设置扩展宽度也不设置固定宽度；
 
-                switch (AdaptWidth) {
+                switch (AdaptWidth)
+                {
                     case AdaptMode.Auto:
                         layoutOptions.Add(GUILayout.ExpandWidth(false));
                         break;
@@ -72,7 +103,8 @@ namespace EditorFramework {
                         break;
                 }
 
-                switch (AdaptHeight) {
+                switch (AdaptHeight)
+                {
                     case AdaptMode.Auto:
                         layoutOptions.Add(GUILayout.ExpandHeight(false));
                         break;
@@ -110,18 +142,20 @@ namespace EditorFramework {
             get { return initialized; }
             set
             {
-                if (value == true&&initialized==false)
+                if (value == true && initialized == false)
                     OnInitialized();
 
                 initialized = value;
             }
         }
 
-        public virtual void RenderLayout() {
+        public virtual void RenderLayout()
+        {
             AfterLayout();
         }
 
-        protected void AfterLayout() {
+        protected void AfterLayout()
+        {
             UpdatePosition();
             CheckMouseEvent();
             OnRender();
@@ -143,8 +177,19 @@ namespace EditorFramework {
         }
 
 
-        public virtual Rect GetContentSize(){
-            return new Rect(Vector2.zero,Style.CalcSize(this));
+
+        public virtual Vector2 ContentSize
+        {
+            get
+            {
+                float height = AdaptHeight == AdaptMode.Fixed ? Height : -1;
+                float width = AdaptWidth == AdaptMode.Fixed ? Width : -1;
+
+                if (height != -1 && width != -1)
+                    return new Vector2(FixedWidth, FixedHeight);
+
+                return Style.CalcSize(this);
+            }
         }
 
 
@@ -152,6 +197,11 @@ namespace EditorFramework {
         {
             if (InitializedEvent != null)
                 InitializedEvent(this, new EventArgs());
+        }
+
+        public Control Clone()
+        {
+            return (Control)MemberwiseClone();
         }
     }
 }

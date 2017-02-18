@@ -1,4 +1,9 @@
-﻿
+﻿using UnityEditor;
+using UnityEngine;
+using System;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace EditorFramework {
     /// <summary>
@@ -6,7 +11,50 @@ namespace EditorFramework {
     /// </summary>
     public abstract class UIFramework:UIElement {
 
-        public virtual object DataContext { get; set; }
+        private object dataContext;
+        public virtual object DataContext
+        {
+            get
+            {
+                if (dataContext != null)
+                    return dataContext;
+
+                if (VisualParent != null && VisualParent is UIFramework)
+                {
+                    UIFramework parent= (UIFramework)VisualParent;
+                    return parent.DataContext;
+                }
+                return dataContext;
+            }
+            set
+            {
+                dataContext = value;
+            }
+        }
+
+        private BindingCollection bindings;
+
+        public BindingCollection Binding
+        { 
+            get {
+                return bindings == null ? bindings = new BindingCollection(this) : bindings;
+            } 
+        }
+
+        public UIFramework()
+        {
+            RenderEvent += UIFramework_RenderEvent;
+        }
+
+        void UIFramework_RenderEvent(object sender, RenderEventArgs e)
+        {
+            if (bindings == null) return;
+
+            foreach (var binding in Binding)
+            {
+                binding.Update();
+            }
+        }
 
     }
 }

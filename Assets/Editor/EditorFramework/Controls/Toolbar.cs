@@ -1,5 +1,5 @@
 ﻿using System;
-using EditorFramework.Panel;
+using EditorFramework.Panels;
 using UnityEngine;
 
 namespace EditorFramework.Controls

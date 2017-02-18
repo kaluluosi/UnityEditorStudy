@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using System.Reflection;
+using TestTool.Common;
 using UnityEditor;
 using UnityEngine;
 
@@ -155,6 +157,8 @@ namespace EditorFramework {
 
 
             object resource = EditorGUIUtility.Load(path);
+            resource = resource == null ? LoadIcon(path) : resource;
+
             if (resource is Texture)
                 return resource as Texture;
             else
@@ -162,7 +166,21 @@ namespace EditorFramework {
 
         }
 
+        protected Texture LoadIcon(string path)
+        {
+            BindingFlags flag = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static;
+            Type type = typeof(EditorGUIUtility);
+            MethodInfo method = type.GetMethod("LoadIcon", flag);
+            return (Texture)method.Invoke(null,new[]{path});
+        }
+
+        
 
 
+        public void Repaint()
+        {
+            if(VisualParent!=null)
+                VisualParent.Repaint();
+        }
     }
 }

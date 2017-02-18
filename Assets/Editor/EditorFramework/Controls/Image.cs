@@ -7,14 +7,12 @@ using UnityEngine;
 namespace EditorFramework.Controls {
     public class Image:Control{
 
-        public string Path { get; set; }
         public ScaleMode Mode { get; set; }
         public bool AlphaBlend { get; set; }
 
         public Image() {
-            Path = "Texture2D Icon";
+            ImagePath = "Texture2D Icon";
             Mode = ScaleMode.ScaleToFit;
-            image = LoadImage(Path);
             AlphaBlend = true;
         }
 

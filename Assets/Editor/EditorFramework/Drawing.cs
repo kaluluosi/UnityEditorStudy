@@ -22,5 +22,10 @@ namespace EditorFramework
             Handles.DrawLine(new Vector2(rect.x, rect.y + rect.height), rect.position);
         }
 
+        public static void DrawLine(Vector2 p1, Vector2 p2,Color color)
+        {
+            Handles.color = color;
+            Handles.DrawLine(p1, p2);
+        }
     }
 }

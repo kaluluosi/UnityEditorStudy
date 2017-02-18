@@ -24,5 +24,6 @@ namespace EditorFramework {
         void OnRender();
         void Render();
 
+        void Repaint();
     }
 }

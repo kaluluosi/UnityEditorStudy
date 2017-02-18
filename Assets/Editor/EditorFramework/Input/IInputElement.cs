@@ -10,6 +10,13 @@ namespace EditorFramework.Input {
         event EventHandler<MouseEventArgs> MouseLeftDownEvent;
         event EventHandler<MouseEventArgs> MouseRightDownEvent;
         event EventHandler<MouseEventArgs> MouseMiddleDownEvent;
+        event EventHandler<MouseEventArgs> MouseLeftUpEvent;
+        event EventHandler<MouseEventArgs> MouseRightUpEvent;
+        event EventHandler<MouseEventArgs> MouseMiddleUpEvent;
+        event EventHandler<MouseEventArgs> MouseDoubleClickEvent;
+        
+        event EventHandler<MouseEventArgs> DragEvent;
+        event EventHandler<MouseEventArgs> DragExitEvent;
         #endregion
 
 
