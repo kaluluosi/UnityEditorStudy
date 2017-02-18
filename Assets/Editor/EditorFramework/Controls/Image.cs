@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace EditorFramework.Controls {
+namespace EditorFramework {
     public class Image:Control{
 
         public ScaleMode Mode { get; set; }

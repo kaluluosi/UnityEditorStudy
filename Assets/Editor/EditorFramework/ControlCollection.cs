@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 
-namespace EditorFramework {
+namespace EditorFramework
+{
     public class ControlCollection :Collection<Control> {
 
         public Control Owner { get; set; }

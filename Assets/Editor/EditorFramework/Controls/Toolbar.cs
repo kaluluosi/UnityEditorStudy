@@ -1,8 +1,4 @@
-﻿using System;
-using EditorFramework.Panels;
-using UnityEngine;
-
-namespace EditorFramework.Controls
+﻿namespace EditorFramework
 {
 
     public class Toolbar : StackPanel
@@ -15,30 +11,6 @@ namespace EditorFramework.Controls
             Orientation = Direction.Horiziontal;
         }
 
-
-//         public override void Render()
-//         {
-//             GUI.BeginGroup(Position, this);
-//             GUILayout.BeginHorizontal(Style, GUILayout.Width(Width), GUILayout.Height(Height));
-//             foreach (var item in Items)
-//             {
-//                 item.RenderLayout();
-//             }
-//             GUILayout.EndHorizontal();
-//             GUI.EndGroup();
-//             base.Render();
-//         }
-// 
-//         public override void RenderLayout()
-//         {
-//             GUILayout.BeginHorizontal(Style,LayoutOptions);
-//             foreach (var item in Items)
-//             {
-//                 item.RenderLayout();
-//             }
-//             GUILayout.EndHorizontal();
-//             base.RenderLayout();
-//         }
 
     }
 }

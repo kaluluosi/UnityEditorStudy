@@ -1,9 +1,9 @@
-﻿using EditorFramework.Panels;
-using System;
+﻿using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorFramework {
+namespace EditorFramework
+{
     public class EditorWindowEx :EditorWindow,IControlContainer,IVisual{
 
         private StackPanel panel;

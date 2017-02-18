@@ -1,11 +1,6 @@
-﻿using EditorFramework.Panels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace EditorFramework.Controls
+namespace EditorFramework
 {
     public class Stretch:Control
     {

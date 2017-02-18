@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EditorFramework.Controls
+namespace EditorFramework
 {
     public class ValueChangeEventArgs : EventArgs
     {

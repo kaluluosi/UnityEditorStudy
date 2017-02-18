@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using EditorFramework;
-using EditorFramework.Controls;
-using System.Collections.Generic;
-using EditorFramework.Panel;
 
 public class StackPanelWindow : EditorWindowEx
 {

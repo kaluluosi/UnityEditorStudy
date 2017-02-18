@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace EditorFramework.Panels
+namespace EditorFramework
 {
     /// <summary>
     /// 虚拟滚动面板
@@ -21,7 +21,7 @@ namespace EditorFramework.Panels
 
         private Vector2 contentSize;
 
-        public Vector2 ContentSize
+        public override Vector2 ContentSize
         {
             get { return contentSize; }
         }
@@ -170,7 +170,7 @@ namespace EditorFramework.Panels
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public bool IsInView(Control item)
+        public override bool IsInView(Control item)
         {
             float y = ScrollPosistion.y - item.Height;
             float y_end = y + Height + item.Height;

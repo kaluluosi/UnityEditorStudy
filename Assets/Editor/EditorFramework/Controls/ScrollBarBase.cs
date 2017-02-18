@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EditorFramework.Controls {
+namespace EditorFramework {
     public abstract class ScrollBarBase:Control {
 
         public event EventHandler<ValueChangeEventArgs> ValueChangedEvent;

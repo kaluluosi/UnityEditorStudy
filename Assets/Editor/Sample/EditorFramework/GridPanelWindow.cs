@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EditorFramework;
-using EditorFramework.Controls;
-using EditorFramework.Panel;
+﻿using EditorFramework;
 using UnityEditor;
 
 public class GridPanelWindow : EditorWindowEx {

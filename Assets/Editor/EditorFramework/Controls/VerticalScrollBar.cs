@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EditorFramework.Controls {
+namespace EditorFramework {
     public class VerticalScrollBar : ScrollBarBase {
 
         public VerticalScrollBar() {

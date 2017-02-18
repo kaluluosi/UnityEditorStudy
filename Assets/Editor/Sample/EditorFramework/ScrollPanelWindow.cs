@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using EditorFramework;
-using EditorFramework.Controls;
 using System.Collections.Generic;
-using EditorFramework.Panel;
-using System.Linq;
 
 public class ScrollPanelWindow : EditorWindowEx
 {
@@ -43,9 +40,6 @@ public class ScrollPanelWindow : EditorWindowEx
         {
             hscrollpanel.Items.Add(new Button("测试" + i));
         }
-
-        vscrollpanel.AutoResize = true;
-        hscrollpanel.AutoResize = true;
 
         Repaint();
     }

@@ -1,13 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using EditorFramework;
-using System;
-using EditorFramework.Controls;
-using System.Collections.Generic;
 
 public class ControlsWindow : EditorWindow
 {
-
 
     [MenuItem("EditorFramework/ControlsWindow")]
     static void DoIt()

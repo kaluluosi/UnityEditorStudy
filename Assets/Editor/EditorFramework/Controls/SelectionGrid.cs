@@ -5,7 +5,7 @@ using System.Text;
 using EditorFramework;
 using UnityEngine;
 
-namespace EditorFramework.Controls {
+namespace EditorFramework {
     public class SelectionGrid:ItemsControl {
         public int Col { get;  set; }
 

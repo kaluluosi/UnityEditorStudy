@@ -1,6 +1,6 @@
 using System;
 
-namespace EditorFramework.Panels
+namespace EditorFramework
 {
     public enum Direction {
         Horiziontal,

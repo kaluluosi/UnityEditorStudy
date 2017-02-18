@@ -5,7 +5,7 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorFramework.Controls {
+namespace EditorFramework {
     public class Label : Control {
 
         public bool Selectable { get; set; }

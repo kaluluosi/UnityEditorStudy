@@ -3,7 +3,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorFramework.Panels
+namespace EditorFramework
 {
     /// <summary>
     /// 基本面板，绝对定位,没有对内容布局

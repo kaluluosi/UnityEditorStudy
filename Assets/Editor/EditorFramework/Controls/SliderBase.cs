@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace EditorFramework.Controls {
+namespace EditorFramework {
     public abstract class SliderBase:Control {
 
         public event EventHandler<ValueChangeEventArgs> ValueChangedEvent;

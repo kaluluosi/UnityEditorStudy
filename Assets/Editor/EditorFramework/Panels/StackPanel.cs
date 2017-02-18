@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace EditorFramework.Panels
+namespace EditorFramework
 {
     /// <summary>
     /// 堆栈式面板
@@ -16,6 +16,19 @@ namespace EditorFramework.Panels
         }
 
         public Direction Orientation { get; set; }
+
+        public override void Render()
+        {
+
+            GUILayout.BeginArea(Position,this,Style);
+
+            RenderContent();
+
+            GUILayout.EndArea();
+
+            base.Render();
+        }
+
 
         protected override void RenderContent()
         {

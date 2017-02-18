@@ -1,11 +1,10 @@
 using System;
-using System.IO;
 using System.Reflection;
-using TestTool.Common;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorFramework {
+namespace EditorFramework
+{
     public abstract class Visual : GUIContent, IVisual {
 
         public event EventHandler<RenderEventArgs> RenderEvent;

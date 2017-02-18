@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EditorFramework;
-using EditorFramework.Controls;
+﻿using System.Linq;
 using UnityEngine;
 
-namespace EditorFramework.Controls
+namespace EditorFramework
 {
 
     public enum DisplayMode

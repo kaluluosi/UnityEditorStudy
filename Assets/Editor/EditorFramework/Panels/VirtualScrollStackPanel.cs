@@ -5,7 +5,7 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorFramework.Panels
+namespace EditorFramework
 {
     /// <summary>
     /// 虚拟滚动堆栈式面板

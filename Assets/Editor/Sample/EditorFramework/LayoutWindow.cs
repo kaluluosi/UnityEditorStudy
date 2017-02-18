@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using EditorFramework;
-using EditorFramework.Controls;
-using System.Collections.Generic;
 
 public class LayoutWindow : EditorWindowEx {
     [MenuItem("EditorFramework/LayoutWindow")]

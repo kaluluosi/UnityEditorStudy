@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace EditorFramework.Controls
+namespace EditorFramework
 {
     public class TextBox : Control
     {

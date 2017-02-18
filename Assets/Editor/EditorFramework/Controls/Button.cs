@@ -2,7 +2,7 @@
 using UnityEngine;
 using EditorFramework.Input;
 
-namespace EditorFramework.Controls
+namespace EditorFramework
 {
     public class Button : Control, IClickHandler
     {

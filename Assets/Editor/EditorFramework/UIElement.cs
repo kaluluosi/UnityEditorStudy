@@ -1,9 +1,9 @@
 using System;
 using EditorFramework.Input;
-using UnityEditor;
 using UnityEngine;
 
-namespace EditorFramework {
+namespace EditorFramework
+{
     public abstract class UIElement : Visual, IInputElement {
 
 

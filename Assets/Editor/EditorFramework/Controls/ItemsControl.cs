@@ -5,7 +5,7 @@ using EditorFramework;
 using System.Collections;
 using System.Reflection;
 
-namespace EditorFramework.Controls
+namespace EditorFramework
 {
     public class ItemsControl : Control, IControlContainer
     {
@@ -13,7 +13,7 @@ namespace EditorFramework.Controls
         public event EventHandler<SelectedChangedEventArgs> SelectedChangedEvent;
 
 
-        public ControlCollection Items { get; set; }
+        public  ControlCollection Items { get; set; }
 
         public ItemsControl()
         {

@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Text;
 using System.Collections;
 
-namespace EditorFramework.Controls
+namespace EditorFramework
 {
     public class ComboBox:ItemsControl
     {

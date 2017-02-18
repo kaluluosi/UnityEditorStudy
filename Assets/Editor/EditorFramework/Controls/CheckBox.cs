@@ -2,7 +2,7 @@
 using EditorFramework.Input;
 using UnityEngine;
 
-namespace EditorFramework.Controls {
+namespace EditorFramework {
     public class CheckBox : Control {
         public event EventHandler<CheckedEventArgs> CheckedEvent;
 

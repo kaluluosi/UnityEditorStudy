@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace EditorFramework.Panels
+namespace EditorFramework
 {
     /// <summary>
     /// 网格式面板

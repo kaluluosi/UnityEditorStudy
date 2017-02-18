@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using EditorFramework;
 
-namespace EditorFramework.Panels
+namespace EditorFramework
 {
     /// <summary>
     /// 面板容器基类

@@ -1,20 +1,14 @@
-﻿using EditorFramework.Panels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
-using System.Collections;
 
-namespace EditorFramework.Controls
+namespace EditorFramework
 {
     /// <summary>
     /// 列表控件，仅支持固定高度的内容控件
     /// </summary>
     public class ListBox : ItemsControl
     {
-        
+
         public class Styles
         {
             public const string EvenBackground = "CN EntryBackEven";
@@ -25,8 +19,25 @@ namespace EditorFramework.Controls
         public float RowHeight { get; set; }
         public bool Selectable { get; set; }
 
+        private Vector2 scrollToPosistion = Vector2.zero;
+        public void ScrollToPosition(Vector2 position)
+        {
+            scrollToPosistion = position;
+        }
+
+        public void ScrollToEnd()
+        {
+            scrollToPosistion = new Vector2(0, RowHeight * Items.Count);
+        }
+
         public override void RenderLayout()
         {
+
+            if (scrollToPosistion != Vector2.zero && Event.current.type == EventType.repaint)
+            {
+                ScrollPosistion = scrollToPosistion;
+                scrollToPosistion = Vector2.zero;
+            }
 
             ScrollPosistion = GUILayout.BeginScrollView(ScrollPosistion, Style, LayoutOptions);
             float totalHeight = Items.Count * RowHeight;

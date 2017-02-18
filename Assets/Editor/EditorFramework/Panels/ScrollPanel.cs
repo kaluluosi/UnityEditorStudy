@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-namespace EditorFramework.Panels
+namespace EditorFramework
 {
     public class ScrollPanel:StackPanel
     {

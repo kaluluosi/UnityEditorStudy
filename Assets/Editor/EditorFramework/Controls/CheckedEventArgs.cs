@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EditorFramework.Controls {
+namespace EditorFramework {
     public class CheckedEventArgs:EventArgs {
 
         public bool OldValue { get; set; }
